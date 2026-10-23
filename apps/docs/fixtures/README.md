@@ -98,7 +98,7 @@ and asserts the deterministic Markdown surface (no browser needed):
   outline of the rendered HTML (backtick normalization aside).
 - Clean-Markdown invariants: balanced fences; no MDX imports,
   expressions, or component JSX outside fences; the authored fenced
-  code survives verbatim (including the `import "@augur/design-system/styles.css"`
+  code survives verbatim (including the `import "@augurproject/design-system/styles.css"`
   sample inside a fence); the package-evaluated value
   (`**2 font families**`) appears evaluated.
 - Example-source parity: every module under `src/examples/` appears

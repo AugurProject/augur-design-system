@@ -12,9 +12,9 @@ The **Augur Design System** is the canonical source for Augur's interface langua
 Independently developed Augur applications should share a common interface language without repeatedly implementing or interpreting the same design decisions. The system functions as both a **design specification** and an **executable implementation of that specification**.
 
 ```tsx
-import { Button, Card, Input, Dialog } from "@augur/design-system"
+import { Button, Card, Input, Dialog } from "@augurproject/design-system"
 
-import "@augur/design-system/styles.css"
+import "@augurproject/design-system/styles.css"
 ```
 
 ## 2. Core Principles
@@ -48,7 +48,7 @@ The system expands without requiring every possible abstraction or package bound
 - **Primitive** — a low-level interface building block that may provide behavior, accessibility, interaction, or basic structure. Radix or equivalent libraries may be used internally where appropriate.
 - **Component** — a reusable implementation of an Augur interface element, such as Button, Input, Select, Dialog, Card, Tabs, Tooltip, or Badge.
 - **Pattern** — a reusable composition or solution involving multiple interface elements, such as Form Field, Page Header, Empty State, Filter Bar, or Search Interface.
-- **Component Library** — the code-facing portion of the design system, consumed as `@augur/design-system`.
+- **Component Library** — the code-facing portion of the design system, consumed as `@augurproject/design-system`.
 - **Documentation Site** — the human-facing representation of the design system: foundations, components, patterns, usage guidance, examples, and rationale, rendering the real package components.
 
 ## 4. Conceptual Layers
@@ -83,7 +83,7 @@ This layering is conceptual; it does not require each layer to become an indepen
 
 GitHub repository: `jubalm/augur-design-system`. A future organization transfer is a separate decision; the older `augur-design-system-od` repository is not this implementation's source of truth.
 
-Workspace package: `@augur/design-system`. The name is the code-facing identity used inside the workspace and by consuming Augur applications. It does not imply publication to npm or any other registry; distribution remains a separate decision.
+Workspace package: `@augurproject/design-system`, under the Augur project's `@augurproject` npm scope (`@augur` on npm belongs to an unrelated company). The name is the code-facing identity used inside the workspace and by consuming Augur applications. The package is not yet published to the npm registry; each GitHub Release attaches an `npm pack` tarball under this name (§16).
 
 The repository contains both the importable design-system package and its documentation website:
 
@@ -196,7 +196,7 @@ The documentation application consumes the local package:
 ```json
 {
   "dependencies": {
-    "@augur/design-system": "workspace:*"
+    "@augurproject/design-system": "workspace:*"
   }
 }
 ```
@@ -268,12 +268,12 @@ The structure evolves with actual requirements rather than modeling every future
 Consumers interact with a stable public API rather than importing arbitrary internal files.
 
 ```tsx
-import { Button, Card, Input } from "@augur/design-system"
+import { Button, Card, Input } from "@augurproject/design-system"
 
-import "@augur/design-system/styles.css"
+import "@augurproject/design-system/styles.css"
 ```
 
-Additional entry points may be exposed where there is a genuine need (for example `@augur/design-system/tokens`). Internal file organization does not automatically become public API.
+Additional entry points may be exposed where there is a genuine need (for example `@augurproject/design-system/tokens`). Internal file organization does not automatically become public API.
 
 ### Optional bundled package output
 
@@ -281,7 +281,7 @@ The primary consumption path is the shadcn-compatible GitHub registry/source-ins
 
 ## 10. Package Build Strategy
 
-The GitHub/shadcn registry path is the primary distribution mechanism, so a bundled package build remains secondary. If `@augur/design-system` needs distributable package artifacts, use **tsup** as the initial build tool, scoped to package output rather than repository orchestration. Registry-installed source must not depend on the existence of a bundled npm package.
+The GitHub/shadcn registry path is the primary distribution mechanism, so a bundled package build remains secondary. If `@augurproject/design-system` needs distributable package artifacts, use **tsup** as the initial build tool, scoped to package output rather than repository orchestration. Registry-installed source must not depend on the existence of a bundled npm package.
 
 ## 11. Component Foundation
 
@@ -310,7 +310,7 @@ The site provides introduction, principles, foundations, token documentation, co
 The documentation renders components from the actual workspace package:
 
 ```tsx
-import { Button } from "@augur/design-system"
+import { Button } from "@augurproject/design-system"
 ```
 
 This ensures the docs demonstrate the implementation consumers receive. Documentation content and documentation-only dependencies remain isolated under `apps/docs` so they do not enter the consumable component source or package output.
@@ -329,7 +329,7 @@ apps/docs/
         └── patterns/
 ```
 
-MDX/shared Markdown-oriented content under the docs app is the primary authoring format. The docs app may import from `@augur/design-system`; the design-system package must not import from `apps/docs`. Docs deployment is documented in `apps/docs/DEPLOYMENT.md`.
+MDX/shared Markdown-oriented content under the docs app is the primary authoring format. The docs app may import from `@augurproject/design-system`; the design-system package must not import from `apps/docs`. Docs deployment is documented in `apps/docs/DEPLOYMENT.md`.
 
 ## 13. Documentation Delivery for Humans and LLMs
 
@@ -429,14 +429,17 @@ release (RELEASING.md)
 │   stamp registry artifacts with the release tag; CI must pass
 ├── Release workflow (manual dispatch on main): re-run CI gates,
 │   create the immutable tag vX.Y.Z and the GitHub Release
-└── optionally publish @augur/design-system later if adopted
+└── optionally publish @augurproject/design-system later if adopted
 ```
 
 ## 16. Distribution
 
-Initial external distribution is GitHub-first rather than requiring npm publication: a public GitHub repository with shadcn-compatible registry/install conventions. This lets projects pull Augur-owned component source using familiar shadcn workflows without an npm release.
+Distribution is GitHub-first and has two channels that share the same CSS files:
 
-An npm-published `@augur/design-system` package may be added later if there is a concrete need. If it is, applications could consume a released version such as `^1.4.0`. Package publication, versioning, and release artifacts are maintainer decisions.
+- **Package tarball.** Each GitHub Release attaches `augurproject-design-system-X.Y.Z.tgz`, built with `npm pack`. Projects that do not use React or the shadcn CLI install it by URL and import the CSS exports: `theme.css`, the optional `fonts.css`, `css/<component>.css`, `styles.css` and the Tailwind bridge `tokens.tailwind.css`. All design-system CSS sits in `@layer augur`, and the `.aug-*` class names are stable API. The tarball carries the final package name, so imports do not change when the package moves to the npm registry.
+- **shadcn registry.** Projects using shadcn workflows install Augur-owned component source from the registry. Registry items ship the package's CSS files, or values parsed from them, so the channels cannot drift.
+
+Publishing to the npm registry waits for publish access to the `@augurproject` npm org. Package publication, versioning, and release artifacts are maintainer decisions.
 
 ## 17. Evolution
 

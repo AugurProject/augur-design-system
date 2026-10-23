@@ -5,7 +5,7 @@
     "": {
       "name": "augur-design-system",
       "devDependencies": {
-        "@augur/design-system": "workspace:*",
+        "@augurproject/design-system": "workspace:*",
         "@google/design.md": "0.4.0",
         "@playwright/test": "1.61.1",
         "@testing-library/jest-dom": "^6.6.0",
@@ -28,7 +28,7 @@
       "dependencies": {
         "@astrojs/mdx": "^8.0.0",
         "@astrojs/react": "^6.0.5",
-        "@augur/design-system": "workspace:*",
+        "@augurproject/design-system": "workspace:*",
         "astro": "^7.3.1",
         "react": "^19.2.8",
         "react-dom": "^19.2.8",
@@ -43,22 +43,27 @@
       },
     },
     "packages/design-system": {
-      "name": "@augur/design-system",
-      "version": "0.0.0",
+      "name": "@augurproject/design-system",
+      "version": "0.2.0",
       "dependencies": {
         "@fontsource/schibsted-grotesk": "5.3.0",
         "@fontsource/sora": "5.3.0",
-        "radix-ui": "1.6.7",
       },
       "devDependencies": {
         "@google/design.md": "0.4.0",
         "@types/node": "^22.0.0",
         "@types/react": "^19.2.18",
+        "radix-ui": "1.6.7",
         "react": "^19.2.8",
       },
       "peerDependencies": {
+        "radix-ui": "1.6.7",
         "react": "^19.0.0",
       },
+      "optionalPeers": [
+        "radix-ui",
+        "react",
+      ],
     },
   },
   "packages": {
@@ -108,9 +113,9 @@
 
     "@astrojs/yaml2ts": ["@astrojs/yaml2ts@0.2.4", "", { "dependencies": { "yaml": "^2.8.3" } }, "sha512-8oddpOae35pJsXPQXhTkM0ypfKPskVsh2bCxRtbf7e+/Epw2nReakFYpLKjZMEr75CsoF203PMnCocpfz0s69A=="],
 
-    "@augur/design-system": ["@augur/design-system@workspace:packages/design-system"],
-
     "@augur/docs": ["@augur/docs@workspace:apps/docs"],
+
+    "@augurproject/design-system": ["@augurproject/design-system@workspace:packages/design-system"],
 
     "@babel/code-frame": ["@babel/code-frame@7.29.7", "", { "dependencies": { "@babel/helper-validator-identifier": "^7.29.7", "js-tokens": "^4.0.0", "picocolors": "^1.1.1" } }, "sha512-Aup7aUOfpbAUg2ROOJN6Iw5f9DMBlzu0mIkm/malLQFN/YQgO48wCj0Kxa3sEHJvPVFg7siR+qRInwXd2qhQKw=="],
 

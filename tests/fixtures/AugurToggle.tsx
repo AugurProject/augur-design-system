@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { AUGUR_FONT_FAMILIES } from "@augur/design-system";
+import { AUGUR_FONT_FAMILIES } from "@augurproject/design-system";
 
 /**
  * Minimal consumer-style fixture for the test harness (issue #6).

@@ -15,13 +15,13 @@ A shared interface language for Augur: maintained design guidance, generated tok
 
 ## What this repository contains
 
-One lightweight Bun workspace contains `packages/design-system` (`@augur/design-system`) and `apps/docs` (plain Astro with React and Markdown/MDX). Components follow shadcn conventions where appropriate. Values representable by the pinned `@google/design.md` schema come from `DESIGN.md`; generated tokens feed a thin semantic light/dark mapping layer.
+One lightweight Bun workspace contains `packages/design-system` (`@augurproject/design-system`) and `apps/docs` (plain Astro with React and Markdown/MDX). Components follow shadcn conventions where appropriate. Values representable by the pinned `@google/design.md` schema come from `DESIGN.md`; generated tokens feed a thin semantic light/dark mapping layer.
 
-The external distribution path is a GitHub-hosted shadcn-compatible source registry, published as immutable release tags (`vX.Y.Z`): install with `bunx shadcn@4.20.1 add "jubalm/augur-design-system/<item>#vX.Y.Z"`. Changes are recorded in [CHANGELOG.md](CHANGELOG.md), and the release procedure is in [RELEASING.md](RELEASING.md). The docs provide rendered pages, clean Markdown equivalents, and `llms.txt`, deployed as a static site. Architectural detail and decisions live in [ARCHITECTURE.md](ARCHITECTURE.md).
+External distribution has two channels, both published as immutable release tags (`vX.Y.Z`). Projects without React or the shadcn CLI install the `@augurproject/design-system` tarball attached to each GitHub Release and import its CSS (`theme.css`, `css/<component>.css`, `styles.css`); see [Package entries](apps/docs/src/content/reference/package-entries.mdx). shadcn projects install source from the GitHub-hosted registry: `bunx shadcn@4.20.1 add "jubalm/augur-design-system/<item>#vX.Y.Z"`. Changes are recorded in [CHANGELOG.md](CHANGELOG.md), and the release procedure is in [RELEASING.md](RELEASING.md). The docs provide rendered pages, clean Markdown equivalents, and `llms.txt`, deployed as a static site. Architectural detail and decisions live in [ARCHITECTURE.md](ARCHITECTURE.md).
 
 ## Development
 
-Requires [Bun](https://bun.com) **1.4.0**, pinned through `packageManager`. The workspace consumes `@augur/design-system` through `workspace:*`.
+Requires [Bun](https://bun.com) **1.4.0**, pinned through `packageManager`. The workspace consumes `@augurproject/design-system` through `workspace:*`.
 
 | Command | What it does |
 | --- | --- |
@@ -36,6 +36,7 @@ Requires [Bun](https://bun.com) **1.4.0**, pinned through `packageManager`. The 
 | `bun run --cwd packages/design-system tokens:verify-failures` | Proves the controlled token-generation failure paths exit nonzero and write no artifacts. |
 | `bun run --cwd packages/design-system registry:check` | Regenerates the registry artifacts in memory and fails on drift. |
 | `bun scripts/consumer-smoke.ts` | Installs every registry item into a fresh consumer and verifies build, render, and overwrite. |
+| `bun scripts/package-smoke.ts` | Packs the package tarball, installs it into a plain-HTML consumer, and checks it in Chromium without React, Tailwind or a font import. |
 | `bun run check:release X.Y.Z` | Verifies release metadata before tagging (see [RELEASING.md](RELEASING.md)). |
 
 There is deliberately no `build` command yet: a bundled package stays deferred until actual package output is required. Browser and docs checks run through `apps/docs/fixtures` after `bun run --cwd apps/docs build`; see [apps/docs/README.md](apps/docs/README.md).

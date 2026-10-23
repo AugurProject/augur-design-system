@@ -1,0 +1,56 @@
+/*
+ * Structural base rules for @augurproject/design-system: the canvas
+ * pairing on body, the keyboard focus ring, and the reduced-motion gate.
+ *
+ * Internal part of the public `theme.css` entry. The rules reference
+ * semantic roles only (`./roles.css`), so they are identical in both
+ * themes; the registry `augur-theme` item ships this file unchanged.
+ * Every rule sits in `@layer augur`.
+ */
+
+@layer augur {
+
+/* ------------------------------------------------------------------ */
+/* Shared structural behavior — identical in both themes.              */
+/* ------------------------------------------------------------------ */
+
+/* Apply the canvas pairing so the default and selected themes render
+   without consumer boilerplate (page-canvas-light / page-canvas-dark). */
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+}
+
+/* Focus: painted for keyboard focus only (focus-visible), as a 2px ring
+   with a 2px offset in the theme's ring color. Structural rule shared by
+   both themes; the color changes with the theme, nothing else does. The
+   2px/2px geometry is structural and intentionally not emitted as a
+   token. */
+:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+/* Links take a 6px offset so the ring clears text and its underline
+   (adopted from augur.net, issue #8). Same ring, larger offset. */
+a:focus-visible {
+  outline-offset: 6px;
+}
+
+/* Reduced motion: structural media-query gate over transition and
+   animation properties (the reduced-motion collapse required by the
+   theme contract). No duration tokens are adopted or emitted;
+   the canonical collapse constant is inlined here and applies equally
+   in both themes, including to consumer-authored motion. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+} /* @layer augur */

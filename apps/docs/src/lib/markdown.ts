@@ -31,7 +31,7 @@
  *     both the root and repository-subpath deployments.
  *   - The derivation asserts balanced code fences at the end.
  */
-import { AUGUR_FONTS } from "@augur/design-system";
+import { AUGUR_FONTS } from "@augurproject/design-system";
 import { examples } from "../examples/registry";
 import type { ExampleDefinition } from "./examples";
 import { withBase } from "./base";
@@ -263,7 +263,7 @@ export function cleanPageMarkdown(page: PageMarkdownInput): string {
   const lines: string[] = [`# ${page.title}`, "", page.description, ""];
   if (page.component) {
     lines.push(
-      `Component export: \`${page.component.exportName}\` from \`@augur/design-system\` — status: ${page.component.status}.`,
+      `Component export: \`${page.component.exportName}\` from \`@augurproject/design-system\` — status: ${page.component.status}.`,
       "",
     );
   }

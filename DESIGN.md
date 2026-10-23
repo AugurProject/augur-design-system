@@ -14,6 +14,8 @@ colors:
   border-light: "#E0E0E7"
   accent-deep: "#095E42"
   accent-wash: "#C9FFE5"
+  accent-hover: "#27D19B"
+  accent-pressed: "#24BC8D"
   surface-dark-1: "#161629"
   surface-dark-2: "#1D1D30"
   surface-dark-3: "#242438"
@@ -133,6 +135,12 @@ components:
   signal-wash:
     backgroundColor: "{colors.accent-wash}"
     textColor: "{colors.primary}"
+  action-primary-dark-hover:
+    backgroundColor: "{colors.accent-hover}"
+    textColor: "{colors.primary}"
+  action-primary-dark-pressed:
+    backgroundColor: "{colors.accent-pressed}"
+    textColor: "{colors.primary}"
 ---
 
 ## Overview
@@ -158,13 +166,14 @@ The palette is built around Augur Navy, Augur Green, and a restrained set of pap
 - **Augur Pewter / `secondary-dark` (#A1A1B8):** Secondary text on dark surfaces.
 - **Deep (#095E42):** The accessible green action and signal companion for light surfaces.
 - **Wash (#C9FFE5):** Light green fill companion; it does not replace Deep for readable green text or actions.
+- **Green hover (#27D19B) and Green pressed (#24BC8D):** Interaction steps of Augur Green for the dark primary action, adopted from augur.net. They are state fills only, always under a Navy label, never resting colors.
 - **Mist (#71728A):** Companion for edges, rules, and quiet marks only, never for readable copy. It marks dark-theme rules and the edges of controls such as inputs and outline buttons in both themes, where it holds at least 3:1 against Paper, White, and Navy. It is not the light quiet-region color, which is Muted.
 
-Light surfaces use Paper as the canvas, White for raised panels, Muted (#ECECF2) for quiet regions, and Border (#E0E0E7) for hairlines. Dark surfaces use Navy as the canvas, then Surface 1 (#161629), Surface 2 (#1D1D30), and Surface 3 / Raised (#242438) as stepped layers; Surface 3 also draws dark panel hairlines. Panel hairlines and control edges stay distinct in both themes. Graphite and Pewter support the system; they do not replace primary copy.
+Light surfaces use Paper as the canvas, White for raised panels, Muted (#ECECF2) for quiet regions, and Border (#E0E0E7) for hairlines. Dark surfaces use Navy as the canvas, then Surface 1 (#161629), Surface 2 (#1D1D30), and Surface 3 / Raised (#242438) as stepped layers. Dark cards sit on Surface 2 and are bounded by Mist, the same edge as controls, as adopted from augur.net; Surface 3 draws the quieter dark editorial rules. In light, panel hairlines (Border) and control edges (Mist) stay distinct. Graphite and Pewter support the system; they do not replace primary copy.
 
 The light and dark themes are equal everyday expressions of one system. Keep content, order, spacing, alignment, and geometry the same in both themes. Use the words open, closed, pending, and final to name state; color only reinforces those words.
 
-Keep text and controls at WCAG AA or better. Reference pairings: Navy on Paper 17.49:1, Graphite on Paper 7.81:1, Deep on Paper 7.17:1, Paper on Navy 17.49:1, Pewter on Navy 7.53:1, Pewter on Surface 3 6.00:1, and Green on Navy 11.87:1. Hover steps keep that standard: Navy on Wash 17.15:1, White on Graphite 8.50:1, Navy on Border 14.49:1, and Paper on Surface 3 13.94:1. Control edges meet the 3:1 non-text minimum: Mist on Paper 4.31:1 and Mist on Navy 4.06:1. Recheck every new color-on-background pairing before shipping.
+Keep text and controls at WCAG AA or better. Reference pairings: Navy on Paper 17.49:1, Graphite on Paper 7.81:1, Deep on Paper 7.17:1, Paper on Navy 17.49:1, Pewter on Navy 7.53:1, Pewter on Surface 3 6.00:1, and Green on Navy 11.87:1. Hover steps keep that standard: Navy on Wash 17.15:1, White on Graphite 8.50:1, Navy on Border 14.49:1, Paper on Surface 3 13.94:1, Navy on Green hover 9.68:1, and Navy on Green pressed 7.84:1. Control edges meet the 3:1 non-text minimum: Mist on Paper 4.31:1, Mist on Navy 4.06:1, and Mist on Surface 2 3.52:1. Recheck every new color-on-background pairing before shipping.
 
 ## Typography
 

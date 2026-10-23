@@ -26,8 +26,8 @@ export type ButtonVariant =
   | "ghost"
   | "link";
 
-/** Control size. */
-export type ButtonSize = "sm" | "md" | "lg";
+/** Control size. `xl` is 48px with 16/24 labels (adopted from augur.net). */
+export type ButtonSize = "sm" | "md" | "lg" | "xl";
 
 export interface ButtonVariantsProps {
   variant?: ButtonVariant;
@@ -47,6 +47,7 @@ const SIZE_CLASSES: Record<ButtonSize, string> = {
   sm: "aug-button--sm",
   md: "aug-button--md",
   lg: "aug-button--lg",
+  xl: "aug-button--xl",
 };
 
 /** Full class string for the given variant and size (defaults: md). */

@@ -8,7 +8,7 @@
  * Identity lives in the masthead only, and project status in the footer
  * only, so neither repeats on this page.
  */
-import { Button, Input, buttonVariants } from "@augur/design-system";
+import { Button, Input, buttonVariants } from "@augurproject/design-system";
 import { ReferenceRecordPanel } from "../examples/patterns/reference-record";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { withBase } from "../lib/base";
@@ -144,8 +144,8 @@ const swatches = [
           )}
           {door.preview === "reference" && (
             <pre class="home-preview-code"><code>{`import { Button } from
-  "@augur/design-system";
-import "@augur/design-system/styles.css";`}</code></pre>
+  "@augurproject/design-system";
+import "@augurproject/design-system/styles.css";`}</code></pre>
           )}
         </div>
         <ul class="home-door-links">

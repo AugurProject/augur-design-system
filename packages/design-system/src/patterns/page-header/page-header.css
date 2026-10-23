@@ -1,7 +1,7 @@
 /*
  * PageHeader styles (issue #14 — first pattern slice).
  *
- * Color: ONLY semantic role custom properties from ../../styles/theme.css
+ * Color: ONLY semantic role custom properties from ../../styles/roles.css
  * (which references generated tokens). No raw color values, no new
  * custom properties — the same contract the Button/Card component CSS
  * follows, enforced by the stylesheet contract test in the repository
@@ -18,7 +18,13 @@
  *           └── col 2: actions (right edge, wrap; when the containing block
  *               is <=640px it drops under the titles — responsive by
  *               structure, no consumer CSS)
+ *
+ * Every rule sits in `@layer augur`; this file depends only on the
+ * theme (`theme.css`).
  */
+
+@layer augur {
+
 .aug-page-header {
   display: flex;
   flex-direction: column;
@@ -141,3 +147,5 @@
     justify-content: flex-start;
   }
 }
+
+} /* @layer augur */

@@ -1,4 +1,4 @@
-import { AUGUR_FONTS } from "@augur/design-system";
+import { AUGUR_FONTS } from "@augurproject/design-system";
 
 /**
  * Read font provenance from the package: family, version, license, and

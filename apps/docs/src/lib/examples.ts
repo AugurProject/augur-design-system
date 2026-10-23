@@ -2,7 +2,7 @@
  * Live-example helper.
  *
  * Convention: a live example is a real module under `src/examples/` that
- * imports from the `@augur/design-system` workspace package and renders
+ * imports from the `@augurproject/design-system` workspace package and renders
  * what consumers actually get. The code sample shown next to the preview
  * is the SAME file, imported with Vite's `?raw` — the sample is derived
  * from the same source as the rendered example, so the two cannot drift.
@@ -14,7 +14,7 @@
  * scopes), so the copied source stays a single-theme consumer sample.
  *
  * Nothing here fakes exports that do not exist: examples import the real
- * `@augur/design-system` exports through the same path consumers use — no
+ * `@augurproject/design-system` exports through the same path consumers use — no
  * mock components, no duplicated implementations.
  */
 import type { ReactNode } from "react";

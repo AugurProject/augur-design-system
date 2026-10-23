@@ -1,7 +1,7 @@
 /*
  * FormField styles (issue #12) — layout for the wiring pattern.
  *
- * Color: ONLY semantic role custom properties from ../../styles/theme.css
+ * Color: ONLY semantic role custom properties from ../../styles/roles.css
  * (which references generated tokens). No raw color values, no new
  * custom properties.
  *
@@ -10,7 +10,12 @@
  * The control's own visuals (height, radius, states) come from Input; this
  * sheet only lays the composition out. The component contract for this
  * slice lives in ../../docs/components.md.
+ *
+ * Every rule sits in `@layer augur`; this file depends only on the
+ * theme (`theme.css`).
  */
+
+@layer augur {
 
 .aug-form-field {
   display: flex;
@@ -43,3 +48,5 @@
   margin-left: var(--augur-spacing-xs); /* space.xs */
   color: inherit;
 }
+
+} /* @layer augur */

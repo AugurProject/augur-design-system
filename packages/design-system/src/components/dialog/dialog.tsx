@@ -10,7 +10,7 @@
  * DialogPortal, DialogOverlay, DialogContent, DialogHeader,
  * DialogFooter, DialogTitle, DialogDescription, DialogClose) styled
  * exclusively through the semantic role custom properties delivered by
- * `@augur/design-system/styles.css` (see `./dialog.css`).
+ * `@augurproject/design-system/styles.css` (see `./dialog.css`).
  *
  * Contracts (consumer view: docs "Dialog" page; component contract:
  * `docs/components.md` in this package):

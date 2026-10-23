@@ -162,5 +162,5 @@
     },
     "@custom-variant dark (&:is([data-theme=\"dark\"], [data-theme=\"dark\"] *, :root:not([data-theme=\"light\"]) *))": ""
   },
-  "docs": "Apply the theme by setting `data-theme=\"light|dark\"` on `<html>` or any container; without an attribute the system preference decides. Do not import @augur/design-system from registry-installed source; this item is self-contained."
+  "docs": "Apply the theme by setting `data-theme=\"light|dark\"` on `<html>` or any container; without an attribute the system preference decides. Do not import @augurproject/design-system from registry-installed source; this item is self-contained."
 }

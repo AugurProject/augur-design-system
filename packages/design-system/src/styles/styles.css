@@ -1,55 +1,23 @@
 /*
- * Public stylesheet entry point for @augur/design-system.
+ * Aggregate stylesheet for @augurproject/design-system.
  *
- * Consumers: import "@augur/design-system/styles.css";
+ * Consumers: import "@augurproject/design-system/styles.css";
  *
- * Aggregates, in dependency order:
- *   1. Self-hosted font faces from the pinned OFL `@fontsource` packages
- *      (see `src/fonts.ts` and `resources/brand/PROVENANCE.md` for exact
- *      provenance). The bare-specifier `@import`s below are resolved at
- *      bundle time by Vite/Astro (the documented consumer); they
- *      are not resolved by the browser.
- *   2. Generated base tokens: `--augur-color-*` custom
- *      properties derived from `DESIGN.md` by the pinned toolchain
- *      (`../tokens/tokens.css` — generated output, never hand-edited).
- *   3. Font-family custom properties with fallback stacks (`./fonts.css`).
- *   4. Typography role classes mirroring the `DESIGN.md` front-matter
- *      `typography` block one-to-one (`./typography.css`).
- *   5. Semantic light/dark theme mapping: shadcn-compatible
- *      role custom properties referencing the generated tokens only
- *      (`./theme.css`), plus the shared focus and reduced-motion behavior.
- *   6. Starter component styles: Button, Card, and
- *      Dialog, styled through the semantic roles only (no
- *      raw values, no new tokens).
- *   6. Starter component styles: Button and Card,
- *      styled through the semantic roles only (no raw values, no new
- *      tokens).
- *   6. Starter component styles: Button and Card,
- *      then Input and the FormField pattern, styled
- *      through the semantic roles only (no raw values, no new tokens).
+ * Everything the package ships, in dependency order: the optional font
+ * faces (`./fonts.css`, bundle-time imports), the theme (`./theme.css`),
+ * then every component and pattern stylesheet (the `css/<name>.css`
+ * exports). All rules sit in `@layer augur`.
  *
- * Color roles must reference generated variables — raw `DESIGN.md` color
- * values live only in generated token output. The token
- * generator currently emits colors only, so typography values in
- * `./typography.css` remain hand-authored to match `DESIGN.md` until a
- * plain-CSS typography token export exists. See docs/semantic-themes.md
- * for the theme mapping record and contrast evidence.
+ * Import the parts instead when the project loads its own fonts or uses
+ * only some components: `theme.css` plus the `css/<name>.css` files it
+ * needs. Each component file depends only on the theme.
  */
-@import "@fontsource/sora/400.css";
-@import "@fontsource/sora/600.css";
-@import "@fontsource/schibsted-grotesk/400.css";
-
-@import "../tokens/tokens.css";
 @import "./fonts.css";
-@import "./typography.css";
 @import "./theme.css";
 @import "../components/button/button.css";
 @import "../components/card/card.css";
 @import "../components/dialog/dialog.css";
-
-/* Pattern styles: PageHeader and EmptyState, styled through the
-   semantic roles only (no raw values, no new tokens). */
-@import "../patterns/page-header/page-header.css";
-@import "../patterns/empty-state/empty-state.css";
 @import "../components/input/input.css";
 @import "../components/form-field/form-field.css";
+@import "../patterns/page-header/page-header.css";
+@import "../patterns/empty-state/empty-state.css";

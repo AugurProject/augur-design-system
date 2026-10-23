@@ -1,7 +1,7 @@
 /*
  * EmptyState styles (issue #14 — first pattern slice).
  *
- * Color: ONLY semantic role custom properties from ../../styles/theme.css
+ * Color: ONLY semantic role custom properties from ../../styles/roles.css
  * (which references generated tokens). No raw color values, no new
  * custom properties — the same contract the Button/Card component CSS
  * follows, enforced by the stylesheet contract test in the repository
@@ -12,7 +12,13 @@
  * Geometry: intentional structural constants (spacing, icon, radius);
  * no tokens are emitted. Steps used: 8/16/24/32px gaps/padding, 40px
  * icon tile, 8px tile radius.
+ *
+ * Every rule sits in `@layer augur`; this file depends only on the
+ * theme (`theme.css`).
  */
+
+@layer augur {
+
 .aug-empty-state {
   display: flex;
   flex-direction: column;
@@ -56,3 +62,5 @@
   gap: 8px; /* space.sm */
   margin-top: 8px; /* space.sm: one extra beat before actions */
 }
+
+} /* @layer augur */

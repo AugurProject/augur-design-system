@@ -35,7 +35,7 @@ describe("buttonVariants class contract", () => {
   });
 
   test("maps every documented size", () => {
-    for (const size of ["sm", "md", "lg"] as const) {
+    for (const size of ["sm", "md", "lg", "xl"] as const) {
       expect(buttonVariants({ size })).toContain(`aug-button--${size}`);
     }
   });

@@ -4,7 +4,7 @@
  * These tests exist to prove the Vitest + Testing Library + axe harness
  * does real work on the real workspace package — not to pad CI green:
  *
- *   1. The public entry point of `@augur/design-system` loads and exposes
+ *   1. The public entry point of `@augurproject/design-system` loads and exposes
  *      its documented constants (workspace resolution through Vitest).
  *   2. A consumer-style fixture renders, is accessible to axe, and reacts
  *      to user interaction (React behavior through Testing Library).
@@ -24,11 +24,11 @@ import axe from "axe-core";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, test, vi } from "vitest";
-import { AUGUR_FONT_FAMILIES, AUGUR_FONTS } from "@augur/design-system";
+import { AUGUR_FONT_FAMILIES, AUGUR_FONTS } from "@augurproject/design-system";
 import { AugurToggle, AUGUR_TOGGLE_TOKENS } from "./fixtures/AugurToggle";
 import { injectPackageStyles } from "./support/styles";
 
-describe("public entry point of @augur/design-system", () => {
+describe("public entry point of @augurproject/design-system", () => {
   test("exposes the documented font constants through the workspace link", () => {
     expect(AUGUR_FONTS.map((font) => font.family)).toEqual([
       "Sora",
@@ -89,7 +89,16 @@ describe("stylesheet contract of the delivered package CSS", () => {
 
   test("resolves the real stylesheets through the package exports", () => {
     expect(packageStyles.sources).toEqual(
-      expect.arrayContaining(["styles.css", "fonts.css", "typography.css", "tokens.css"]),
+      expect.arrayContaining([
+        "styles.css",
+        "fonts.css",
+        "theme.css",
+        "font-stacks.css",
+        "typography.css",
+        "roles.css",
+        "base.css",
+        "tokens/tokens.css",
+      ]),
     );
     // Non-degenerate guard: the sheets must actually carry the documented
     // font and generated color custom properties, so the contract below

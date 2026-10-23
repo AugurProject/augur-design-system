@@ -3,7 +3,7 @@
  *
  * shadcn-compatible API, Augur-owned styling: a native `<button>`
  * styled exclusively through the semantic role custom properties
- * delivered by `@augur/design-system/styles.css` (see `./button.css`).
+ * delivered by `@augurproject/design-system/styles.css` (see `./button.css`).
  * React 19 style: a plain function component; `ref` forwards through
  * props (no forwardRef).
  *

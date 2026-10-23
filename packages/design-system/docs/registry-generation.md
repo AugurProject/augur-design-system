@@ -7,7 +7,8 @@ hand. Authority chain (contract: [`registry-contract.md`](registry-contract.md)
 
 ```
 DESIGN.md → tokens.css (pinned toolchain)
-src/styles/theme.css, fonts.css, styles.css   (canonical relationships)
+src/styles/roles.css, base.css, typography.css,
+  font-stacks.css, fonts.css, tokens.tailwind.css  (canonical relationships)
 src/components/*, src/patterns/*              (canonical component source)
         ↓  bun run registry:generate   (this policy)
 registry.json (repo root, index form)          — committed
@@ -37,15 +38,22 @@ every component item).
 - **Base tokens**: parsed from the generated `src/tokens/tokens.css`
   (`--augur-color-*`, uppercased hex) — the curated delivery subset mirrors
   the registry fixture (D5).
-- **Semantic roles**: parsed from `src/styles/theme.css` `:root` (light) and
-  `[data-theme="dark"] {` (dark) blocks; the generator hard-fails if the
+- **Semantic roles**: parsed from `src/styles/roles.css` `:root` (light) and
+  `[data-theme="dark"], .dark {` (dark) blocks; the generator hard-fails if the
   system-preference fallback block differs from the explicit dark block.
-- **Fonts**: voice values derived from `src/styles/fonts.css` (first quoted
-  family per voice, plus the system fallback stack); `@import` lines derived
-  from `src/styles/styles.css`; exact-pinned `@fontsource` dependencies per
-  contract §9 (`registry:font` rejected, D4).
-- **Structural CSS** (body canvas, `:focus-visible` ring, reduced-motion
-  gate, `@custom-variant dark`): structural rules referencing roles only.
+  Role values travel in the item's `css` payload because the CLI merges
+  `:root` and `.dark` into the consumer's own unlayered blocks.
+- **Fonts**: voice values derived from `src/styles/font-stacks.css` (first
+  quoted family per voice, plus the system fallback stack); `@import` lines
+  derived from `src/styles/fonts.css`; exact-pinned `@fontsource`
+  dependencies per contract §9 (`registry:font` rejected, D4).
+- **Tailwind map**: `cssVars.theme` and the block-form `@custom-variant
+  dark` are parsed from `src/styles/tokens.tailwind.css`, the package's
+  Tailwind bridge export. The generator fails if a role has no mapping.
+- **Structural CSS and typography** (body canvas, `:focus-visible` ring,
+  6px link offset, reduced-motion gate; the typography role classes): the
+  theme item ships `src/styles/base.css` and `src/styles/typography.css` as
+  files with their package content unchanged, imported ahead of every rule.
 - **Component file content**: canonical component source (contract §5.1 —
   `path` always points at the canonical repository file) with three
   documented consumer-shape transforms:
@@ -57,7 +65,7 @@ every component item).
   3. a side-effect `import "./<name>.css"` is prepended to the primary
      component file, and the component CSS ships as a `registry:file` with an
      explicit `@ui/…`/`@components/…` target. Installed source therefore never
-     imports `@augur/design-system` (§11) and never relies on bundled npm
+     imports `@augurproject/design-system` (§11) and never relies on bundled npm
      output.
 
 Drift in the generated `augur-theme` item is caught by `registry:check`

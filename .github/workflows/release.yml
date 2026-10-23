@@ -2,8 +2,9 @@
 #
 # Run it by hand from `main` after the release-preparation PR has merged:
 # Actions → Release → Run workflow, version `X.Y.Z`. It re-runs every CI gate
-# on the dispatched commit, verifies the release metadata, then creates the
-# annotated tag `vX.Y.Z` on that commit and the matching GitHub Release.
+# on the dispatched commit, verifies the release metadata, packs the package
+# tarball and smoke-tests it, then creates the annotated tag `vX.Y.Z` on that
+# commit and the matching GitHub Release with the tarball attached.
 #
 # It never moves, deletes or force-pushes a tag. If `vX.Y.Z` exists the run
 # fails; a bad release is superseded by the next patch release.
@@ -56,6 +57,10 @@ jobs:
         env:
           VERSION: ${{ inputs.version }}
         run: bun run check:release "$VERSION" --notes "$RUNNER_TEMP/release-notes.md"
+      - name: Install Playwright Chromium
+        run: bunx playwright install --with-deps chromium
+      - name: Pack and smoke-test the package tarball
+        run: bun scripts/package-smoke.ts --out "$RUNNER_TEMP/pack"
       - name: Create the annotated tag
         env:
           VERSION: ${{ inputs.version }}
@@ -68,4 +73,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           VERSION: ${{ inputs.version }}
-        run: gh release create "v$VERSION" --verify-tag --title "v$VERSION" --notes-file "$RUNNER_TEMP/release-notes.md"
+        run: |
+          gh release create "v$VERSION" --verify-tag --title "v$VERSION" \
+            --notes-file "$RUNNER_TEMP/release-notes.md" \
+            "$RUNNER_TEMP/pack/augurproject-design-system-$VERSION.tgz"

@@ -1,5 +1,5 @@
 /**
- * Base token generator for @augur/design-system.
+ * Base token generator for @augurproject/design-system.
  *
  * Generates machine-readable base tokens from the repository-root `DESIGN.md`
  * using the exact-pinned `@google/design.md` toolchain. Generated artifacts

@@ -1,7 +1,7 @@
 /*
  * Input styles (issue #12).
  *
- * Color: ONLY semantic role custom properties from ../../styles/theme.css
+ * Color: ONLY semantic role custom properties from ../../styles/roles.css
  * (which references generated tokens). No raw color values, no new
  * custom properties.
  *
@@ -11,7 +11,12 @@
  * explicitly for inputs; control heights remain adopted structural
  * constants. The component contract for this slice lives in
  * ../../docs/components.md.
+ *
+ * Every rule sits in `@layer augur`; this file depends only on the
+ * theme (`theme.css`).
  */
+
+@layer augur {
 
 .aug-input {
   box-sizing: border-box;
@@ -26,6 +31,15 @@
   background-color: transparent; /* sits on any surface: canvas or card */
   color: var(--foreground);
   vertical-align: middle;
+}
+
+/* xl: 48px with 16/24 text, matching the xl Button (adopted from
+   augur.net). Class-level API: add `aug-input--xl` through className. */
+.aug-input.aug-input--xl {
+  height: 48px;
+  padding: 0 var(--augur-spacing-lg);
+  font-size: 16px;
+  line-height: 24px;
 }
 
 /* Hover: the edge steps from Mist to the stronger control hover edge.
@@ -74,10 +88,12 @@
 }
 
 /* Keyboard focus: painted by the theme contract's shared
-   :focus-visible rule (2px ring, 2px offset, --ring); no per-component
+   :focus-visible rule in base.css (2px ring, 2px offset, --ring); no per-component
    focus CSS, exactly like Button. */
 
 /* Adopted touch target minimum; desktop size variants remain intact. */
 @media (pointer: coarse) {
   .aug-input { min-height: 44px; min-width: 44px; }
 }
+
+} /* @layer augur */

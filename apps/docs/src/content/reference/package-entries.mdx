@@ -1,22 +1,43 @@
 ---
 title: Package entries
-description: The public @augur/design-system package entry points and the generated source-registry distribution path.
+description: The public @augurproject/design-system package entry points and the generated source-registry distribution path.
 order: 1
 ---
 import { DocExample } from "../../components/DocExample";
 import { examples } from "../../examples/registry";
 
-`@augur/design-system` is source-based. Workspace applications can import it directly; external consumers can install generated source through the shadcn-compatible registry.
+`@augurproject/design-system` is source-based. Workspace applications can import it directly. Other projects install it from the tarball attached to each GitHub Release (see [Installing the package](#installing-the-package)), or install generated source through the shadcn-compatible registry.
 
-The package exposes three public package entry points:
+The package exposes these public entry points:
 
 | Entry | What it delivers |
 | --- | --- |
-| `@augur/design-system` | Public React components/patterns, component types/helpers, and font provenance constants/types |
-| `@augur/design-system/styles.css` | Aggregated font faces, generated tokens, semantic themes, typography roles, shared focus behavior, and component/pattern styles |
-| `@augur/design-system/fonts.css` | Voice-family custom properties and fallback stacks only; it does not load font files |
+| `@augurproject/design-system` | Public React components/patterns, component types/helpers, and font provenance constants/types |
+| `@augurproject/design-system/theme.css` | Generated tokens, font-family stacks, typography roles, semantic light/dark roles, and the body, focus and reduced-motion rules. Loads no fonts |
+| `@augurproject/design-system/fonts.css` | Optional font faces: Sora 400/600 and Schibsted Grotesk 400 from the pinned `@fontsource` packages. Bundler only |
+| `@augurproject/design-system/css/<name>.css` | One stylesheet per component or pattern: `button`, `card`, `dialog`, `input`, `form-field`, `page-header`, `empty-state`. Each depends only on `theme.css` |
+| `@augurproject/design-system/styles.css` | Everything above: `fonts.css`, `theme.css` and every component stylesheet |
+| `@augurproject/design-system/tokens.tailwind.css` | Tailwind v4 bridge: `@theme inline` colour utilities for every semantic role, `font-sans` and `font-heading`, and a `dark:` variant |
 
-Internal source paths are not public API.
+The `.aug-*` class names are stable API. Before 1.0, renaming one is a minor release with a changelog note. Internal source paths are not public API.
+
+## Cascade layer
+
+Every rule the package ships sits in `@layer augur`, so your CSS overrides it without specificity or order tricks. Unlayered CSS always wins. Layers you declare after `augur` also win.
+
+A layer's position is set by its first appearance. With Tailwind v4, declare the order before importing anything, so Tailwind utilities override Augur rules:
+
+```css
+@layer theme, base, augur, components, utilities;
+@import "tailwindcss";
+@import "@augurproject/design-system/theme.css";
+```
+
+Without that statement, `augur` is added after Tailwind's layers and outranks its utilities.
+
+## Dark mode
+
+The theme follows the operating-system preference by default. Set `data-theme="dark"` or `data-theme="light"` on `<html>` or any container to force a scheme there; shadcn's `.dark` class also selects dark.
 
 ## Root module
 
@@ -28,23 +49,43 @@ It also exports machine-readable font provenance data:
 
 ## Aggregated stylesheet
 
-Most consumers should load the full stylesheet once:
+Most bundled consumers load the full stylesheet once:
 
 ```ts
-import "@augur/design-system/styles.css";
+import "@augurproject/design-system/styles.css";
 ```
 
-This is the shared visual contract for package consumers: self-hosted font faces, generated design values, semantic role mapping, typography, focus behavior, and component/pattern styling.
+## Theme and component files
 
-## Fonts-only stylesheet
-
-Consumers that deliver font files by another route but still want Augur's family stacks can import:
+Import the parts instead when the project loads its own fonts or uses only some components:
 
 ```ts
-import "@augur/design-system/fonts.css";
+import "@augurproject/design-system/theme.css";
+import "@augurproject/design-system/css/button.css";
 ```
 
-This defines `--augur-font-primary` and `--augur-font-secondary` with their maintained fallback stacks. It intentionally contains no `@fontsource` imports; self-hosted font-face delivery comes from the aggregated stylesheet.
+`theme.css` and the component files use relative imports only, so a page without a bundler can link them from `node_modules`:
+
+```html
+<link rel="stylesheet" href="node_modules/@augurproject/design-system/src/styles/theme.css">
+<link rel="stylesheet" href="node_modules/@augurproject/design-system/src/components/button/button.css">
+```
+
+Without `fonts.css`, text falls back to the system sans stack until the project supplies Sora and Schibsted Grotesk.
+
+## Fonts
+
+`fonts.css` imports the pinned `@fontsource` faces. Its bare `@import` specifiers resolve at bundle time (Vite, Astro, webpack), not from a plain `<link>`. Skip it when the project loads its own fonts.
+
+## Installing the package
+
+The package is not on the npm registry yet. Each GitHub Release from `v0.2.0` attaches an `npm pack` tarball. Install it by URL; the package keeps its final name, so imports do not change when it moves to the registry:
+
+```sh
+npm install https://github.com/jubalm/augur-design-system/releases/download/vX.Y.Z/augurproject-design-system-X.Y.Z.tgz
+```
+
+The tarball includes the React entry point. Projects that use only the CSS need neither React nor Tailwind.
 
 ## Source registry
 

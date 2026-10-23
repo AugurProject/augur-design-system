@@ -6,6 +6,39 @@ Releases are immutable Git tags (`vX.Y.Z`) that describe the whole consumer-faci
 
 ## Unreleased
 
+## [0.2.0] - 2026-10-24
+
+Adopt it by installing the tarball attached to the `v0.2.0` GitHub Release, `https://github.com/jubalm/augur-design-system/releases/download/v0.2.0/augurproject-design-system-0.2.0.tgz`, or the registry items at `#v0.2.0`. Rename `@augur/design-system` imports to `@augurproject/design-system`, and replace imports of the old `fonts.css` (font stacks) with `theme.css`.
+
+### Added
+
+- **Package tarball.** Each GitHub Release attaches an `npm pack` tarball of `@augurproject/design-system`. Install it by URL; imports keep working when the package moves to the npm registry. `RELEASING.md` documents the channel, and CI packs the tarball and checks it in a plain-HTML page on every pull request.
+- **CSS exports.** `theme.css` (tokens, typography and semantic roles; loads no fonts), the optional `fonts.css` (font faces), one `css/<name>.css` per component and pattern, `styles.css` (everything), and `tokens.tailwind.css` (Tailwind v4 bridge: colour utilities for every role, `font-sans`, `font-heading` and a `dark:` variant). `theme.css` and the component files use relative imports only, so a page without a bundler can link them.
+- **`@layer augur`.** Every rule the package ships sits in one cascade layer, so unlayered consumer CSS, and consumer layers ordered after `augur`, override it predictably.
+- **Dark-mode hooks.** shadcn's `.dark` class selects dark in the package CSS too, alongside `data-theme` and the OS preference.
+- **`xl` control size.** `Button size="xl"` and the `aug-input--xl` class: 48px with 16/24 text.
+- **Brand hover edge.** `--brand-hover-edge`: Green at 50% in dark, Deep at 50% in light, for brand surfaces such as interactive cards and tabs. Controls keep `--input-hover`.
+- **Primary pressed role.** `--primary-active` and `--primary-active-foreground`.
+- **Green interaction steps.** `accent-hover` (`#27D19B`) and `accent-pressed` (`#24BC8D`) in `DESIGN.md`, with their component pairings.
+
+### Changed
+
+- **Breaking: package renamed** from `@augur/design-system` to `@augurproject/design-system`. `@augur` on npm belongs to an unrelated company.
+- **Breaking for React consumers: `react` and `radix-ui` are optional peer dependencies.** A CSS-only install pulls in neither; projects that import the React components install `react` and `radix-ui@1.6.7` themselves. Registry items still declare `radix-ui`.
+- **Breaking: `fonts.css` now loads font faces.** The font-family stacks it used to hold are part of `theme.css`.
+- **Breaking for override order: CSS is layered.** Consumer CSS that relied on loading after the design system to win at equal specificity now wins whatever the order. With Tailwind v4, declare `@layer theme, base, augur, components, utilities;` first so utilities override Augur rules.
+- Dark default Button hovers to `#27D19B` and presses to `#24BC8D`, both under a Navy label, adopted from augur.net. Light is unchanged.
+- Dark `--card` is Surface 2 (`#1D1D30`) and dark `--border` is Mist (`#71728A`), adopted from augur.net. Dark cards now share a fill with popovers and secondary controls and are separated by their Mist bounds.
+- Links take a 6px focus-ring offset (#8). Other elements keep 2px.
+- `--font-sans` in the Tailwind mapping is Schibsted Grotesk, the body voice. Sora is `--font-heading` and stays the heading and display font through the typography roles.
+- The `augur-theme` registry item ships `typography.css` and the new `base.css` (body, focus and reduced-motion rules) as files with the package's content, and reads its Tailwind mapping from `tokens.tailwind.css`, so registry installs and package imports share one source.
+
+### Fixed
+
+- The `augur-theme` item imports its typography file ahead of every rule. Plain CSS ignores an `@import` that follows a rule.
+- The typography stylesheet header no longer points to a `./fonts.css` that registry installs do not include.
+- The registry `dark:` variant applied in every scheme unless light was pinned. It now follows `.dark` and `data-theme="dark"`; the package's `tokens.tailwind.css` variant also follows the OS preference.
+
 ## [0.1.0] - 2026-09-28
 
 The first versioned release. Consumers adopt it by tag: `jubalm/augur-design-system/<item>#v0.1.0`, or the built item at `https://raw.githubusercontent.com/jubalm/augur-design-system/v0.1.0/public/r/<item>.json`.

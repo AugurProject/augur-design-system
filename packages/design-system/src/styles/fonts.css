@@ -1,30 +1,18 @@
 /*
- * Font-family custom properties and fallback stacks for @augur/design-system.
+ * Optional font faces for @augurproject/design-system.
  *
- * Source of truth: the `DESIGN.md` typography block names two families.
- * Per the brand's voice model (recorded in the foundation decision audit of
- * PDF page 04.1): Sora is the primary voice (display, headings, control,
- * ui), Schibsted Grotesk is the secondary voice (body, metadata).
+ * Consumers: import "@augurproject/design-system/fonts.css";
  *
- * The custom properties are named by voice role, not by font name, so the
- * underlying family can change without renaming the surface contract.
+ * Loads the faces the theme's typography roles use, from the pinned
+ * OFL-1.1 `@fontsource` packages (dependencies of this package): Sora
+ * 400 and 600, and Schibsted Grotesk 400. See `src/fonts.ts` and
+ * `resources/brand/PROVENANCE.md` for exact provenance.
  *
- * Font files themselves are delivered by the pinned `@fontsource` packages
- * imported from `styles.css`. See `resources/brand/PROVENANCE.md` for
- * exact versions, licenses, and copyright notices.
- *
- * This file is dependency-free plain CSS (no bare-specifier imports), so it
- * can also be loaded on its own via the `./fonts.css` package export when a
- * consumer delivers font files by another route.
+ * The bare-specifier imports are resolved at bundle time (Vite, Astro,
+ * webpack); a browser cannot resolve them from a plain `<link>`. Skip
+ * this file when the project loads its own fonts; `theme.css` works
+ * without it and falls back to the system sans stack.
  */
-:root {
-  /* Primary voice: Sora (OFL-1.1). Fallback: system sans stack. */
-  --augur-font-primary:
-    "Sora", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
-    "Helvetica Neue", Arial, sans-serif;
-
-  /* Secondary voice: Schibsted Grotesk (OFL-1.1). Fallback: system sans stack. */
-  --augur-font-secondary:
-    "Schibsted Grotesk", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
-    "Helvetica Neue", Arial, sans-serif;
-}
+@import "@fontsource/sora/400.css" layer(augur);
+@import "@fontsource/sora/600.css" layer(augur);
+@import "@fontsource/schibsted-grotesk/400.css" layer(augur);

@@ -1,7 +1,7 @@
 # Font delivery fixture (issue #5)
 
 A minimal rendered fixture that verifies the fonts delivered by
-`@augur/design-system` in a real browser — no docs app required
+`@augurproject/design-system` in a real browser — no docs app required
 (the Astro app is issue #7; CI wiring for browser checks is #6/#15).
 
 ## What it proves

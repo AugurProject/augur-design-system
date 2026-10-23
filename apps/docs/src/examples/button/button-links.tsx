@@ -1,4 +1,4 @@
-import { Button } from "@augur/design-system";
+import { Button } from "@augurproject/design-system";
 
 export function ButtonLinksExample() {
   return (

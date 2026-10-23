@@ -14,12 +14,17 @@
  *
  * Never hand-copies token values: base tokens are parsed from the
  * generated `src/tokens/tokens.css`; semantic role mappings are parsed
- * from `src/styles/theme.css` (and the system-fallback block is asserted
+ * from `src/styles/roles.css` (and the system-fallback block is asserted
  * identical to the explicit dark block); font voices are derived from
- * `src/styles/fonts.css`; font `@import`s are derived from
- * `src/styles/styles.css`. Structural CSS (focus ring, body canvas,
- * reduced-motion gate, `@custom-variant dark`) is structural — variable
- * references only, no raw values.
+ * `src/styles/font-stacks.css`; font `@import`s are derived from
+ * `src/styles/fonts.css`; the Tailwind `cssVars.theme` map and the
+ * `dark` custom variant are parsed from `src/styles/tokens.tailwind.css`.
+ * The theme item ships `typography.css` and `base.css` (focus ring, body
+ * canvas, reduced-motion gate) as files with their package content
+ * unchanged, so registry installs and package imports share one source.
+ * Role values stay in the item's `css` payload because the CLI merges
+ * `:root`/`.dark` into the consumer's own blocks; a layered file would
+ * lose to the unlayered defaults `shadcn init` writes.
  *
  * Component item file content is derived from the canonical component
  * source with documented consumer-shape transforms (contract §5, §7):
@@ -96,17 +101,18 @@ function parseRoleBlock(css: string, startMarker: string): RoleMap {
   }
   const body = css.slice(open + 1, end);
   const roles: RoleMap = {};
-  for (const m of body.matchAll(/(--[a-z-]+):\s*var\((--augur-color-[a-z0-9-]+)\)/g)) {
-    roles[m[1]] = `var(${m[2]})`;
+  for (const m of body.matchAll(/(?:^|[;{\s])(--[a-z-]+):\s*([^;]+);/g)) {
+    if (m[1].startsWith("--augur-")) continue;
+    roles[m[1]] = m[2].trim().replace(/\s+/g, " ");
   }
   return roles;
 }
 
 /** Parse the theme.css role mappings for light, dark, and the fallback. */
 function parseThemeRoles(): { light: RoleMap; dark: RoleMap } {
-  const css = read("src/styles/theme.css");
+  const css = read("src/styles/roles.css");
   const light = parseRoleBlock(css, ":root {");
-  const dark = parseRoleBlock(css, '[data-theme="dark"] {');
+  const dark = parseRoleBlock(css, '[data-theme="dark"],\n.dark {');
   const fallback = parseRoleBlock(css, ':root:not([data-theme="light"]) {');
   const keys = (r: RoleMap) => Object.keys(r).sort().join(",");
   if (keys(dark) !== keys(light)) throw new Error("dark/light role sets differ");
@@ -118,7 +124,7 @@ function parseThemeRoles(): { light: RoleMap; dark: RoleMap } {
 
 /** Derive the two voice custom properties from fonts.css. */
 function parseFontVoices(): { primary: string; secondary: string } {
-  const css = read("src/styles/fonts.css");
+  const css = read("src/styles/font-stacks.css");
   const voice = (name: string): string => {
     const m = css.match(new RegExp(`--augur-font-${name}:\\s*"([^"]+)"`));
     if (!m) throw new Error(`--augur-font-${name} not found in fonts.css`);
@@ -129,19 +135,66 @@ function parseFontVoices(): { primary: string; secondary: string } {
 
 /** Derive the pinned @fontsource @import list from styles.css. */
 function parseFontImports(): string[] {
-  const imports = [...read("src/styles/styles.css").matchAll(/@import "(@fontsource[^"]+)"/g)].map(
-    (m) => m[0],
+  const imports = [...read("src/styles/fonts.css").matchAll(/@import "(@fontsource[^"]+)"/g)].map(
+    (m) => `@import "${m[1]}"`,
   );
-  if (imports.length === 0) throw new Error("no @fontsource imports found in styles.css");
+  if (imports.length === 0) throw new Error("no @fontsource imports found in fonts.css");
   return imports;
+}
+
+/** Convert a small CSS fragment to the CLI's nested `css` object form:
+ * `selector { ... }` becomes a nested object and a bare `@slot;`
+ * statement becomes `{ "@slot": "" }`. Declarations are not expected. */
+function cssToObject(text: string): Record<string, unknown> {
+  const out: Record<string, unknown> = {};
+  let i = 0;
+  while (i < text.length) {
+    const brace = text.indexOf("{", i);
+    const semi = text.indexOf(";", i);
+    if (semi >= 0 && (brace < 0 || semi < brace)) {
+      const stmt = text.slice(i, semi).trim();
+      if (stmt) out[stmt] = "";
+      i = semi + 1;
+      continue;
+    }
+    if (brace < 0) break;
+    const prelude = text.slice(i, brace).trim().replace(/\s+/g, " ");
+    let depth = 1;
+    let j = brace + 1;
+    while (j < text.length && depth > 0) {
+      if (text[j] === "{") depth++;
+      else if (text[j] === "}") depth--;
+      j++;
+    }
+    out[prelude] = cssToObject(text.slice(brace + 1, j - 1));
+    i = j;
+  }
+  return out;
+}
+
+/** Parse the Tailwind bridge: the `@theme inline` map and the `dark` variant.
+ *
+ * The CLI cannot write a block-form `@custom-variant` (it turns `@slot;`
+ * into declarations), so the registry gets the one-line form built from
+ * the bridge's explicit-hook selector (`.dark`, `data-theme`). The OS
+ * preference branch stays package-only; roles still follow it. */
+function parseTailwindBridge(): { themeVars: Record<string, string>; darkVariant: string } {
+  const css = read("src/styles/tokens.tailwind.css").replace(/\/\*[\s\S]*?\*\//g, "");
+  const themeStart = css.indexOf("@theme inline {");
+  if (themeStart < 0) throw new Error("@theme inline not found in tokens.tailwind.css");
+  const themeVars: Record<string, string> = {};
+  for (const m of css.slice(themeStart).matchAll(/(--[a-z-]+):\s*([^;]+);/g)) themeVars[m[1]] = m[2].trim();
+  const parsed = cssToObject(css.slice(0, themeStart));
+  const block = parsed["@custom-variant dark"];
+  const explicit = block && typeof block === "object" ? Object.keys(block).find((k) => k.startsWith("&:")) : undefined;
+  if (!explicit) throw new Error("@custom-variant dark block with an explicit-hook selector not found in tokens.tailwind.css");
+  return { themeVars, darkVariant: `@custom-variant dark (${explicit})` };
 }
 
 // ------------------------------------------------------------ theme item
 
-
-
 const THEME_DOCS =
-  'Apply the theme by setting `data-theme="light|dark"` on `<html>` or any container; without an attribute the system preference decides. Do not import @augur/design-system from registry-installed source; this item is self-contained.';
+  'Apply the theme by setting `data-theme="light|dark"` or the `.dark` class on `<html>` or any container; without either the system preference decides. All installed rules sit in `@layer augur`. Do not import @augurproject/design-system from registry-installed source; this item is self-contained.';
 
 function buildThemeItem(): Record<string, unknown> {
   const tokens = parseTokens();
@@ -158,40 +211,32 @@ function buildThemeItem(): Record<string, unknown> {
   rootVars["--augur-font-primary"] = fonts.primary;
   rootVars["--augur-font-secondary"] = fonts.secondary;
 
-  const themeVars: Record<string, string> = {
-    "--font-sans": "var(--augur-font-primary)",
-  };
-  for (const role of Object.keys(light).sort()) {
-    themeVars[`--color${role.replace(/^--/, "-")}`] = `var(${role})`;
+  const { themeVars, darkVariant } = parseTailwindBridge();
+  for (const role of Object.keys(light)) {
+    const key = `--color${role.replace(/^--/, "-")}`;
+    if (themeVars[key] !== `var(${role})`) {
+      throw new Error(`tokens.tailwind.css has no ${key}: var(${role}) mapping for role ${role}`);
+    }
   }
 
+  // Imports first: the CLI hoists them, and plain CSS ignores an @import
+  // that follows a rule.
   const css: Record<string, unknown> = {};
   for (const imp of imports) css[imp] = "";
+  css['@import "./styles/augur-typography.css"'] = "";
+  css['@import "./styles/augur-base.css"'] = "";
   // Semantic roles travel in `css`, not `cssVars.light`/`dark`: the CLI
   // prefixes cssVars keys with `--` again and maps each non-color value
   // into `@theme inline` as `--role: var(--role)`, which yields invalid
   // `var(----role)` / self-referencing entries in the consumer (issue #94).
   css[":root"] = { ...rootVars, ...light };
-  css['@import "./styles/augur-typography.css"'] = "";
   css['[data-theme="light"]'] = { "color-scheme": "light", ...light };
   css[".dark"] = { "color-scheme": "dark", ...dark };
   css['[data-theme="dark"]'] = { "color-scheme": "dark", ...dark };
   css["@media (prefers-color-scheme: dark)"] = {
     ':root:not([data-theme="light"])': { "color-scheme": "dark", ...dark },
   };
-  css["body"] = { "background-color": "var(--background)", color: "var(--foreground)" };
-  css[":focus-visible"] = { outline: "2px solid var(--ring)", "outline-offset": "2px" };
-  css["@media (prefers-reduced-motion: reduce)"] = {
-    "*, *::before, *::after": {
-      "animation-duration": "0.01ms !important",
-      "animation-iteration-count": "1 !important",
-      "transition-duration": "0.01ms !important",
-      "scroll-behavior": "auto !important",
-    },
-  };
-  css[
-    '@custom-variant dark (&:is([data-theme="dark"], [data-theme="dark"] *, :root:not([data-theme="light"]) *))'
-  ] = "";
+  css[darkVariant] = "";
 
   return {
     name: "augur-theme",
@@ -201,12 +246,20 @@ function buildThemeItem(): Record<string, unknown> {
     description:
       "Augur semantic light/dark theme: generated base tokens, shadcn-compatible role mappings, focus and reduced-motion behavior, and self-hosted Sora + Schibsted Grotesk fonts.",
     dependencies: ["@fontsource/sora@5.3.0", "@fontsource/schibsted-grotesk@5.3.0"],
-    files: [{
-      path: "packages/design-system/src/styles/typography.css",
-      type: "registry:style",
-      target: "src/styles/augur-typography.css",
-      content: read("src/styles/typography.css"),
-    }],
+    files: [
+      {
+        path: "packages/design-system/src/styles/typography.css",
+        type: "registry:style",
+        target: "src/styles/augur-typography.css",
+        content: read("src/styles/typography.css"),
+      },
+      {
+        path: "packages/design-system/src/styles/base.css",
+        type: "registry:style",
+        target: "src/styles/augur-base.css",
+        content: read("src/styles/base.css"),
+      },
+    ],
     cssVars: { theme: themeVars },
     css,
     docs: THEME_DOCS,

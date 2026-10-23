@@ -18,6 +18,10 @@
 # at every commit a release tag could point to: generated-output drift,
 # shadcn schema validation, and the independent-consumer install smoke.
 #
+# `package` (issue #9) packs the package tarball, installs it into a plain-HTML
+# consumer, and checks the theme and a component stylesheet in Chromium with
+# no React, Tailwind or font import.
+#
 # `docs-verification` (issue #15) covers the docs app: clean Markdown,
 # real-browser behavior (fonts, theme contract, keyboard, mobile, the
 # full starter-component set including Dialog focus/dismissal/scroll
@@ -157,6 +161,23 @@ jobs:
         run: bun run --cwd packages/design-system registry:validate
       - name: Independent-consumer install smoke (consumer-smoke)
         run: bun scripts/consumer-smoke.ts
+
+  package:
+    name: package
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v5
+      - name: Set up pinned Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: ${{ env.BUN_VERSION }}
+      - name: Frozen install
+        run: bun install --frozen-lockfile
+      - name: Install Playwright Chromium
+        run: bunx playwright install --with-deps chromium
+      - name: Package tarball smoke (package-smoke)
+        run: bun scripts/package-smoke.ts
 
   docs-verification:
     name: docs-verification

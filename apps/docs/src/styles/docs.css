@@ -4,7 +4,7 @@
  * Consumption rules honored here:
  *
  *   - Color: ONLY semantic role custom properties delivered by
- *     `@augur/design-system/styles.css` (--background, --card,
+ *     `@augurproject/design-system/styles.css` (--background, --card,
  *     --foreground, --muted, --border, --primary, --ring, ...). No raw
  *     color values, ever; light/dark follows the package theme contract.
  *   - Fonts: family via the package's voice custom properties
@@ -1302,7 +1302,7 @@ body {
 /* Shared documentation pages and live examples (issue #8)            */
 /*                                                                    */
 /* Chrome only: every color/font reference below is a semantic role    */
-/* custom property delivered by @augur/design-system/styles.css.       */
+/* custom property delivered by @augurproject/design-system/styles.css.       */
 /* ---------------------------------------------------------------- */
 
 /* Page renderer (DocPage.astro): lede. */

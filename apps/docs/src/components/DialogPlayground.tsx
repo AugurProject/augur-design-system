@@ -34,7 +34,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@augur/design-system";
+} from "@augurproject/design-system";
 
 function ReviewDialogBody({ long = false }: { long?: boolean }) {
   return (

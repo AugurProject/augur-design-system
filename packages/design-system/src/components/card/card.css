@@ -1,7 +1,7 @@
 /*
  * Card styles (issue #11).
  *
- * Color: ONLY semantic role custom properties from ../../styles/theme.css
+ * Color: ONLY semantic role custom properties from ../../styles/roles.css
  * (which references generated tokens). No raw color values, no new
  * custom properties.
  *
@@ -10,7 +10,12 @@
  * surface radius consumes the generated rounded token
  * (`--augur-rounded-surface`, 0px — issues #45/#50). Component contract:
  * ../../docs/components.md.
+ *
+ * Every rule sits in `@layer augur`; this file depends only on the
+ * theme (`theme.css`).
  */
+
+@layer augur {
 
 .aug-card {
   box-sizing: border-box;
@@ -93,3 +98,5 @@
 .aug-card-content > :last-child {
   margin-bottom: 0;
 }
+
+} /* @layer augur */

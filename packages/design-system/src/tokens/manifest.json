@@ -5,7 +5,7 @@
     "source": {
       "file": "DESIGN.md",
       "location": "repository root",
-      "sha256": "bd57ef107556918a470d68f9e53bc31022fb27c5d28f65c01254fbe6d3f177cc"
+      "sha256": "10b28e341e67e3d41f9e319f4d601a7c20e1aecc68255355bfb5aaf868cfb471"
     },
     "tool": {
       "name": "@google/design.md",
@@ -25,20 +25,20 @@
     {
       "file": "tokens.css",
       "format": "css-vars",
-      "sha256": "7a9e4eda76be5629d213491cca8e33317db06ee526b4cc522c96eac6615f8836",
-      "bytes": 1473
+      "sha256": "080a5bc96512516ddd00a0d60873d74b61f857e73a78d912d6c5ab9e8deaa728",
+      "bytes": 1553
     },
     {
       "file": "tokens.tailwind.css",
       "format": "css-tailwind",
-      "sha256": "5caac3466250f40091125178f34b235dee185d782e08c77fe431ac613867a9d5",
-      "bytes": 2707
+      "sha256": "3ac5468153d87593b9a52786a5fa329a9f95fbddf61f7d2e80a4325d3c843dda",
+      "bytes": 2775
     },
     {
       "file": "tokens.dtcg.json",
       "format": "dtcg",
-      "sha256": "d5284efa61f7fb822e330051d3f3f424a68bee8026f10e862fcbb00e1571a5fb",
-      "bytes": 8619
+      "sha256": "a82a3989b20373048c7458875c2aed0789d5a2410052dee0b45ae2c5b88265dc",
+      "bytes": 9054
     }
   ]
 }

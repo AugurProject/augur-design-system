@@ -34,7 +34,7 @@ import {
   FormField,
   FormFieldControl,
   Input,
-} from "@augur/design-system";
+} from "@augurproject/design-system";
 import { loadPackageStyles } from "./support/styles";
 
 function renderField(props?: { error?: string; required?: boolean }) {

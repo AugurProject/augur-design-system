@@ -2,7 +2,7 @@
 
 This file records where brand-related assets in this repository came from, how
 they are delivered, and which source formats are still unavailable. It also
-documents the font delivery provenance for `@augur/design-system`.
+documents the font delivery provenance for `@augurproject/design-system`.
 
 ## 1. Authority: interface tokens vs fixed identity artwork
 
@@ -173,7 +173,7 @@ packaging should follow the decision recorded there.
 
 ## 5. Font delivery provenance
 
-Fonts are delivered as npm dependencies of `@augur/design-system` — legitimately
+Fonts are delivered as npm dependencies of `@augurproject/design-system` — legitimately
 self-hostable, OFL-licensed Fontsource packages — never from Google Fonts CDNs
 or other third-party hosts at runtime.
 

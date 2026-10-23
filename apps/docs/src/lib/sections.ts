@@ -35,7 +35,7 @@ const INTROS: Record<string, { description: string; intro: string }> = {
   },
   components: {
     description:
-      "The accessible React components shipped by @augur/design-system, documented from their real exports with live examples.",
+      "The accessible React components shipped by @augurproject/design-system, documented from their real exports with live examples.",
     intro:
       "Each page documents a real package export: when to use it, its variants and states, accessibility behavior, and API. Examples render what consumers actually receive.",
   },

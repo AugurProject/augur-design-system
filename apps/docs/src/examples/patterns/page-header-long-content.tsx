@@ -5,7 +5,7 @@ import {
   PageHeaderContent,
   PageHeaderDescription,
   PageHeaderTitle,
-} from "@augur/design-system";
+} from "@augurproject/design-system";
 
 export function PageHeaderLongContentExample() {
   return (

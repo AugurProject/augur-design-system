@@ -1,7 +1,7 @@
 /*
  * Button styles (issue #11).
  *
- * Color: ONLY semantic role custom properties from ../../styles/theme.css
+ * Color: ONLY semantic role custom properties from ../../styles/roles.css
  * (which references generated tokens). No raw color values, no new
  * custom properties.
  *
@@ -9,7 +9,12 @@
  * (--augur-spacing-*, --augur-rounded-control — issues #45/#51); control
  * heights remain adopted structural constants. The component contract
  * for this slice lives in ../../docs/components.md.
+ *
+ * Every rule sits in `@layer augur`; this file depends only on the
+ * theme (`theme.css`).
  */
+
+@layer augur {
 
 /* Margin reset at zero specificity (issue #97): it clears user-agent
    button margins but never outranks a consumer's layout margin, whatever
@@ -46,6 +51,16 @@
 .aug-button--lg {
   height: 40px;
   padding: 0 var(--augur-spacing-xl);
+}
+
+/* xl: 48px with 16/24 labels, adopted from augur.net for prominent
+   actions. The doubled class outranks the 14/20 control role class
+   whatever the stylesheet order. */
+.aug-button.aug-button--xl {
+  height: 48px;
+  padding: 0 var(--augur-spacing-xl);
+  font-size: 16px;
+  line-height: 24px;
 }
 
 /*
@@ -100,7 +115,8 @@
 
 /* Filled variants step to a neighbouring palette color and keep their
    own family, so a hovered primary never reads as disabled. Existing
-   palette steps only; no alpha tints. */
+   palette steps only; no alpha tints. The default (primary) hover is
+   Green in light and the darker Green hover step in dark. */
 .aug-button--default:hover:not(:disabled) {
   background-color: var(--primary-hover);
   color: var(--primary-hover-foreground);
@@ -115,7 +131,14 @@
   background-color: var(--destructive-hover);
   color: var(--destructive-foreground);
 }
-.aug-button--default:active:not(:disabled),
+/* Pressed: the default button takes its own pressed role (the Navy
+   inversion in light, the Green pressed step in dark); the other
+   variants invert to foreground on background. */
+.aug-button--default:active:not(:disabled) {
+  background-color: var(--primary-active);
+  color: var(--primary-active-foreground);
+}
+
 .aug-button--destructive:active:not(:disabled),
 .aug-button--secondary:active:not(:disabled),
 .aug-button--outline:active:not(:disabled),
@@ -183,3 +206,5 @@
 @media (pointer: coarse) {
   .aug-button { min-height: 44px; min-width: 44px; }
 }
+
+} /* @layer augur */

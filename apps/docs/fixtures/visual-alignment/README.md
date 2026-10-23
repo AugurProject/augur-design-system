@@ -2,7 +2,7 @@
 
 This non-shipping fixture illustrates the adopted direction in
 [`visual-direction.mdx`](../../src/content/foundations/visual-direction.mdx).
-It lives outside Astro routes and imports the real `@augur/design-system/styles.css`.
+It lives outside Astro routes and imports the real `@augurproject/design-system/styles.css`.
 Bun bundles the pinned package's Sora 400/600 and Schibsted Grotesk 400 WOFF2
 sources as local CSS data URLs; no network font service is involved. Generated
 bundle files are ignored. All new geometry and border relationships remain local.

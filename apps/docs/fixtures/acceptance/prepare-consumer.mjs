@@ -5,7 +5,7 @@ const app=process.argv[2];
 if (!app) throw new Error('Pass the disposable consumer app directory');
 const repo=resolve(import.meta.dirname,'../../../..');
 const example=join(repo,'apps/docs/src/examples/patterns');
-const record=(await readFile(join(example,'reference-record.tsx'),'utf8')).replace('"@augur/design-system"','"@/components/ui/button"');
+const record=(await readFile(join(example,'reference-record.tsx'),'utf8')).replace('"@augurproject/design-system"','"@/components/ui/button"');
 await writeFile(join(app,'src/reference-record.tsx'),record);
 await copyFile(join(example,'reference-record.css'),join(app,'src/reference-record.css'));
 await writeFile(join(app,'src/App.tsx'),`import { ReferenceRecordExample } from './reference-record';

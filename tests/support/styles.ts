@@ -1,16 +1,13 @@
 /**
- * Loads the stylesheets delivered by `@augur/design-system` into the jsdom
+ * Loads the stylesheets delivered by `@augurproject/design-system` into the jsdom
  * document and exposes their custom-property surface for contract tests.
  *
  * Resolution goes through the package's documented public exports, not raw
  * file paths, so the harness keeps testing the surface consumers receive:
  *
- *   @augur/design-system/styles.css  (aggregator: @fontsource imports plus
- *                                     ./fonts.css and ./typography.css)
- *   packages/design-system/src/tokens/tokens.css
- *     — the generated artifact path documented by the generated-file policy
- *       (`packages/design-system/src/tokens/README.md`); verified for drift
- *       in CI by `tokens:check` (issue #3).
+ *   @augurproject/design-system/styles.css  (aggregator: ./fonts.css,
+ *     ./theme.css and its parts, including the generated
+ *     ../tokens/tokens.css, then every component stylesheet)
  *
  * Bare-specifier `@import`s (the `@fontsource` files) are skipped: the
  * package documents them as bundle-time imports resolved by Vite/Astro,
@@ -19,7 +16,7 @@
  */
 import { readFileSync } from "node:fs";
 import { createRequire } from "node:module";
-import { dirname, resolve } from "node:path";
+import { dirname, relative, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 /** The repo root (Vitest runs from the root; see vitest.config.ts). */
@@ -70,7 +67,13 @@ export function injectPackageStyles(): PackageStyles {
   if (!cached) {
     const element = document.createElement("style");
     element.setAttribute("data-augur-test-styles", "true");
-    element.textContent = styles.cssText;
+    // jsdom parses `@layer` blocks but its getComputedStyle ignores
+    // layered rules, so the wrapper is removed for the jsdom copy only.
+    // Layer placement is asserted structurally in
+    // packages/design-system/test/semantic-theme.test.ts.
+    element.textContent = styles.cssText
+      .replace(/@layer augur\s*\{/g, "")
+      .replace(/\}\s*\/\* @layer augur \*\//g, "");
     document.head.append(element);
     cached = styles;
   }
@@ -79,36 +82,26 @@ export function injectPackageStyles(): PackageStyles {
 
 /** Load the package stylesheets without touching the jsdom document. */
 export function loadPackageStyles(): PackageStyles {
-  const stylesPath = resolveToPath("@augur/design-system/styles.css");
+  const stylesPath = resolveToPath("@augurproject/design-system/styles.css");
+  const pkgDir = resolve(repoRoot, "packages/design-system/src");
   const sources: string[] = [];
   const chunks: string[] = [];
+  const seen = new Set<string>();
 
-  // The aggregator itself, then its relative (same-package) imports.
-  const aggregator = readFileSync(stylesPath, "utf8");
-  sources.push("styles.css");
-  chunks.push(aggregator);
-  for (const match of aggregator.matchAll(/^@import\s+"([^"]+)";/gm)) {
-    const specifier = match[1];
-    if (specifier.startsWith(".")) {
-      const imported = readFileSync(
-        resolve(dirname(stylesPath), specifier),
-        "utf8",
-      );
-      sources.push(specifier.replace("./", ""));
-      chunks.push(imported);
+  // The aggregator, then its relative (same-package) imports, depth first
+  // in import order: styles.css → theme.css → tokens, roles, base, …
+  const visit = (file: string) => {
+    if (seen.has(file)) return;
+    seen.add(file);
+    const css = readFileSync(file, "utf8");
+    for (const match of css.matchAll(/^@import\s+"([^"]+)"[^;]*;/gm)) {
+      // Bare specifiers (@fontsource) are bundle-time imports; skipped.
+      if (match[1].startsWith(".")) visit(resolve(dirname(file), match[1]));
     }
-    // Bare specifiers (@fontsource) are bundle-time imports; skipped.
-  }
-
-  // Generated base tokens (issue #3), via the documented artifact path
-  // (`packages/design-system/src/tokens/tokens.css`; the directory README
-  // documents it, and `tokens:check` in CI verifies it for drift).
-  const tokensPath = resolve(
-    repoRoot,
-    "packages/design-system/src/tokens/tokens.css",
-  );
-  chunks.push(readFileSync(tokensPath, "utf8"));
-  sources.push("tokens.css");
+    sources.push(relative(pkgDir, file).replace(/^styles\//, ""));
+    chunks.push(css);
+  };
+  visit(stylesPath);
 
   const cssText = chunks.join("\n");
   const { declared, referenced } = collectCustomProperties(cssText);

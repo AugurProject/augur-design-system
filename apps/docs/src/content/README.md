@@ -48,7 +48,7 @@ blank field fails the build with a clear message):
 - `draft: true` — validated but excluded from routes.
 
 Component pages additionally require `component` (the PascalCase public
-export name from `@augur/design-system`) and accept `status`
+export name from `@augurproject/design-system`) and accept `status`
 (`planned | draft | stable | deprecated`, default `planned`) and
 `registry` (shadcn registry item id).
 
@@ -72,7 +72,7 @@ entry and the missing headings. The contract lives in
 `src/lib/component-sections.ts` and is proven by the deliberate
 invalid-content fixture (`fixtures/verify-content-failures.mjs`).
 
-Until a component exists in `@augur/design-system`, do not author its
+Until a component exists in `@augurproject/design-system`, do not author its
 page: no mockups, no private copies, no speculative API tables. Pages
 document real exports (a `status: planned` page may describe the
 intended contract once a component is claimed by an issue, but its
@@ -84,7 +84,7 @@ Examples render what consumers actually receive, from real workspace
 exports — never hand-duplicated values:
 
 1. **Write the example as a real module** under `src/examples/<area>/<name>.tsx`.
-   It imports from `@augur/design-system` and renders statically.
+   It imports from `@augurproject/design-system` and renders statically.
 2. **Register it** in `src/examples/registry.ts`, importing the module
    once as a component and once with `?raw` for its own source:
 
