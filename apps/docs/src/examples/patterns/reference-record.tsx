@@ -1,5 +1,5 @@
 /** Static frame C evidence. No live query, selection, or submission workflow. */
-import { Button } from "@augur/design-system";
+import { Button } from "@augurproject/design-system";
 import "./reference-record.css";
 
 /**

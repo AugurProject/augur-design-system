@@ -58,11 +58,11 @@ const patterns = defineCollection({
 const components = defineCollection({
   loader: glob({ pattern: "*.{md,mdx}", base: "./src/content/components" }),
   schema: baseSchema.extend({
-    /** Public export name from @augur/design-system, e.g. "Button". */
+    /** Public export name from @augurproject/design-system, e.g. "Button". */
     component: z
       .string()
       .trim()
-      .min(1, "component is required: the public export name from @augur/design-system")
+      .min(1, "component is required: the public export name from @augurproject/design-system")
       .regex(/^[A-Z][A-Za-z0-9]*$/, 'component must be the PascalCase export name, e.g. "Button"'),
     /** Delivery status of the component. "planned" pages document the contract before implementation exists. */
     status: z.enum(["planned", "draft", "stable", "deprecated"]).default("planned"),

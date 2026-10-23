@@ -1,0 +1,346 @@
+/*
+ * Semantic light/dark role mapping for @augurproject/design-system.
+ *
+ * Internal part of the public `theme.css` entry, which imports it after
+ * the generated tokens, the font stacks, and the typography roles.
+ * Every rule sits in `@layer augur`, so unlayered consumer CSS, and
+ * consumer layers ordered after `augur`, override it predictably.
+ *
+ * Authority chain (ARCHITECTURE.md, "Theme mapping"):
+ *
+ *   DESIGN.md  (canonical for schema-representable values)
+ *      ↓  pinned toolchain
+ *   ../tokens/tokens.css  (generated --augur-color-* primitives; do not edit)
+ *      ↓  this file: relationships and semantic roles only
+ *   shadcn-compatible CSS custom properties
+ *
+ * Rules enforced here (verified by test/semantic-theme.test.ts):
+ *
+ *   - No raw color values. Every color is a reference to a generated
+ *     `--augur-color-*` variable. A literal hex/rgb/hsl value in this file
+ *     fails the tests; raw DESIGN.md values live only in generated output.
+ *   - Light is the default theme (`:root`). Dark is selected explicitly
+ *     with `[data-theme="dark"]` or shadcn's `.dark` class on `html` or
+ *     any container subtree, and implicitly by `prefers-color-scheme:
+ *     dark` when no explicit choice is made. `[data-theme="light"]` pins
+ *     light inside a dark system preference.
+ *   - Geometry, typography roles, focus structure, and reduced-motion
+ *     handling are each defined exactly once, outside the theme scopes
+ *     (`./typography.css`, `./base.css`): the themes swap color roles
+ *     only, so light and dark are equivalent by construction (same
+ *     selectors, same structure, different tokens).
+ *   - This file maps color roles only. Spacing and corner radius are
+ *     generated `--augur-spacing-*` / `--augur-rounded-*` primitives
+ *     consumed directly by component CSS; control sizing, focus geometry,
+ *     and motion are structural CSS in `./base.css` and the components.
+ *   - One documented exception to single-hop references:
+ *     `--brand-hover-edge` mixes a generated green token to 50% with
+ *     `color-mix()`; it still names no raw value.
+ *
+ * Companion-name fidelity (`DESIGN.md`): mappings
+ * reference brand companions by companion name (Navy, Green, Deep, Wash,
+ * Paper, Graphite, Pewter, Mist) and runtime surfaces by role name (canvas,
+ * raised, muted, surface steps). shadcn role names describe jobs, not
+ * colors: the shadcn `--primary` slot is filled by the Deep companion in
+ * light and the Green companion in dark, while
+ * `--augur-color-primary` remains the Navy companion. This collision is
+ * deliberate and documented; see docs/semantic-themes.md for the full
+ * pairing table, contrast evidence, and schema-external decisions.
+ */
+
+@layer augur {
+
+/* ------------------------------------------------------------------ */
+/* Light theme — default.                                              */
+/* Canvas pairing: Paper + Navy (page-canvas-light).                   */
+/* ------------------------------------------------------------------ */
+/* Pinned-light containers: the light role set applied at
+   any [data-theme="light"] scope, so a light pin inside a dark host
+   resolves the light roles instead of silently inheriting them. The
+   mappings mirror :root exactly — one maintained light contract, two
+   selectors. */
+[data-theme="light"] {
+  color-scheme: light;
+
+  --background: var(--augur-color-surface-light);
+  --foreground: var(--augur-color-primary);
+
+  /* Raised panel: panel-light pairing (White + Navy). */
+  --card: var(--augur-color-surface-light-raised);
+  --card-foreground: var(--augur-color-primary);
+
+  /* Floating layer sits at the raised step: White + Navy. */
+  --popover: var(--augur-color-surface-light-raised);
+  --popover-foreground: var(--augur-color-primary);
+
+  /* Primary action: Deep + White (action-primary-light). The accessible
+     green companion carries light-theme intent; Green itself is reserved
+     for dark surfaces per the brand's surface rules. */
+  --primary: var(--augur-color-accent-deep);
+  --primary-foreground: var(--augur-color-surface-light-raised);
+
+  /* Primary hover: Green + Navy (signal-dark reversed, ~12:1). The one
+     documented exception to "Green on dark surfaces only": transient,
+     Navy-labelled, and within the primary's own green family, so the
+     view still carries one green signal. */
+  --primary-hover: var(--augur-color-accent);
+  --primary-hover-foreground: var(--augur-color-primary);
+
+  /* Primary pressed: the Navy + Paper inversion every filled control
+     uses while pressed in light. */
+  --primary-active: var(--augur-color-primary);
+  --primary-active-foreground: var(--augur-color-surface-light);
+
+  /* Secondary control: quiet region pairing (Muted + Navy,
+     muted-region-light). Hover steps to the neighbouring Border step. */
+  --secondary: var(--augur-color-surface-light-muted);
+  --secondary-foreground: var(--augur-color-primary);
+  --secondary-hover: var(--augur-color-border-light);
+
+  /* Quiet region with Graphite secondary text (secondary-text family). */
+  --muted: var(--augur-color-surface-light-muted);
+  --muted-foreground: var(--augur-color-secondary);
+
+  /* Hover/highlight surface for surface controls (outline, ghost, menu
+     items): neutral Muted + Navy. Deliberately not the Wash companion:
+     green is a signal of intent (primary action, active state, focus,
+     short orienting rule), not a resting hover tint. Filled variants
+     step to their own palette neighbours instead (the *-hover roles). */
+  --accent: var(--augur-color-surface-light-muted);
+  --accent-foreground: var(--augur-color-primary);
+
+  /* Schema-external slot: the brand palette defines no danger hue, so
+     destructive actions are named by label (inherited state rule) and
+     this slot maps to the strongest neutral action pairing (White +
+     Navy) rather than an invented off-brand color. Hover steps to
+     Graphite, keeping the White label (~8.9:1). */
+  --destructive: var(--augur-color-primary);
+  --destructive-foreground: var(--augur-color-surface-light-raised);
+  --destructive-hover: var(--augur-color-secondary);
+
+  /* Panel hairlines (divider-light). Control edges are Mist, lighter
+     than ink yet >= 3:1 on Paper and White (WCAG 1.4.11), stepping to
+     Graphite on hover. */
+  --border: var(--augur-color-border-light);
+  --input: var(--augur-color-surface-dark-mist);
+  --input-hover: var(--augur-color-secondary);
+
+  /* Quiet editorial separators: grouping hairlines for shell
+     chrome, rules, and tables. It currently resolves to the same step
+     as --border in both themes; it stays a separate role so editorial
+     rules and panel bounds can diverge without touching each other. */
+  --border-quiet: var(--augur-color-border-light);
+
+  /* Brand hover edge: the green companion at 50% for brand surfaces
+     such as interactive cards and tabs (Deep in light, Green in dark).
+     Controls keep the neutral --input-hover. Decorative reinforcement
+     only; it never carries the 3:1 control-edge requirement. */
+  --brand-hover-edge: color-mix(in srgb, var(--augur-color-accent-deep) 50%, transparent);
+
+  /* Focus ring: Deep in light. */
+  --ring: var(--augur-color-accent-deep);}
+
+:root {
+  color-scheme: light;
+
+  --background: var(--augur-color-surface-light);
+  --foreground: var(--augur-color-primary);
+
+  /* Raised panel: panel-light pairing (White + Navy). */
+  --card: var(--augur-color-surface-light-raised);
+  --card-foreground: var(--augur-color-primary);
+
+  /* Floating layer sits at the raised step: White + Navy. */
+  --popover: var(--augur-color-surface-light-raised);
+  --popover-foreground: var(--augur-color-primary);
+
+  /* Primary action: Deep + White (action-primary-light). The accessible
+     green companion carries light-theme intent; Green itself is reserved
+     for dark surfaces per the brand's surface rules. */
+  --primary: var(--augur-color-accent-deep);
+  --primary-foreground: var(--augur-color-surface-light-raised);
+
+  /* Primary hover: Green + Navy (signal-dark reversed, ~12:1). The one
+     documented exception to "Green on dark surfaces only": transient,
+     Navy-labelled, and within the primary's own green family, so the
+     view still carries one green signal. */
+  --primary-hover: var(--augur-color-accent);
+  --primary-hover-foreground: var(--augur-color-primary);
+
+  /* Primary pressed: the Navy + Paper inversion every filled control
+     uses while pressed in light. */
+  --primary-active: var(--augur-color-primary);
+  --primary-active-foreground: var(--augur-color-surface-light);
+
+  /* Secondary control: quiet region pairing (Muted + Navy,
+     muted-region-light). Hover steps to the neighbouring Border step. */
+  --secondary: var(--augur-color-surface-light-muted);
+  --secondary-foreground: var(--augur-color-primary);
+  --secondary-hover: var(--augur-color-border-light);
+
+  /* Quiet region with Graphite secondary text (secondary-text family). */
+  --muted: var(--augur-color-surface-light-muted);
+  --muted-foreground: var(--augur-color-secondary);
+
+  /* Hover/highlight surface for surface controls (outline, ghost, menu
+     items): neutral Muted + Navy. Deliberately not the Wash companion:
+     green is a signal of intent (primary action, active state, focus,
+     short orienting rule), not a resting hover tint. Filled variants
+     step to their own palette neighbours instead (the *-hover roles). */
+  --accent: var(--augur-color-surface-light-muted);
+  --accent-foreground: var(--augur-color-primary);
+
+  /* Schema-external slot: the brand palette defines no danger hue, so
+     destructive actions are named by label (inherited state rule) and
+     this slot maps to the strongest neutral action pairing (White +
+     Navy) rather than an invented off-brand color. Hover steps to
+     Graphite, keeping the White label (~8.9:1). */
+  --destructive: var(--augur-color-primary);
+  --destructive-foreground: var(--augur-color-surface-light-raised);
+  --destructive-hover: var(--augur-color-secondary);
+
+  /* Panel hairlines (divider-light). Control edges are Mist, lighter
+     than ink yet >= 3:1 on Paper and White (WCAG 1.4.11), stepping to
+     Graphite on hover. */
+  --border: var(--augur-color-border-light);
+  --input: var(--augur-color-surface-dark-mist);
+  --input-hover: var(--augur-color-secondary);
+
+  /* Quiet editorial separators: grouping hairlines for shell
+     chrome, rules, and tables. It currently resolves to the same step
+     as --border in both themes; it stays a separate role so editorial
+     rules and panel bounds can diverge without touching each other. */
+  --border-quiet: var(--augur-color-border-light);
+
+  /* Brand hover edge: the green companion at 50% for brand surfaces
+     such as interactive cards and tabs (Deep in light, Green in dark).
+     Controls keep the neutral --input-hover. Decorative reinforcement
+     only; it never carries the 3:1 control-edge requirement. */
+  --brand-hover-edge: color-mix(in srgb, var(--augur-color-accent-deep) 50%, transparent);
+
+  /* Focus ring: Deep in light. Verified at least 3:1 against every
+     surface it paints on. */
+  --ring: var(--augur-color-accent-deep);
+}
+
+/* ------------------------------------------------------------------ */
+/* Dark theme — explicit selection.                                    */
+/* Canvas pairing: Navy + Paper (page-canvas-dark).                    */
+/* ------------------------------------------------------------------ */
+[data-theme="dark"],
+.dark {
+  color-scheme: dark;
+
+  --background: var(--augur-color-primary);
+  --foreground: var(--augur-color-surface-light);
+
+  /* panel-dark-2 pairing: Surface 2 + Paper, adopted from augur.net. */
+  --card: var(--augur-color-surface-dark-2);
+  --card-foreground: var(--augur-color-surface-light);
+
+  /* Floating layer sits one step above cards: panel-dark-2 pairing. */
+  --popover: var(--augur-color-surface-dark-2);
+  --popover-foreground: var(--augur-color-surface-light);
+
+  /* Primary action: Green + Navy (action-primary-dark). Hover and
+     pressed step to the darker Green interaction steps adopted from
+     augur.net, under the same Navy label. */
+  --primary: var(--augur-color-accent);
+  --primary-foreground: var(--augur-color-primary);
+  --primary-hover: var(--augur-color-accent-hover);
+  --primary-hover-foreground: var(--augur-color-primary);
+  --primary-active: var(--augur-color-accent-pressed);
+  --primary-active-foreground: var(--augur-color-primary);
+
+  /* Secondary control: one raised step, panel-dark-2 pairing. Hover
+     steps up to Surface 3 (panel-dark-3). */
+  --secondary: var(--augur-color-surface-dark-2);
+  --secondary-foreground: var(--augur-color-surface-light);
+  --secondary-hover: var(--augur-color-surface-dark-3);
+
+  /* Quiet region one step above the canvas, with Pewter secondary text
+     (secondary-text-dark family). */
+  --muted: var(--augur-color-surface-dark-1);
+  --muted-foreground: var(--augur-color-secondary-dark);
+
+  /* Hover/highlight surface for surface controls: neutral raised step +
+     Paper (same restraint as the light theme: green is not a resting
+     hover tint). Surface 3 sits one step above every dark surface a
+     control can rest on (canvas, card, popover), so the hover stays
+     visible inside floating layers too (panel-dark-3 pairing). */
+  --accent: var(--augur-color-surface-dark-3);
+  --accent-foreground: var(--augur-color-surface-light);
+
+  /* Schema-external slot: strongest neutral action pairing in dark
+     (Navy + Pewter), same rationale as the light theme. Hover steps to
+     Paper, keeping the Navy label. */
+  --destructive: var(--augur-color-secondary-dark);
+  --destructive-foreground: var(--augur-color-primary);
+  --destructive-hover: var(--augur-color-surface-light);
+
+  /* Panel bounds and control edges both use Mist (divider-dark), as
+     adopted from augur.net; control edges step to Pewter on hover.
+     Mist never carries copy. */
+  --border: var(--augur-color-surface-dark-mist);
+  --input: var(--augur-color-surface-dark-mist);
+  --input-hover: var(--augur-color-secondary-dark);
+
+  /* Quiet editorial separators in dark: a Surface 3 step, not Mist —
+     grouping hairlines must not glow like control edges. */
+  --border-quiet: var(--augur-color-surface-dark-3);
+
+  --brand-hover-edge: color-mix(in srgb, var(--augur-color-accent) 50%, transparent);
+
+  /* Focus ring: Green in dark. */
+  --ring: var(--augur-color-accent);
+}
+
+/* System-preference fallback: dark unless light is pinned explicitly.
+   The test suite asserts this block declares the identical role set and
+   values as the explicit dark block above. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+
+    --background: var(--augur-color-primary);
+    --foreground: var(--augur-color-surface-light);
+
+    --card: var(--augur-color-surface-dark-2);
+    --card-foreground: var(--augur-color-surface-light);
+
+    --popover: var(--augur-color-surface-dark-2);
+    --popover-foreground: var(--augur-color-surface-light);
+
+    --primary: var(--augur-color-accent);
+    --primary-foreground: var(--augur-color-primary);
+    --primary-hover: var(--augur-color-accent-hover);
+    --primary-hover-foreground: var(--augur-color-primary);
+    --primary-active: var(--augur-color-accent-pressed);
+    --primary-active-foreground: var(--augur-color-primary);
+
+    --secondary: var(--augur-color-surface-dark-2);
+    --secondary-foreground: var(--augur-color-surface-light);
+    --secondary-hover: var(--augur-color-surface-dark-3);
+
+    --muted: var(--augur-color-surface-dark-1);
+    --muted-foreground: var(--augur-color-secondary-dark);
+
+    --accent: var(--augur-color-surface-dark-3);
+    --accent-foreground: var(--augur-color-surface-light);
+
+    --destructive: var(--augur-color-secondary-dark);
+    --destructive-foreground: var(--augur-color-primary);
+    --destructive-hover: var(--augur-color-surface-light);
+
+    --border: var(--augur-color-surface-dark-mist);
+    --input: var(--augur-color-surface-dark-mist);
+    --input-hover: var(--augur-color-secondary-dark);
+    --border-quiet: var(--augur-color-surface-dark-3);
+
+    --brand-hover-edge: color-mix(in srgb, var(--augur-color-accent) 50%, transparent);
+
+    --ring: var(--augur-color-accent);
+  }
+}
+
+} /* @layer augur */

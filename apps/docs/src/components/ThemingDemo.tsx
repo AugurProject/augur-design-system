@@ -6,7 +6,7 @@
  * Both panels pin `data-theme` explicitly (light / dark), so the pair
  * never collapses into one theme when the host page changes. The panels
  * are plain elements styled only with the semantic role custom
- * properties delivered by `@augur/design-system/styles.css`; the paint
+ * properties delivered by `@augurproject/design-system/styles.css`; the paint
  * always follows the resolved role, never a local color value. The
  * scoping mechanism itself (inherit vs pin) is demonstrated separately
  * by the scoped-subtree example on this page.

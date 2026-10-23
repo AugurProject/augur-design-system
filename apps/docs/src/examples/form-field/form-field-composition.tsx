@@ -1,4 +1,4 @@
-import { FormField, FormFieldControl } from "@augur/design-system";
+import { FormField, FormFieldControl } from "@augurproject/design-system";
 
 export function FormFieldCompositionExample() {
   return (

@@ -46,7 +46,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@augur/design-system";
+} from "@augurproject/design-system";
 import { loadPackageStyles } from "./support/styles";
 
 /** A complete, correctly named dialog with a trigger and two actions. */

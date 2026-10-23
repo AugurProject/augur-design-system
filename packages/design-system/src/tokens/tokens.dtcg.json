@@ -5,7 +5,7 @@
     "source": {
       "file": "DESIGN.md",
       "location": "repository root",
-      "sha256": "bd57ef107556918a470d68f9e53bc31022fb27c5d28f65c01254fbe6d3f177cc"
+      "sha256": "10b28e341e67e3d41f9e319f4d601a7c20e1aecc68255355bfb5aaf868cfb471"
     },
     "tool": {
       "name": "@google/design.md",
@@ -145,6 +145,28 @@
             0.898
           ],
           "hex": "#c9ffe5"
+        }
+      },
+      "accent-hover": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.153,
+            0.82,
+            0.608
+          ],
+          "hex": "#27d19b"
+        }
+      },
+      "accent-pressed": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.141,
+            0.737,
+            0.553
+          ],
+          "hex": "#24bc8d"
         }
       },
       "surface-dark-1": {

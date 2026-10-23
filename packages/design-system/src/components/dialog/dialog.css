@@ -1,7 +1,7 @@
 /*
  * Dialog styles (issue #13).
  *
- * Color: ONLY semantic role custom properties from ../../styles/theme.css
+ * Color: ONLY semantic role custom properties from ../../styles/roles.css
  * (which references generated tokens). No raw color values, no new
  * custom properties. The panel consumes the theme's floating-layer
  * pairing (`--popover` / `--popover-foreground`): White on light, and
@@ -15,7 +15,12 @@
  * transitions.
  *
  * Component contract: ../../docs/components.md.
+ *
+ * Every rule sits in `@layer augur`; this file depends only on the
+ * theme (`theme.css`).
  */
+
+@layer augur {
 
 /*
  * Overlay scrim. A single structural rule for every theme scope
@@ -161,3 +166,5 @@
   .aug-dialog-close { width: 44px; height: 44px; }
   .aug-dialog-title, .aug-dialog-description { padding-right: 44px; }
 }
+
+} /* @layer augur */

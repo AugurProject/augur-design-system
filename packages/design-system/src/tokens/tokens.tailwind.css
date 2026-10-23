@@ -1,7 +1,7 @@
 /**
  * GENERATED FILE — do not edit. Regenerate: `bun run tokens:generate` in packages/design-system. Verify: `bun run tokens:check`. Policy and schema boundaries: packages/design-system/docs/token-generation.md.
  *
- * Source:  DESIGN.md (repository root), sha256 bd57ef107556918a470d68f9e53bc31022fb27c5d28f65c01254fbe6d3f177cc
+ * Source:  DESIGN.md (repository root), sha256 10b28e341e67e3d41f9e319f4d601a7c20e1aecc68255355bfb5aaf868cfb471
  * Tool:    @google/design.md@0.4.0 (exact pin in packages/design-system/package.json (0.4.0))
  * Command: design.md export DESIGN.md --format css-tailwind
  * Lint:    0 errors / 0 warnings / 1 infos at generation time
@@ -21,6 +21,8 @@
   --color-border-light: #e0e0e7;
   --color-accent-deep: #095e42;
   --color-accent-wash: #c9ffe5;
+  --color-accent-hover: #27d19b;
+  --color-accent-pressed: #24bc8d;
   --color-surface-dark-1: #161629;
   --color-surface-dark-2: #1d1d30;
   --color-surface-dark-3: #242438;

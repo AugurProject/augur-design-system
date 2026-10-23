@@ -1,4 +1,4 @@
-@import "@augur/design-system/styles.css";
+@import "@augurproject/design-system/styles.css";
 /* Isolated reference decisions. These never enter the shipping package or docs CSS. */
 :root { --review-rule: var(--augur-color-border-light); --review-control-edge: var(--augur-color-secondary); --review-field: var(--augur-color-surface-light-muted); }
 [data-theme="dark"] { --review-rule: var(--augur-color-surface-dark-3); --review-control-edge: var(--augur-color-surface-dark-mist); --review-field: var(--augur-color-surface-dark-1); }

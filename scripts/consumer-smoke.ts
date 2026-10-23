@@ -29,7 +29,7 @@
  *   1. components.json aliases (contract §7)
  *   2. dependency installation with exact pins, zero workspace:* links
  *   3. installed source lands at alias targets (@ui, @lib, @components)
- *   4. source ownership: installed source never imports @augur/* (contract §11)
+ *   4. source ownership: installed source never imports @augur/* or @augurproject/* (contract §11)
  *   5. fonts/styles delivery: @font-face, [data-theme="dark"], woff2 assets (§8–9)
  *   6. compile: `vite build` exit 0
  *   7. render smoke: Button/Card/Input/Dialog + page-header/empty-state render
@@ -263,9 +263,9 @@ for (const rel of expectedFiles) {
     fail(`installed source missing: ${rel}`, "The item's file targets did not land under the consumer aliases; check the artifact's files[].target values.");
 }
 
-// 4e. Source ownership: installed source never imports @augur/* (§11).
+// 4e. Source ownership: installed source never imports @augur/* or @augurproject/* (§11).
 const srcFiles = deepFind(path.join(appDir, "src"), /\.(ts|tsx|css)$/);
-const augurImports = srcFiles.filter((f) => /@augur\//.test(fs.readFileSync(f, "utf8")));
+const augurImports = srcFiles.filter((f) => /@augur(project)?\//.test(fs.readFileSync(f, "utf8")));
 if (augurImports.length > 0)
   fail(`installed source imports @augur/* (breaks §11 independence): ${augurImports.join(", ")}`, "Registry-installed source must be self-contained; regenerate artifacts and re-check registry:generate output.");
 

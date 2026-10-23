@@ -20,7 +20,7 @@
     "test:browser": "playwright test"
   },
   "devDependencies": {
-    "@augur/design-system": "workspace:*",
+    "@augurproject/design-system": "workspace:*",
     "@google/design.md": "0.4.0",
     "@playwright/test": "1.61.1",
     "@testing-library/jest-dom": "^6.6.0",

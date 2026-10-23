@@ -14,7 +14,7 @@ import { MoonIcon, SunIcon } from "./icons";
  *   - a press pins the opposite of the theme in effect as an explicit
  *     `[data-theme="light"|"dark"]` on `<html>` and persists it.
  *
- * Honors the `@augur/design-system` theme contract exactly
+ * Honors the `@augurproject/design-system` theme contract exactly
  * (`packages/design-system/src/styles/theme.css`); this control only ever
  * writes to `<html>`.
  *

@@ -1,20 +1,33 @@
 {
-  "name": "@augur/design-system",
-  "version": "0.1.0",
+  "name": "@augurproject/design-system",
+  "version": "0.2.0",
   "private": true,
   "type": "module",
   "exports": {
     ".": "./src/index.ts",
+    "./theme.css": "./src/styles/theme.css",
+    "./fonts.css": "./src/styles/fonts.css",
     "./styles.css": "./src/styles/styles.css",
-    "./fonts.css": "./src/styles/fonts.css"
+    "./tokens.tailwind.css": "./src/styles/tokens.tailwind.css",
+    "./css/button.css": "./src/components/button/button.css",
+    "./css/card.css": "./src/components/card/card.css",
+    "./css/dialog.css": "./src/components/dialog/dialog.css",
+    "./css/input.css": "./src/components/input/input.css",
+    "./css/form-field.css": "./src/components/form-field/form-field.css",
+    "./css/page-header.css": "./src/patterns/page-header/page-header.css",
+    "./css/empty-state.css": "./src/patterns/empty-state/empty-state.css",
+    "./package.json": "./package.json"
   },
+  "files": [
+    "src",
+    "!src/tools"
+  ],
   "sideEffects": [
     "**/*.css"
   ],
   "dependencies": {
     "@fontsource/schibsted-grotesk": "5.3.0",
-    "@fontsource/sora": "5.3.0",
-    "radix-ui": "1.6.7"
+    "@fontsource/sora": "5.3.0"
   },
   "scripts": {
     "test": "bun test",
@@ -27,12 +40,22 @@
     "registry:validate": "cd ../.. && bunx shadcn@4.20.1 registry validate registry.json"
   },
   "peerDependencies": {
+    "radix-ui": "1.6.7",
     "react": "^19.0.0"
+  },
+  "peerDependenciesMeta": {
+    "radix-ui": {
+      "optional": true
+    },
+    "react": {
+      "optional": true
+    }
   },
   "devDependencies": {
     "@google/design.md": "0.4.0",
     "@types/node": "^22.0.0",
     "@types/react": "^19.2.18",
+    "radix-ui": "1.6.7",
     "react": "^19.2.8"
   }
 }

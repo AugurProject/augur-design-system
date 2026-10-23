@@ -8,7 +8,7 @@
  * computed styles. The three rule-led notes sit in the support column
  * and stack below the specimen on narrow screens.
  */
-import { AUGUR_FONTS, AUGUR_FONT_FAMILIES } from "@augur/design-system";
+import { AUGUR_FONTS, AUGUR_FONT_FAMILIES } from "@augurproject/design-system";
 
 const ROLES: readonly { className: string; label: string; sample: string; spec: string }[] = [
   { className: "augur-type-display", label: "display", sample: "Make it clear.", spec: "Sora 600 · 40/44 · −0.01em" },

@@ -178,7 +178,7 @@ Augur contract:
    default shadcn registry — a silent wrong-source hazard. Full addresses
    also work when the consumer installs via namespace or URL, because the
    CLI understands GitHub addresses in every mode.
-3. **Items never depend on `@augur/design-system`** (§11).
+3. **Items never depend on `@augurproject/design-system`** (§11).
 4. `devDependencies` are not used by Augur items (consumers install runtime
    source only).
 
@@ -239,7 +239,7 @@ The `augur-theme` item carries the complete Augur look in one install:
    via the pinned toolchain) → `css[":root"]`. They merge into the
    consumer's existing `:root` block.
 2. **Semantic role values** (`--background` … `--ring`, exactly the #4
-   mapping in `src/styles/theme.css`) → `css[":root"]` (light) and
+   mapping in `src/styles/roles.css`) → `css[":root"]` (light) and
    `css[".dark"]` (dark), which merge into the consumer's `:root` and `.dark`
    and overwrite the init-scaffold neutral values. This keeps the shadcn
    `.dark` convention working for consumers who use a `dark` class. They are
@@ -255,9 +255,13 @@ The `augur-theme` item carries the complete Augur look in one install:
 4. **`color-scheme`** → `:root` (light), `.dark` and `[data-theme="dark"]`
    and the system-fallback scope (dark), so UA rendering follows the
    selected theme.
-5. **Structural behavior** → `css`: the `body` canvas application, the
-   `:focus-visible` 2px/2px ring rule, and the reduced-motion gate — each
-   defined once, theme-independent, as in `theme.css`.
+5. **Structural behavior and typography** → `files`: `src/styles/base.css`
+   (the `body` canvas application, the `:focus-visible` 2px/2px ring rule
+   with the 6px link offset, and the reduced-motion gate) and
+   `src/styles/typography.css`, installed as `augur-base.css` and
+   `augur-typography.css` with their package content unchanged and
+   imported from the `css` payload ahead of every rule. Both sit in
+   `@layer augur`.
 6. **Tailwind utility mappings** → `cssVars.theme`: `--color-<role>` →
    `var(--<role>)` for the mapped role set plus `--font-sans` →
    `var(--augur-font-primary)`. This is what makes `bg-background`,
@@ -273,9 +277,10 @@ Not delivered (deliberate, per `semantic-themes.md` D6): `--radius`,
 `--augur-rounded-*` primitives directly; the consumer's init-scaffold values
 for those roles remain.
 
-**Relationship to the package entries:** `@augur/design-system`'s
-`./styles.css` and `./fonts.css` exports (used by the workspace docs app)
-remain the in-repo consumption path. The registry item content is generated
+**Relationship to the package entries:** `@augurproject/design-system`'s
+CSS exports (`./theme.css`, `./styles.css`, `./css/<name>.css` and the
+rest; used by the workspace docs app and by tarball installs) are the
+package consumption path. The registry item content is generated
 from the same canonical files (§3) so the two paths cannot drift; the
 registry item is self-contained and never instructs a consumer to import the
 package.
@@ -306,8 +311,9 @@ only, exact pins, no third-party CDN at runtime) and framework neutrality.
    `@font-face` rules — zero third-party requests.
 
 The `--augur-font-primary` / `--augur-font-secondary` voice custom
-properties (`fonts.css` content) are delivered in `css[":root"]`; the
-`--font-sans` utility mapping points at the primary voice. Weights stay
+properties (`font-stacks.css` content) are delivered in `css[":root"]`; the
+`--font-sans` utility mapping points at the secondary (body) voice and
+`--font-heading` at the primary voice, as in `tokens.tailwind.css`. Weights stay
 exactly the PROVENANCE.md set (Sora 400 + 600, Schibsted Grotesk 400);
 adding weights requires a `DESIGN.md` change first.
 
@@ -343,20 +349,19 @@ JSON channel):
 
 ---
 
-## 11. Independence from `@augur/design-system`
+## 11. Independence from `@augurproject/design-system`
 
 `ARCHITECTURE.md` §10: "Registry-installed source should not depend on the
 existence of a bundled npm package." This contract operationalizes that:
 
 1. **No package imports.** Registry-installed source never imports
-   `@augur/design-system` or any `@augur/*` specifier. It depends only on:
+   `@augurproject/design-system` or any `@augur/*` specifier. It depends only on:
    the consumer's React, the item-declared npm dependencies (§6), and the
    consumer's alias-resolved files (§7).
 2. **No npm publication dependency.** Nothing in the install flow reads or
-   requires an npm package named `@augur/design-system`; none exists. The
-   workspace package remains `private: true`; its `exports` (`.`,
-   `./styles.css`, `./fonts.css`) serve the in-repo docs app via
-   `workspace:*` only.
+   requires an npm package named `@augurproject/design-system`. The package
+   is not on the npm registry; its `exports` serve the in-repo docs app via
+   `workspace:*` and tarball installs from GitHub Releases (RELEASING.md).
 3. **Styles are self-contained.** The theme item delivers tokens, roles,
    fonts, and structure into the consumer's CSS (§8–9). A consumer that
    never installs the package gets the same visual system as the docs app.
@@ -489,7 +494,7 @@ Consumer-facing pinning policy (release procedure: [`RELEASING.md`](../../../REL
 
 ## 15. Out of scope
 
-- npm publication of `@augur/design-system`, or any bundled package output
+- npm publication of `@augurproject/design-system`, or any bundled package output
   (deferred by architecture; tsup decision recorded in `ARCHITECTURE.md`).
 - Framework support beyond the verified Vite + React + Tailwind v4 path
   (§10), MCP server / `open in v0` integrations, and private-registry

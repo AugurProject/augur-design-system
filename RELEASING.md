@@ -4,6 +4,7 @@ A design-system release is an immutable Git tag, `vX.Y.Z`, that points to one co
 
 ## Consumer contract
 
+- Package tarball (from `v0.2.0`): `npm install https://github.com/jubalm/augur-design-system/releases/download/vX.Y.Z/augurproject-design-system-X.Y.Z.tgz`. The tarball keeps the final package name, `@augurproject/design-system`, so imports stay the same when the package moves to the npm registry.
 - GitHub source registry: `bunx shadcn@4.20.1 add "jubalm/augur-design-system/<item>#vX.Y.Z"`.
 - Built registry item: `https://raw.githubusercontent.com/jubalm/augur-design-system/vX.Y.Z/public/r/<item>.json`.
 - Every `registryDependencies` address inside a released item is stamped `#vX.Y.Z`, so transitive items resolve to the same release.
@@ -30,8 +31,17 @@ Before 1.0:
    - Stamp the registry artifacts: `AUGUR_REGISTRY_REF=vX.Y.Z bun run --cwd packages/design-system registry:generate`. Never edit `registry.json` or `public/r/` by hand.
    - Run `bun run check:release X.Y.Z` locally.
 3. **Verify.** The PR must pass every CI job, including `registry` (artifact drift, shadcn schema validation, and the independent-consumer install smoke). Merge it once green.
-4. **Release.** In GitHub Actions, run the **Release** workflow on `main` with version `X.Y.Z`. It re-runs every CI gate on that commit, runs `check:release`, creates the annotated tag `vX.Y.Z`, and publishes the GitHub Release with the changelog section as its notes.
-5. **Confirm** that the tag and the Release exist, and that `https://raw.githubusercontent.com/jubalm/augur-design-system/vX.Y.Z/public/r/button.json` resolves with `#vX.Y.Z` dependencies.
+4. **Release.** In GitHub Actions, run the **Release** workflow on `main` with version `X.Y.Z`. It re-runs every CI gate on that commit, runs `check:release`, packs the package with `npm pack` and runs the tarball smoke against it, creates the annotated tag `vX.Y.Z`, and publishes the GitHub Release with the changelog section as its notes and the tarball attached.
+5. **Confirm** that the tag and the Release exist, that the Release has `augurproject-design-system-X.Y.Z.tgz` attached, and that `https://raw.githubusercontent.com/jubalm/augur-design-system/vX.Y.Z/public/r/button.json` resolves with `#vX.Y.Z` dependencies.
+
+## Package tarball
+
+Until the maintainer has publish access to the `@augurproject` npm org, the package reaches consumers only as the tarball attached to each Release.
+
+- The Release workflow builds it from the tagged commit with `npm pack` in `packages/design-system`. The `files` field limits it to `src/` without `src/tools/`.
+- `bun scripts/package-smoke.ts` packs the working tree, installs the tarball into a plain-HTML consumer, and checks the theme and a component stylesheet in Chromium without React, Tailwind or a font import. CI runs it on every pull request; the Release workflow runs it on the tarball it attaches.
+- A release asset is never replaced. A bad tarball is fixed by the next patch release, like any other release defect.
+- The package keeps `"private": true`, which blocks an accidental `npm publish`. Moving to the npm registry is a separate change: remove `private`, publish the same version, and switch consumers from the URL to a version range.
 
 `registry:check` accepts the committed artifacts stamped with the current package version or unstamped. Changes merged after a release may regenerate the artifacts without a stamp; the next release PR stamps them again.
 

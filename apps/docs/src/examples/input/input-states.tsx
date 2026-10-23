@@ -1,5 +1,5 @@
 import { useId } from "react";
-import { Input } from "@augur/design-system";
+import { Input } from "@augurproject/design-system";
 
 // Input leaves labeling and error text to you; FormField wires the same parts.
 const field = { display: "flex", flexDirection: "column", gap: "var(--augur-spacing-sm)" } as const;

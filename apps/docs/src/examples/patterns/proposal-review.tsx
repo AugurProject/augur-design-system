@@ -12,7 +12,7 @@ import {
   PageHeaderContent,
   PageHeaderDescription,
   PageHeaderTitle,
-} from "@augur/design-system";
+} from "@augurproject/design-system";
 import { PROPOSAL_REVIEW } from "../../lib/proposal-review";
 import { ReferenceRecordPanel } from "./reference-record";
 import "./proposal-review.css";

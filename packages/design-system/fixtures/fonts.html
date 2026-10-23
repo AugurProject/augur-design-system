@@ -1,6 +1,6 @@
 <!doctype html>
 <!--
-  Font delivery verification fixture for @augur/design-system (issue #5).
+  Font delivery verification fixture for @augurproject/design-system (issue #5).
 
   Renders every DESIGN.md typography role with the delivered fonts and
   shows live evidence (font faces, document.fonts.check() results,
@@ -13,7 +13,7 @@
 
   The stylesheet links below point directly at the pinned @fontsource
   packages and at the package's own font/typography styles, so the page
-  needs no bundler. (Consumers use "@augur/design-system/styles.css",
+  needs no bundler. (Consumers use "@augurproject/design-system/styles.css",
   whose bare-specifier @imports are resolved by Vite/Astro at build time.)
 -->
 <html lang="en">
@@ -29,7 +29,7 @@
     <link rel="stylesheet" href="/packages/design-system/node_modules/@fontsource/sora/400.css" />
     <link rel="stylesheet" href="/packages/design-system/node_modules/@fontsource/sora/600.css" />
     <link rel="stylesheet" href="/packages/design-system/node_modules/@fontsource/schibsted-grotesk/400.css" />
-    <link rel="stylesheet" href="../src/styles/fonts.css" />
+    <link rel="stylesheet" href="../src/styles/font-stacks.css" />
     <link rel="stylesheet" href="../src/styles/typography.css" />
     <style>
       body { margin: 0 auto; max-width: 44rem; padding: 2rem; color: #161629; background: #ffffff; }

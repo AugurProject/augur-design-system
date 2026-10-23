@@ -3,7 +3,7 @@
  * Base layout for the docs shell (issues #7 and #55).
  *
  * Consumes the real workspace package stylesheet
- * (`@augur/design-system/styles.css`) as the only style source for
+ * (`@augurproject/design-system/styles.css`) as the only style source for
  * colors and font voices; `../styles/docs.css` adds shell chrome only.
  *
  * Theme contract: the inline script below re-applies a persisted choice
@@ -19,7 +19,7 @@
  * The home page opts out of the sidebar/rail/pager with `shell={false}`:
  * it is the landing composition, not a document.
  */
-import "@augur/design-system/styles.css";
+import "@augurproject/design-system/styles.css";
 import "../styles/docs.css";
 import BrandLockup from "../components/BrandLockup.astro";
 import ThemeToggle from "../components/ThemeToggle";

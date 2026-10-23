@@ -14,17 +14,25 @@
       "path": "packages/design-system/src/styles/typography.css",
       "type": "registry:style",
       "target": "src/styles/augur-typography.css",
-      "content": "/*\n * Typography role classes for @augur/design-system.\n *\n * Each class mirrors one `DESIGN.md` front-matter `typography` role,\n * keyed by the role name. Values are hand-authored to match `DESIGN.md`\n * exactly and verified against it by the fonts fixture driver\n * (`fixtures/verify-fonts.mjs`); the token pipeline (issue #3) generates\n * the primitive tokens, while role classes stay the maintained runtime\n * mapping. Do not add roles or values that are not in `DESIGN.md`.\n *\n * Families come from `./fonts.css` custom properties; font files are\n * delivered via `styles.css`. Weights rely on faces loaded by the pinned\n * `@fontsource` packages (Sora 400/600, Schibsted Grotesk 400) — the\n * editorial roles (issue 45) deliberately reuse\n * the 400 faces; no Sora Light dependency exists.\n */\n\n/* Base: body copy uses the secondary voice unless a role overrides it. */\nbody {\n  font-family: var(--augur-font-secondary);\n  font-weight: 400;\n}\n\n/* DESIGN.md `typography.display` — Sora 600, 40/44, -0.01em. */\n.augur-type-display {\n  font-family: var(--augur-font-primary);\n  font-weight: 600;\n  font-size: 40px;\n  line-height: 44px;\n  letter-spacing: -0.01em;\n}\n\n/* DESIGN.md `typography.heading-1` — Sora 600, 28/34, -0.005em. */\n.augur-type-heading-1 {\n  font-family: var(--augur-font-primary);\n  font-weight: 600;\n  font-size: 28px;\n  line-height: 34px;\n  letter-spacing: -0.005em;\n}\n\n/* DESIGN.md `typography.heading-2` — Sora 600, 20/26. */\n.augur-type-heading-2 {\n  font-family: var(--augur-font-primary);\n  font-weight: 600;\n  font-size: 20px;\n  line-height: 26px;\n}\n\n/* DESIGN.md `typography.body` — Schibsted Grotesk 400, 16/24. */\n.augur-type-body {\n  font-family: var(--augur-font-secondary);\n  font-weight: 400;\n  font-size: 16px;\n  line-height: 24px;\n}\n\n/* DESIGN.md `typography.control` — Sora 600, 14/20. */\n.augur-type-control {\n  font-family: var(--augur-font-primary);\n  font-weight: 600;\n  font-size: 14px;\n  line-height: 20px;\n}\n\n/* DESIGN.md `typography.ui` — Sora 400, 14/20. */\n.augur-type-ui {\n  font-family: var(--augur-font-primary);\n  font-weight: 400;\n  font-size: 14px;\n  line-height: 20px;\n}\n\n/* DESIGN.md `typography.metadata` — Schibsted Grotesk 400, 12/16. */\n.augur-type-metadata {\n  font-family: var(--augur-font-secondary);\n  font-weight: 400;\n  font-size: 12px;\n  line-height: 16px;\n}\n\n/* DESIGN.md `typography.editorial-title` — Sora 400, 40/48, -0.01em.\n   The editorial voice: long-form titles set regular so size\n   alone creates order. The 32/40 step below 600px is part of the\n   adopted role, per the visual direction contract. */\n.augur-type-editorial-title {\n  font-family: var(--augur-font-primary);\n  font-weight: 400;\n  font-size: 40px;\n  line-height: 48px;\n  letter-spacing: -0.01em;\n}\n\n/* DESIGN.md `typography.editorial-section` — Sora 400, 28/34, -0.005em. */\n.augur-type-editorial-section {\n  font-family: var(--augur-font-primary);\n  font-weight: 400;\n  font-size: 28px;\n  line-height: 34px;\n  letter-spacing: -0.005em;\n}\n\n/* DESIGN.md `typography.editorial-label` — Schibsted Grotesk 400,\n   12/16, +0.12em: short tracked uppercase labels. Wrapping is allowed;\n   the tracking is never reduced to fit. */\n.augur-type-editorial-label {\n  font-family: var(--augur-font-secondary);\n  font-weight: 400;\n  font-size: 12px;\n  line-height: 16px;\n  letter-spacing: 0.12em;\n  text-transform: uppercase;\n}\n\n/* Adopted mobile steps for the editorial roles (visual direction\n   contract). The seven inherited roles have no mobile steps. */\n@media (max-width: 599px) {\n  .augur-type-editorial-title {\n    font-size: 32px;\n    line-height: 40px;\n  }\n\n  .augur-type-editorial-section {\n    font-size: 24px;\n    line-height: 32px;\n  }\n}\n"
+      "content": "/*\n * Typography role classes for @augurproject/design-system.\n *\n * Each class mirrors one `DESIGN.md` front-matter `typography` role,\n * keyed by the role name. Values are hand-authored to match `DESIGN.md`\n * exactly and verified against it by the fonts fixture driver\n * (`fixtures/verify-fonts.mjs`); the token pipeline (issue #3) generates\n * the primitive tokens, while role classes stay the maintained runtime\n * mapping. Do not add roles or values that are not in `DESIGN.md`.\n *\n * Families come from the `--augur-font-primary` and\n * `--augur-font-secondary` custom properties (`font-stacks.css` in the\n * package; the registry theme item declares them on `:root`). Font files\n * are delivered separately, by the package's optional `fonts.css` export\n * or by the consumer. Weights rely on Sora 400/600 and Schibsted\n * Grotesk 400 faces; the editorial roles (issue 45) deliberately reuse\n * the 400 faces, and no Sora Light dependency exists.\n *\n * Every rule sits in `@layer augur`.\n */\n\n@layer augur {\n\n/* Base: body copy uses the secondary voice unless a role overrides it. */\nbody {\n  font-family: var(--augur-font-secondary);\n  font-weight: 400;\n}\n\n/* DESIGN.md `typography.display` — Sora 600, 40/44, -0.01em. */\n.augur-type-display {\n  font-family: var(--augur-font-primary);\n  font-weight: 600;\n  font-size: 40px;\n  line-height: 44px;\n  letter-spacing: -0.01em;\n}\n\n/* DESIGN.md `typography.heading-1` — Sora 600, 28/34, -0.005em. */\n.augur-type-heading-1 {\n  font-family: var(--augur-font-primary);\n  font-weight: 600;\n  font-size: 28px;\n  line-height: 34px;\n  letter-spacing: -0.005em;\n}\n\n/* DESIGN.md `typography.heading-2` — Sora 600, 20/26. */\n.augur-type-heading-2 {\n  font-family: var(--augur-font-primary);\n  font-weight: 600;\n  font-size: 20px;\n  line-height: 26px;\n}\n\n/* DESIGN.md `typography.body` — Schibsted Grotesk 400, 16/24. */\n.augur-type-body {\n  font-family: var(--augur-font-secondary);\n  font-weight: 400;\n  font-size: 16px;\n  line-height: 24px;\n}\n\n/* DESIGN.md `typography.control` — Sora 600, 14/20. */\n.augur-type-control {\n  font-family: var(--augur-font-primary);\n  font-weight: 600;\n  font-size: 14px;\n  line-height: 20px;\n}\n\n/* DESIGN.md `typography.ui` — Sora 400, 14/20. */\n.augur-type-ui {\n  font-family: var(--augur-font-primary);\n  font-weight: 400;\n  font-size: 14px;\n  line-height: 20px;\n}\n\n/* DESIGN.md `typography.metadata` — Schibsted Grotesk 400, 12/16. */\n.augur-type-metadata {\n  font-family: var(--augur-font-secondary);\n  font-weight: 400;\n  font-size: 12px;\n  line-height: 16px;\n}\n\n/* DESIGN.md `typography.editorial-title` — Sora 400, 40/48, -0.01em.\n   The editorial voice: long-form titles set regular so size\n   alone creates order. The 32/40 step below 600px is part of the\n   adopted role, per the visual direction contract. */\n.augur-type-editorial-title {\n  font-family: var(--augur-font-primary);\n  font-weight: 400;\n  font-size: 40px;\n  line-height: 48px;\n  letter-spacing: -0.01em;\n}\n\n/* DESIGN.md `typography.editorial-section` — Sora 400, 28/34, -0.005em. */\n.augur-type-editorial-section {\n  font-family: var(--augur-font-primary);\n  font-weight: 400;\n  font-size: 28px;\n  line-height: 34px;\n  letter-spacing: -0.005em;\n}\n\n/* DESIGN.md `typography.editorial-label` — Schibsted Grotesk 400,\n   12/16, +0.12em: short tracked uppercase labels. Wrapping is allowed;\n   the tracking is never reduced to fit. */\n.augur-type-editorial-label {\n  font-family: var(--augur-font-secondary);\n  font-weight: 400;\n  font-size: 12px;\n  line-height: 16px;\n  letter-spacing: 0.12em;\n  text-transform: uppercase;\n}\n\n/* Adopted mobile steps for the editorial roles (visual direction\n   contract). The seven inherited roles have no mobile steps. */\n@media (max-width: 599px) {\n  .augur-type-editorial-title {\n    font-size: 32px;\n    line-height: 40px;\n  }\n\n  .augur-type-editorial-section {\n    font-size: 24px;\n    line-height: 32px;\n  }\n}\n\n} /* @layer augur */\n"
+    },
+    {
+      "path": "packages/design-system/src/styles/base.css",
+      "type": "registry:style",
+      "target": "src/styles/augur-base.css",
+      "content": "/*\n * Structural base rules for @augurproject/design-system: the canvas\n * pairing on body, the keyboard focus ring, and the reduced-motion gate.\n *\n * Internal part of the public `theme.css` entry. The rules reference\n * semantic roles only (`./roles.css`), so they are identical in both\n * themes; the registry `augur-theme` item ships this file unchanged.\n * Every rule sits in `@layer augur`.\n */\n\n@layer augur {\n\n/* ------------------------------------------------------------------ */\n/* Shared structural behavior — identical in both themes.              */\n/* ------------------------------------------------------------------ */\n\n/* Apply the canvas pairing so the default and selected themes render\n   without consumer boilerplate (page-canvas-light / page-canvas-dark). */\nbody {\n  background-color: var(--background);\n  color: var(--foreground);\n}\n\n/* Focus: painted for keyboard focus only (focus-visible), as a 2px ring\n   with a 2px offset in the theme's ring color. Structural rule shared by\n   both themes; the color changes with the theme, nothing else does. The\n   2px/2px geometry is structural and intentionally not emitted as a\n   token. */\n:focus-visible {\n  outline: 2px solid var(--ring);\n  outline-offset: 2px;\n}\n\n/* Links take a 6px offset so the ring clears text and its underline\n   (adopted from augur.net, issue #8). Same ring, larger offset. */\na:focus-visible {\n  outline-offset: 6px;\n}\n\n/* Reduced motion: structural media-query gate over transition and\n   animation properties (the reduced-motion collapse required by the\n   theme contract). No duration tokens are adopted or emitted;\n   the canonical collapse constant is inlined here and applies equally\n   in both themes, including to consumer-authored motion. */\n@media (prefers-reduced-motion: reduce) {\n  *,\n  *::before,\n  *::after {\n    animation-duration: 0.01ms !important;\n    animation-iteration-count: 1 !important;\n    transition-duration: 0.01ms !important;\n    scroll-behavior: auto !important;\n  }\n}\n\n} /* @layer augur */\n"
     }
   ],
   "cssVars": {
     "theme": {
-      "--font-sans": "var(--augur-font-primary)",
+      "--font-sans": "var(--augur-font-secondary)",
+      "--font-heading": "var(--augur-font-primary)",
       "--color-accent": "var(--accent)",
       "--color-accent-foreground": "var(--accent-foreground)",
       "--color-background": "var(--background)",
       "--color-border": "var(--border)",
       "--color-border-quiet": "var(--border-quiet)",
+      "--color-brand-hover-edge": "var(--brand-hover-edge)",
       "--color-card": "var(--card)",
       "--color-card-foreground": "var(--card-foreground)",
       "--color-destructive": "var(--destructive)",
@@ -38,6 +46,8 @@
       "--color-popover": "var(--popover)",
       "--color-popover-foreground": "var(--popover-foreground)",
       "--color-primary": "var(--primary)",
+      "--color-primary-active": "var(--primary-active)",
+      "--color-primary-active-foreground": "var(--primary-active-foreground)",
       "--color-primary-foreground": "var(--primary-foreground)",
       "--color-primary-hover": "var(--primary-hover)",
       "--color-primary-hover-foreground": "var(--primary-hover-foreground)",
@@ -51,6 +61,8 @@
     "@import \"@fontsource/sora/400.css\"": "",
     "@import \"@fontsource/sora/600.css\"": "",
     "@import \"@fontsource/schibsted-grotesk/400.css\"": "",
+    "@import \"./styles/augur-typography.css\"": "",
+    "@import \"./styles/augur-base.css\"": "",
     ":root": {
       "color-scheme": "light",
       "--augur-color-primary": "#0e0e21",
@@ -64,6 +76,8 @@
       "--augur-color-border-light": "#e0e0e7",
       "--augur-color-accent-deep": "#095e42",
       "--augur-color-accent-wash": "#c9ffe5",
+      "--augur-color-accent-hover": "#27d19b",
+      "--augur-color-accent-pressed": "#24bc8d",
       "--augur-color-surface-dark-1": "#161629",
       "--augur-color-surface-dark-2": "#1d1d30",
       "--augur-color-surface-dark-3": "#242438",
@@ -88,6 +102,8 @@
       "--primary-foreground": "var(--augur-color-surface-light-raised)",
       "--primary-hover": "var(--augur-color-accent)",
       "--primary-hover-foreground": "var(--augur-color-primary)",
+      "--primary-active": "var(--augur-color-primary)",
+      "--primary-active-foreground": "var(--augur-color-surface-light)",
       "--secondary": "var(--augur-color-surface-light-muted)",
       "--secondary-foreground": "var(--augur-color-primary)",
       "--secondary-hover": "var(--augur-color-border-light)",
@@ -102,9 +118,9 @@
       "--input": "var(--augur-color-surface-dark-mist)",
       "--input-hover": "var(--augur-color-secondary)",
       "--border-quiet": "var(--augur-color-border-light)",
+      "--brand-hover-edge": "color-mix(in srgb, var(--augur-color-accent-deep) 50%, transparent)",
       "--ring": "var(--augur-color-accent-deep)"
     },
-    "@import \"./styles/augur-typography.css\"": "",
     "[data-theme=\"light\"]": {
       "color-scheme": "light",
       "--background": "var(--augur-color-surface-light)",
@@ -117,6 +133,8 @@
       "--primary-foreground": "var(--augur-color-surface-light-raised)",
       "--primary-hover": "var(--augur-color-accent)",
       "--primary-hover-foreground": "var(--augur-color-primary)",
+      "--primary-active": "var(--augur-color-primary)",
+      "--primary-active-foreground": "var(--augur-color-surface-light)",
       "--secondary": "var(--augur-color-surface-light-muted)",
       "--secondary-foreground": "var(--augur-color-primary)",
       "--secondary-hover": "var(--augur-color-border-light)",
@@ -131,20 +149,23 @@
       "--input": "var(--augur-color-surface-dark-mist)",
       "--input-hover": "var(--augur-color-secondary)",
       "--border-quiet": "var(--augur-color-border-light)",
+      "--brand-hover-edge": "color-mix(in srgb, var(--augur-color-accent-deep) 50%, transparent)",
       "--ring": "var(--augur-color-accent-deep)"
     },
     ".dark": {
       "color-scheme": "dark",
       "--background": "var(--augur-color-primary)",
       "--foreground": "var(--augur-color-surface-light)",
-      "--card": "var(--augur-color-surface-dark-1)",
+      "--card": "var(--augur-color-surface-dark-2)",
       "--card-foreground": "var(--augur-color-surface-light)",
       "--popover": "var(--augur-color-surface-dark-2)",
       "--popover-foreground": "var(--augur-color-surface-light)",
       "--primary": "var(--augur-color-accent)",
       "--primary-foreground": "var(--augur-color-primary)",
-      "--primary-hover": "var(--augur-color-accent-wash)",
+      "--primary-hover": "var(--augur-color-accent-hover)",
       "--primary-hover-foreground": "var(--augur-color-primary)",
+      "--primary-active": "var(--augur-color-accent-pressed)",
+      "--primary-active-foreground": "var(--augur-color-primary)",
       "--secondary": "var(--augur-color-surface-dark-2)",
       "--secondary-foreground": "var(--augur-color-surface-light)",
       "--secondary-hover": "var(--augur-color-surface-dark-3)",
@@ -155,24 +176,27 @@
       "--destructive": "var(--augur-color-secondary-dark)",
       "--destructive-foreground": "var(--augur-color-primary)",
       "--destructive-hover": "var(--augur-color-surface-light)",
-      "--border": "var(--augur-color-surface-dark-3)",
+      "--border": "var(--augur-color-surface-dark-mist)",
       "--input": "var(--augur-color-surface-dark-mist)",
       "--input-hover": "var(--augur-color-secondary-dark)",
       "--border-quiet": "var(--augur-color-surface-dark-3)",
+      "--brand-hover-edge": "color-mix(in srgb, var(--augur-color-accent) 50%, transparent)",
       "--ring": "var(--augur-color-accent)"
     },
     "[data-theme=\"dark\"]": {
       "color-scheme": "dark",
       "--background": "var(--augur-color-primary)",
       "--foreground": "var(--augur-color-surface-light)",
-      "--card": "var(--augur-color-surface-dark-1)",
+      "--card": "var(--augur-color-surface-dark-2)",
       "--card-foreground": "var(--augur-color-surface-light)",
       "--popover": "var(--augur-color-surface-dark-2)",
       "--popover-foreground": "var(--augur-color-surface-light)",
       "--primary": "var(--augur-color-accent)",
       "--primary-foreground": "var(--augur-color-primary)",
-      "--primary-hover": "var(--augur-color-accent-wash)",
+      "--primary-hover": "var(--augur-color-accent-hover)",
       "--primary-hover-foreground": "var(--augur-color-primary)",
+      "--primary-active": "var(--augur-color-accent-pressed)",
+      "--primary-active-foreground": "var(--augur-color-primary)",
       "--secondary": "var(--augur-color-surface-dark-2)",
       "--secondary-foreground": "var(--augur-color-surface-light)",
       "--secondary-hover": "var(--augur-color-surface-dark-3)",
@@ -183,10 +207,11 @@
       "--destructive": "var(--augur-color-secondary-dark)",
       "--destructive-foreground": "var(--augur-color-primary)",
       "--destructive-hover": "var(--augur-color-surface-light)",
-      "--border": "var(--augur-color-surface-dark-3)",
+      "--border": "var(--augur-color-surface-dark-mist)",
       "--input": "var(--augur-color-surface-dark-mist)",
       "--input-hover": "var(--augur-color-secondary-dark)",
       "--border-quiet": "var(--augur-color-surface-dark-3)",
+      "--brand-hover-edge": "color-mix(in srgb, var(--augur-color-accent) 50%, transparent)",
       "--ring": "var(--augur-color-accent)"
     },
     "@media (prefers-color-scheme: dark)": {
@@ -194,14 +219,16 @@
         "color-scheme": "dark",
         "--background": "var(--augur-color-primary)",
         "--foreground": "var(--augur-color-surface-light)",
-        "--card": "var(--augur-color-surface-dark-1)",
+        "--card": "var(--augur-color-surface-dark-2)",
         "--card-foreground": "var(--augur-color-surface-light)",
         "--popover": "var(--augur-color-surface-dark-2)",
         "--popover-foreground": "var(--augur-color-surface-light)",
         "--primary": "var(--augur-color-accent)",
         "--primary-foreground": "var(--augur-color-primary)",
-        "--primary-hover": "var(--augur-color-accent-wash)",
+        "--primary-hover": "var(--augur-color-accent-hover)",
         "--primary-hover-foreground": "var(--augur-color-primary)",
+        "--primary-active": "var(--augur-color-accent-pressed)",
+        "--primary-active-foreground": "var(--augur-color-primary)",
         "--secondary": "var(--augur-color-surface-dark-2)",
         "--secondary-foreground": "var(--augur-color-surface-light)",
         "--secondary-hover": "var(--augur-color-surface-dark-3)",
@@ -212,30 +239,15 @@
         "--destructive": "var(--augur-color-secondary-dark)",
         "--destructive-foreground": "var(--augur-color-primary)",
         "--destructive-hover": "var(--augur-color-surface-light)",
-        "--border": "var(--augur-color-surface-dark-3)",
+        "--border": "var(--augur-color-surface-dark-mist)",
         "--input": "var(--augur-color-surface-dark-mist)",
         "--input-hover": "var(--augur-color-secondary-dark)",
         "--border-quiet": "var(--augur-color-surface-dark-3)",
+        "--brand-hover-edge": "color-mix(in srgb, var(--augur-color-accent) 50%, transparent)",
         "--ring": "var(--augur-color-accent)"
       }
     },
-    "body": {
-      "background-color": "var(--background)",
-      "color": "var(--foreground)"
-    },
-    ":focus-visible": {
-      "outline": "2px solid var(--ring)",
-      "outline-offset": "2px"
-    },
-    "@media (prefers-reduced-motion: reduce)": {
-      "*, *::before, *::after": {
-        "animation-duration": "0.01ms !important",
-        "animation-iteration-count": "1 !important",
-        "transition-duration": "0.01ms !important",
-        "scroll-behavior": "auto !important"
-      }
-    },
-    "@custom-variant dark (&:is([data-theme=\"dark\"], [data-theme=\"dark\"] *, :root:not([data-theme=\"light\"]) *))": ""
+    "@custom-variant dark (&:where(.dark, .dark *, [data-theme=\"dark\"], [data-theme=\"dark\"] *))": ""
   },
-  "docs": "Apply the theme by setting `data-theme=\"light|dark\"` on `<html>` or any container; without an attribute the system preference decides. Do not import @augur/design-system from registry-installed source; this item is self-contained."
+  "docs": "Apply the theme by setting `data-theme=\"light|dark\"` or the `.dark` class on `<html>` or any container; without either the system preference decides. All installed rules sit in `@layer augur`. Do not import @augurproject/design-system from registry-installed source; this item is self-contained."
 }

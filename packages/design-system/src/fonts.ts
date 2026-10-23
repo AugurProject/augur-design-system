@@ -1,5 +1,5 @@
 /**
- * Font delivery and provenance for @augur/design-system.
+ * Font delivery and provenance for @augurproject/design-system.
  *
  * Families, delivered weights, and the exact redistribution sources are
  * recorded here as machine-readable constants so consumers (docs site,

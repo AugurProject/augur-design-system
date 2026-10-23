@@ -1,0 +1,32 @@
+/*
+ * Font-family custom properties and fallback stacks for @augurproject/design-system.
+ *
+ * Source of truth: the `DESIGN.md` typography block names two families.
+ * Per the brand's voice model (recorded in the foundation decision audit of
+ * PDF page 04.1): Sora is the primary voice (display, headings, control,
+ * ui), Schibsted Grotesk is the secondary voice (body, metadata).
+ *
+ * The custom properties are named by voice role, not by font name, so the
+ * underlying family can change without renaming the surface contract.
+ *
+ * Internal part of the public `theme.css` entry. Font files themselves
+ * are delivered separately by the optional `fonts.css` export, which
+ * imports the pinned `@fontsource` packages. See
+ * `resources/brand/PROVENANCE.md` for exact versions, licenses, and
+ * copyright notices.
+ */
+@layer augur {
+
+:root {
+  /* Primary voice: Sora (OFL-1.1). Fallback: system sans stack. */
+  --augur-font-primary:
+    "Sora", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+    "Helvetica Neue", Arial, sans-serif;
+
+  /* Secondary voice: Schibsted Grotesk (OFL-1.1). Fallback: system sans stack. */
+  --augur-font-secondary:
+    "Schibsted Grotesk", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+    "Helvetica Neue", Arial, sans-serif;
+}
+
+} /* @layer augur */

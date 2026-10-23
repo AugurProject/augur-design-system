@@ -1,10 +1,10 @@
 /**
- * Public entry point for @augur/design-system.
+ * Public entry point for @augurproject/design-system.
  *
  * Consumers use this module and the stylesheet entry point:
  *
- *   import { Button, Card } from "@augur/design-system";
- *   import "@augur/design-system/styles.css";
+ *   import { Button, Card } from "@augurproject/design-system";
+ *   import "@augurproject/design-system/styles.css";
  *
  * Generated tokens and theme output landed with the foundation work
  * (#3–#5); font delivery (#5) adds the machine-readable font

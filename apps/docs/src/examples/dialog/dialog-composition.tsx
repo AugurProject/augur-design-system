@@ -8,7 +8,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@augur/design-system";
+} from "@augurproject/design-system";
 
 export function DialogCompositionExample() {
   return (

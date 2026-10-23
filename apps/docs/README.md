@@ -11,8 +11,8 @@ content verification run through the fixtures described in
 [`fixtures/README.md`](fixtures/README.md).
 
 The app consumes the real workspace package
-(`@augur/design-system` via `workspace:*`): the stylesheet entry
-`@augur/design-system/styles.css` is the only color/font style source
+(`@augurproject/design-system` via `workspace:*`): the stylesheet entry
+`@augurproject/design-system/styles.css` is the only color/font style source
 (shell chrome in `src/styles/docs.css` uses semantic role custom
 properties exclusively), and pages/components import the package entry
 constants (`AUGUR_FONTS`, `AUGUR_FONT_FAMILIES`). Docs-only dependencies

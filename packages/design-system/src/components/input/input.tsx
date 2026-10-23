@@ -3,7 +3,7 @@
  *
  * shadcn-compatible API, Augur-owned styling: a native `<input>` styled
  * exclusively through the semantic role custom properties delivered by
- * `@augur/design-system/styles.css` (see `./input.css`). React 19
+ * `@augurproject/design-system/styles.css` (see `./input.css`). React 19
  * style: a plain function component; `ref` forwards through props (no
  * forwardRef).
  *

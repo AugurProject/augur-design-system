@@ -1,4 +1,4 @@
-import { Button, Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@augur/design-system";
+import { Button, Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@augurproject/design-system";
 
 export function CardCompositionExample() {
   return (

@@ -33,7 +33,7 @@ import {
   CardHeader,
   CardTitle,
   buttonVariants,
-} from "@augur/design-system";
+} from "@augurproject/design-system";
 import { loadPackageStyles } from "./support/styles";
 
 describe("Button keyboard and activation contract", () => {

@@ -206,7 +206,7 @@ for (const rel of expectedMd) {
   if (rel.startsWith("components/")) {
     ok(
       `${rel} retains component export and maturity metadata`,
-      /^Component export: `[^`]+` from `@augur\/design-system` — status: (planned|draft|stable|deprecated)\.$/m.test(text),
+      /^Component export: `[^`]+` from `@augurproject\/design-system` — status: (planned|draft|stable|deprecated)\.$/m.test(text),
     );
   }
 
@@ -220,7 +220,7 @@ for (const rel of expectedMd) {
 const gettingStarted = mdContents.get("getting-started.md");
 ok(
   "getting-started.md keeps its authored consumer examples verbatim",
-  gettingStarted.includes('import "@augur/design-system/styles.css";') &&
+  gettingStarted.includes('import "@augurproject/design-system/styles.css";') &&
     gettingStarted.includes("npx shadcn@latest add"),
 );
 ok(

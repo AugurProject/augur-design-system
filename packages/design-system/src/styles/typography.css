@@ -1,5 +1,5 @@
 /*
- * Typography role classes for @augur/design-system.
+ * Typography role classes for @augurproject/design-system.
  *
  * Each class mirrors one `DESIGN.md` front-matter `typography` role,
  * keyed by the role name. Values are hand-authored to match `DESIGN.md`
@@ -8,12 +8,18 @@
  * the primitive tokens, while role classes stay the maintained runtime
  * mapping. Do not add roles or values that are not in `DESIGN.md`.
  *
- * Families come from `./fonts.css` custom properties; font files are
- * delivered via `styles.css`. Weights rely on faces loaded by the pinned
- * `@fontsource` packages (Sora 400/600, Schibsted Grotesk 400) — the
- * editorial roles (issue 45) deliberately reuse
- * the 400 faces; no Sora Light dependency exists.
+ * Families come from the `--augur-font-primary` and
+ * `--augur-font-secondary` custom properties (`font-stacks.css` in the
+ * package; the registry theme item declares them on `:root`). Font files
+ * are delivered separately, by the package's optional `fonts.css` export
+ * or by the consumer. Weights rely on Sora 400/600 and Schibsted
+ * Grotesk 400 faces; the editorial roles (issue 45) deliberately reuse
+ * the 400 faces, and no Sora Light dependency exists.
+ *
+ * Every rule sits in `@layer augur`.
  */
+
+@layer augur {
 
 /* Base: body copy uses the secondary voice unless a role overrides it. */
 body {
@@ -125,3 +131,5 @@ body {
     line-height: 32px;
   }
 }
+
+} /* @layer augur */

@@ -1,5 +1,5 @@
 /**
- * Semantic theme tests for @augur/design-system (issue #4).
+ * Semantic theme tests for @augurproject/design-system (issues #4, #9).
  *
  * Run with the built-in runner from the package directory:
  *
@@ -57,7 +57,7 @@ function parseBlocks(css: string): Block[] {
   while (i < src.length) {
     const open = src.indexOf("{", i);
     if (open === -1) break;
-    const prelude = src.slice(i, open).trim();
+    const prelude = src.slice(i, open).trim().replace(/\s+/g, " ");
     let depth = 1;
     let j = open + 1;
     while (j < src.length && depth > 0) {
@@ -74,6 +74,9 @@ function parseBlocks(css: string): Block[] {
           declarations: nested.declarations,
         });
       }
+    } else if (prelude.startsWith("@layer")) {
+      // Layers do not change the cascade facts these tests assert on.
+      blocks.push(...parseBlocks(body));
     } else if (!prelude.startsWith("@")) {
       const declarations: Record<string, string> = {};
       for (const decl of body.split(";")) {
@@ -145,9 +148,13 @@ function contrast(a: string, b: string): number {
 /* Fixtures under test.                                                */
 /* ------------------------------------------------------------------ */
 
-const themeCss = read("src/styles/theme.css");
+/** The role mapping plus the structural base rules: everything theme.css
+ * adds over the generated tokens, font stacks and typography. */
+const rolesCss = read("src/styles/roles.css");
+const baseCss = read("src/styles/base.css");
+const themeCss = `${rolesCss}\n${baseCss}`;
 const tokensCss = read("src/tokens/tokens.css");
-const fontsCss = read("src/styles/fonts.css");
+const fontsCss = read("src/styles/font-stacks.css");
 const typographyCss = read("src/styles/typography.css");
 const stylesCss = read("src/styles/styles.css");
 const packageJson = JSON.parse(read("package.json")) as {
@@ -167,7 +174,8 @@ const generatedColors: Record<string, string> = Object.fromEntries(
 
 /** The semantic role set every theme scope must define: the
  * shadcn-compatible roles plus the Augur extensions (the quiet editorial
- * rule, the control hover edge, and the filled-button hover steps). */
+ * rule, the control and brand hover edges, and the filled-button hover
+ * and pressed steps). */
 const SEMANTIC_ROLES = [
   "--background",
   "--foreground",
@@ -179,6 +187,8 @@ const SEMANTIC_ROLES = [
   "--primary-foreground",
   "--primary-hover",
   "--primary-hover-foreground",
+  "--primary-active",
+  "--primary-active-foreground",
   "--secondary",
   "--secondary-foreground",
   "--secondary-hover",
@@ -193,8 +203,12 @@ const SEMANTIC_ROLES = [
   "--border-quiet",
   "--input",
   "--input-hover",
+  "--brand-hover-edge",
   "--ring",
 ] as const;
+
+/** Roles that mix a generated token instead of referencing it directly. */
+const MIXED_ROLES = new Set<string>(["--brand-hover-edge"]);
 
 /** Foreground/background text pairs emitted per theme. `documented` names
  * a pairing whose ratio DESIGN.md (or its audited record) states; those
@@ -213,19 +227,21 @@ const TEXT_PAIRS: Record<
     { fg: "--accent-foreground", bg: "--accent", documented: "Navy on Muted 16.17 (muted-region-light)" },
     { fg: "--destructive-foreground", bg: "--destructive" },
     { fg: "--primary-hover-foreground", bg: "--primary-hover", documented: "Green on Navy 11.87 (DESIGN.md reference pairing)" },
+    { fg: "--primary-active-foreground", bg: "--primary-active", documented: "Paper on Navy 17.49 (page-canvas-dark)" },
     { fg: "--secondary-foreground", bg: "--secondary-hover" },
     { fg: "--destructive-foreground", bg: "--destructive-hover" },
   ],
   dark: [
     { fg: "--foreground", bg: "--background", documented: "Paper on Navy 17.49 (page-canvas-dark)" },
-    { fg: "--card-foreground", bg: "--card" },
+    { fg: "--card-foreground", bg: "--card", documented: "Paper on Surface 2 15.19 (panel-dark-2)" },
     { fg: "--popover-foreground", bg: "--popover", documented: "Paper on Surface 2 15.19 (panel-dark)" },
     { fg: "--primary-foreground", bg: "--primary", documented: "Navy on Green 11.87 (action-primary-dark)" },
     { fg: "--secondary-foreground", bg: "--secondary", documented: "Paper on Surface 2 15.19 (panel-dark)" },
     { fg: "--muted-foreground", bg: "--muted" },
     { fg: "--accent-foreground", bg: "--accent", documented: "Paper on Surface 3 13.94 (panel-dark-3)" },
     { fg: "--destructive-foreground", bg: "--destructive", documented: "Pewter on Navy 7.53 (reversed pair)" },
-    { fg: "--primary-hover-foreground", bg: "--primary-hover" },
+    { fg: "--primary-hover-foreground", bg: "--primary-hover", documented: "Navy on Green hover 9.68 (action-primary-dark-hover)" },
+    { fg: "--primary-active-foreground", bg: "--primary-active", documented: "Navy on Green pressed 7.84 (action-primary-dark-pressed)" },
     { fg: "--secondary-foreground", bg: "--secondary-hover" },
     { fg: "--destructive-foreground", bg: "--destructive-hover", documented: "Navy on Paper 17.49 (page-canvas-light)" },
   ],
@@ -274,7 +290,7 @@ function scopeFor(label: string): ThemeScope {
     case "light":
       return { label, block: findBlock(themeBlocks, ":root") };
     case "dark-explicit":
-      return { label, block: findBlock(themeBlocks, '[data-theme="dark"]') };
+      return { label, block: findBlock(themeBlocks, '[data-theme="dark"], .dark') };
     case "dark-system":
       return {
         label,
@@ -308,9 +324,9 @@ describe("generated token integrity (issue #3 output)", () => {
     }
   });
 
-  test("the generator emits the 15 color primitives the theme maps from", () => {
+  test("the generator emits the 17 color primitives the theme maps from", () => {
     const names = Object.keys(generatedColors);
-    expect(names.length).toBe(15);
+    expect(names.length).toBe(17);
     for (const name of names) {
       expect(name.startsWith("--augur-color-")).toBe(true);
       expect(generatedColors[name]).toMatch(/^#[0-9a-f]{6}$/);
@@ -319,13 +335,13 @@ describe("generated token integrity (issue #3 output)", () => {
 });
 
 describe("missing references", () => {
-  test("every var() in theme.css resolves to a defined custom property", () => {
+  test("every var() in the role and base rules resolves to a defined custom property", () => {
     const defined = definedVars(tokensCss, fontsCss, typographyCss, themeCss);
     const missing = [...referencedVars(themeCss)].filter((v) => !defined.has(v));
     expect(missing).toEqual([]);
   });
 
-  test("every generated token referenced by theme.css exists in tokens.css", () => {
+  test("every generated token referenced by the role mapping exists in tokens.css", () => {
     const referenced = [...referencedVars(themeCss)].filter((v) =>
       v.startsWith("--augur-color-"),
     );
@@ -335,7 +351,7 @@ describe("missing references", () => {
     }
   });
 
-  test("typography roles reference font families that fonts.css defines", () => {
+  test("typography roles reference font families that font-stacks.css defines", () => {
     const defined = definedVars(fontsCss);
     for (const ref of referencedVars(typographyCss)) {
       expect(defined.has(ref)).toBe(true);
@@ -344,7 +360,7 @@ describe("missing references", () => {
 });
 
 describe("no duplicate raw values", () => {
-  test("theme.css contains no raw color literals", () => {
+  test("the role and base rules contain no raw color literals", () => {
     const body = stripComments(themeCss);
     expect(body).not.toMatch(/#[0-9a-fA-F]{3,8}\b/);
     expect(body).not.toMatch(/\brgba?\(/);
@@ -422,9 +438,17 @@ describe("contrast validation (WCAG 2.x, recomputed from generated values)", () 
   test("every role is a direct single-hop generated-token reference", () => {
     for (const { scope } of themes) {
       for (const role of SEMANTIC_ROLES) {
+        if (MIXED_ROLES.has(role)) continue;
         expect(resolveRole(scope, role)).toMatch(/^#[0-9a-f]{6}$/);
       }
     }
+  });
+
+  test("the brand hover edge is the scope's green companion at 50%", () => {
+    const mix = (token: string) => `color-mix(in srgb, var(${token}) 50%, transparent)`;
+    expect(light.block.declarations["--brand-hover-edge"]).toBe(mix("--augur-color-accent-deep"));
+    expect(darkExplicit.block.declarations["--brand-hover-edge"]).toBe(mix("--augur-color-accent"));
+    expect(darkSystem.block.declarations["--brand-hover-edge"]).toBe(mix("--augur-color-accent"));
   });
 
   test("all text pairs meet AA for normal text (>= 4.5:1)", () => {
@@ -481,10 +505,13 @@ describe("control edges (WCAG 1.4.11 non-text contrast)", () => {
     }
   });
 
-  test("panel edges and control edges resolve to different steps in both themes", () => {
-    for (const scope of themes) {
-      expect(resolveRole(scope, "--border")).not.toBe(resolveRole(scope, "--input"));
-    }
+  test("light panel edges stay distinct from control edges", () => {
+    expect(resolveRole(light, "--border")).not.toBe(resolveRole(light, "--input"));
+  });
+
+  test("dark panel edges use Mist, the control edge, as adopted from augur.net", () => {
+    expect(resolveRole(darkExplicit, "--border")).toBe(resolveRole(darkExplicit, "--input"));
+    expect(resolveRole(darkExplicit, "--border")).toBe(generatedColors["--augur-color-surface-dark-mist"]);
   });
 });
 
@@ -506,6 +533,8 @@ describe("structural behavior shared by both themes", () => {
     expect(focus?.media).toBeNull();
     expect(focus?.declarations["outline"]).toBe("2px solid var(--ring)");
     expect(focus?.declarations["outline-offset"]).toBe("2px");
+    const link = themeBlocks.find((b) => b.selector === "a:focus-visible");
+    expect(link?.declarations["outline-offset"]).toBe("6px");
     // Never paint for pointer focus: no bare :focus rule exists.
     expect(stripComments(themeCss).match(/:focus\b(?!-visible)/)).toBeNull();
   });
@@ -546,7 +575,7 @@ describe("package-level style consumption", () => {
     if (seen.has(entry)) return seen;
     seen.add(entry);
     const css = stripComments(readFileSync(entry, "utf8"));
-    for (const m of css.matchAll(/@import\s+(?:url\()?["']([^"']+)["']\)?\s*;/g)) {
+    for (const m of css.matchAll(/@import\s+(?:url\()?["']([^"']+)["']\)?[^;]*;/g)) {
       const spec = m[1];
       if (spec.startsWith(".")) {
         const target = resolve(dirname(entry), spec);
@@ -573,13 +602,59 @@ describe("package-level style consumption", () => {
     const reachedNames = [...reached].map((p) => p.replace(`${pkgRoot}/`, ""));
     for (const aggregate of [
       "src/styles/theme.css",
+      "src/styles/roles.css",
+      "src/styles/base.css",
       "src/styles/typography.css",
+      "src/styles/font-stacks.css",
       "src/styles/fonts.css",
       "src/tokens/tokens.css",
+      "src/components/button/button.css",
+      "src/patterns/empty-state/empty-state.css",
     ]) {
       expect(reachedNames).toContain(aggregate);
     }
     expect(reachedNames.some((p) => p.includes("@fontsource/sora/400.css"))).toBe(true);
     expect(reachedNames.some((p) => p.includes("@fontsource/schibsted-grotesk/400.css"))).toBe(true);
+  });
+
+  /** Exports a plain-HTML page can `<link>` with no bundler. */
+  const PLAIN_EXPORTS = Object.entries(packageJson.exports).filter(
+    ([key]) => key === "./theme.css" || key.startsWith("./css/"),
+  );
+
+  test("every public CSS export is a real file", () => {
+    for (const [key, target] of Object.entries(packageJson.exports)) {
+      if (key === ".") continue;
+      expect(existsSync(resolve(pkgRoot, target)), key).toBe(true);
+    }
+    expect(PLAIN_EXPORTS.length).toBe(8);
+  });
+
+  test("theme.css and css/<name>.css load with relative imports only", () => {
+    for (const [key, target] of PLAIN_EXPORTS) {
+      for (const file of walkImports(resolve(pkgRoot, target))) {
+        const css = stripComments(readFileSync(file, "utf8"));
+        for (const m of css.matchAll(/@import\s+["']([^"']+)["']/g)) {
+          expect(m[1].startsWith("."), `${key}: ${file} imports ${m[1]}`).toBe(true);
+        }
+      }
+    }
+  });
+
+  test("every rule the package ships sits in @layer augur", () => {
+    const entry = resolve(pkgRoot, packageJson.exports["./styles.css"]);
+    for (const file of walkImports(entry)) {
+      if (!file.startsWith(`${pkgRoot}/src/`)) continue; // @fontsource, layered at import
+      const css = stripComments(readFileSync(file, "utf8"));
+      const rel = file.replace(`${pkgRoot}/`, "");
+      if (rel === "src/tokens/tokens.css") {
+        // Generated verbatim; theme.css layers it at import.
+        expect(read("src/styles/theme.css")).toContain('@import "../tokens/tokens.css" layer(augur);');
+        continue;
+      }
+      // Outside the layer only @import statements may appear.
+      const outside = css.replace(/@layer augur\s*\{[\s\S]*\}\s*$/, "").replace(/@import[^;]+;/g, "");
+      expect(outside.trim(), rel).toBe("");
+    }
   });
 });

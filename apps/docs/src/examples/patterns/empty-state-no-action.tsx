@@ -3,7 +3,7 @@ import {
   EmptyStateDescription,
   EmptyStateIcon,
   EmptyStateTitle,
-} from "@augur/design-system";
+} from "@augurproject/design-system";
 
 function ArchiveGlyph() {
   return (

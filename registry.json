@@ -18,16 +18,23 @@
           "path": "packages/design-system/src/styles/typography.css",
           "type": "registry:style",
           "target": "src/styles/augur-typography.css"
+        },
+        {
+          "path": "packages/design-system/src/styles/base.css",
+          "type": "registry:style",
+          "target": "src/styles/augur-base.css"
         }
       ],
       "cssVars": {
         "theme": {
-          "--font-sans": "var(--augur-font-primary)",
+          "--font-sans": "var(--augur-font-secondary)",
+          "--font-heading": "var(--augur-font-primary)",
           "--color-accent": "var(--accent)",
           "--color-accent-foreground": "var(--accent-foreground)",
           "--color-background": "var(--background)",
           "--color-border": "var(--border)",
           "--color-border-quiet": "var(--border-quiet)",
+          "--color-brand-hover-edge": "var(--brand-hover-edge)",
           "--color-card": "var(--card)",
           "--color-card-foreground": "var(--card-foreground)",
           "--color-destructive": "var(--destructive)",
@@ -41,6 +48,8 @@
           "--color-popover": "var(--popover)",
           "--color-popover-foreground": "var(--popover-foreground)",
           "--color-primary": "var(--primary)",
+          "--color-primary-active": "var(--primary-active)",
+          "--color-primary-active-foreground": "var(--primary-active-foreground)",
           "--color-primary-foreground": "var(--primary-foreground)",
           "--color-primary-hover": "var(--primary-hover)",
           "--color-primary-hover-foreground": "var(--primary-hover-foreground)",
@@ -54,6 +63,8 @@
         "@import \"@fontsource/sora/400.css\"": "",
         "@import \"@fontsource/sora/600.css\"": "",
         "@import \"@fontsource/schibsted-grotesk/400.css\"": "",
+        "@import \"./styles/augur-typography.css\"": "",
+        "@import \"./styles/augur-base.css\"": "",
         ":root": {
           "color-scheme": "light",
           "--augur-color-primary": "#0e0e21",
@@ -67,6 +78,8 @@
           "--augur-color-border-light": "#e0e0e7",
           "--augur-color-accent-deep": "#095e42",
           "--augur-color-accent-wash": "#c9ffe5",
+          "--augur-color-accent-hover": "#27d19b",
+          "--augur-color-accent-pressed": "#24bc8d",
           "--augur-color-surface-dark-1": "#161629",
           "--augur-color-surface-dark-2": "#1d1d30",
           "--augur-color-surface-dark-3": "#242438",
@@ -91,6 +104,8 @@
           "--primary-foreground": "var(--augur-color-surface-light-raised)",
           "--primary-hover": "var(--augur-color-accent)",
           "--primary-hover-foreground": "var(--augur-color-primary)",
+          "--primary-active": "var(--augur-color-primary)",
+          "--primary-active-foreground": "var(--augur-color-surface-light)",
           "--secondary": "var(--augur-color-surface-light-muted)",
           "--secondary-foreground": "var(--augur-color-primary)",
           "--secondary-hover": "var(--augur-color-border-light)",
@@ -105,9 +120,9 @@
           "--input": "var(--augur-color-surface-dark-mist)",
           "--input-hover": "var(--augur-color-secondary)",
           "--border-quiet": "var(--augur-color-border-light)",
+          "--brand-hover-edge": "color-mix(in srgb, var(--augur-color-accent-deep) 50%, transparent)",
           "--ring": "var(--augur-color-accent-deep)"
         },
-        "@import \"./styles/augur-typography.css\"": "",
         "[data-theme=\"light\"]": {
           "color-scheme": "light",
           "--background": "var(--augur-color-surface-light)",
@@ -120,6 +135,8 @@
           "--primary-foreground": "var(--augur-color-surface-light-raised)",
           "--primary-hover": "var(--augur-color-accent)",
           "--primary-hover-foreground": "var(--augur-color-primary)",
+          "--primary-active": "var(--augur-color-primary)",
+          "--primary-active-foreground": "var(--augur-color-surface-light)",
           "--secondary": "var(--augur-color-surface-light-muted)",
           "--secondary-foreground": "var(--augur-color-primary)",
           "--secondary-hover": "var(--augur-color-border-light)",
@@ -134,20 +151,23 @@
           "--input": "var(--augur-color-surface-dark-mist)",
           "--input-hover": "var(--augur-color-secondary)",
           "--border-quiet": "var(--augur-color-border-light)",
+          "--brand-hover-edge": "color-mix(in srgb, var(--augur-color-accent-deep) 50%, transparent)",
           "--ring": "var(--augur-color-accent-deep)"
         },
         ".dark": {
           "color-scheme": "dark",
           "--background": "var(--augur-color-primary)",
           "--foreground": "var(--augur-color-surface-light)",
-          "--card": "var(--augur-color-surface-dark-1)",
+          "--card": "var(--augur-color-surface-dark-2)",
           "--card-foreground": "var(--augur-color-surface-light)",
           "--popover": "var(--augur-color-surface-dark-2)",
           "--popover-foreground": "var(--augur-color-surface-light)",
           "--primary": "var(--augur-color-accent)",
           "--primary-foreground": "var(--augur-color-primary)",
-          "--primary-hover": "var(--augur-color-accent-wash)",
+          "--primary-hover": "var(--augur-color-accent-hover)",
           "--primary-hover-foreground": "var(--augur-color-primary)",
+          "--primary-active": "var(--augur-color-accent-pressed)",
+          "--primary-active-foreground": "var(--augur-color-primary)",
           "--secondary": "var(--augur-color-surface-dark-2)",
           "--secondary-foreground": "var(--augur-color-surface-light)",
           "--secondary-hover": "var(--augur-color-surface-dark-3)",
@@ -158,24 +178,27 @@
           "--destructive": "var(--augur-color-secondary-dark)",
           "--destructive-foreground": "var(--augur-color-primary)",
           "--destructive-hover": "var(--augur-color-surface-light)",
-          "--border": "var(--augur-color-surface-dark-3)",
+          "--border": "var(--augur-color-surface-dark-mist)",
           "--input": "var(--augur-color-surface-dark-mist)",
           "--input-hover": "var(--augur-color-secondary-dark)",
           "--border-quiet": "var(--augur-color-surface-dark-3)",
+          "--brand-hover-edge": "color-mix(in srgb, var(--augur-color-accent) 50%, transparent)",
           "--ring": "var(--augur-color-accent)"
         },
         "[data-theme=\"dark\"]": {
           "color-scheme": "dark",
           "--background": "var(--augur-color-primary)",
           "--foreground": "var(--augur-color-surface-light)",
-          "--card": "var(--augur-color-surface-dark-1)",
+          "--card": "var(--augur-color-surface-dark-2)",
           "--card-foreground": "var(--augur-color-surface-light)",
           "--popover": "var(--augur-color-surface-dark-2)",
           "--popover-foreground": "var(--augur-color-surface-light)",
           "--primary": "var(--augur-color-accent)",
           "--primary-foreground": "var(--augur-color-primary)",
-          "--primary-hover": "var(--augur-color-accent-wash)",
+          "--primary-hover": "var(--augur-color-accent-hover)",
           "--primary-hover-foreground": "var(--augur-color-primary)",
+          "--primary-active": "var(--augur-color-accent-pressed)",
+          "--primary-active-foreground": "var(--augur-color-primary)",
           "--secondary": "var(--augur-color-surface-dark-2)",
           "--secondary-foreground": "var(--augur-color-surface-light)",
           "--secondary-hover": "var(--augur-color-surface-dark-3)",
@@ -186,10 +209,11 @@
           "--destructive": "var(--augur-color-secondary-dark)",
           "--destructive-foreground": "var(--augur-color-primary)",
           "--destructive-hover": "var(--augur-color-surface-light)",
-          "--border": "var(--augur-color-surface-dark-3)",
+          "--border": "var(--augur-color-surface-dark-mist)",
           "--input": "var(--augur-color-surface-dark-mist)",
           "--input-hover": "var(--augur-color-secondary-dark)",
           "--border-quiet": "var(--augur-color-surface-dark-3)",
+          "--brand-hover-edge": "color-mix(in srgb, var(--augur-color-accent) 50%, transparent)",
           "--ring": "var(--augur-color-accent)"
         },
         "@media (prefers-color-scheme: dark)": {
@@ -197,14 +221,16 @@
             "color-scheme": "dark",
             "--background": "var(--augur-color-primary)",
             "--foreground": "var(--augur-color-surface-light)",
-            "--card": "var(--augur-color-surface-dark-1)",
+            "--card": "var(--augur-color-surface-dark-2)",
             "--card-foreground": "var(--augur-color-surface-light)",
             "--popover": "var(--augur-color-surface-dark-2)",
             "--popover-foreground": "var(--augur-color-surface-light)",
             "--primary": "var(--augur-color-accent)",
             "--primary-foreground": "var(--augur-color-primary)",
-            "--primary-hover": "var(--augur-color-accent-wash)",
+            "--primary-hover": "var(--augur-color-accent-hover)",
             "--primary-hover-foreground": "var(--augur-color-primary)",
+            "--primary-active": "var(--augur-color-accent-pressed)",
+            "--primary-active-foreground": "var(--augur-color-primary)",
             "--secondary": "var(--augur-color-surface-dark-2)",
             "--secondary-foreground": "var(--augur-color-surface-light)",
             "--secondary-hover": "var(--augur-color-surface-dark-3)",
@@ -215,32 +241,17 @@
             "--destructive": "var(--augur-color-secondary-dark)",
             "--destructive-foreground": "var(--augur-color-primary)",
             "--destructive-hover": "var(--augur-color-surface-light)",
-            "--border": "var(--augur-color-surface-dark-3)",
+            "--border": "var(--augur-color-surface-dark-mist)",
             "--input": "var(--augur-color-surface-dark-mist)",
             "--input-hover": "var(--augur-color-secondary-dark)",
             "--border-quiet": "var(--augur-color-surface-dark-3)",
+            "--brand-hover-edge": "color-mix(in srgb, var(--augur-color-accent) 50%, transparent)",
             "--ring": "var(--augur-color-accent)"
           }
         },
-        "body": {
-          "background-color": "var(--background)",
-          "color": "var(--foreground)"
-        },
-        ":focus-visible": {
-          "outline": "2px solid var(--ring)",
-          "outline-offset": "2px"
-        },
-        "@media (prefers-reduced-motion: reduce)": {
-          "*, *::before, *::after": {
-            "animation-duration": "0.01ms !important",
-            "animation-iteration-count": "1 !important",
-            "transition-duration": "0.01ms !important",
-            "scroll-behavior": "auto !important"
-          }
-        },
-        "@custom-variant dark (&:is([data-theme=\"dark\"], [data-theme=\"dark\"] *, :root:not([data-theme=\"light\"]) *))": ""
+        "@custom-variant dark (&:where(.dark, .dark *, [data-theme=\"dark\"], [data-theme=\"dark\"] *))": ""
       },
-      "docs": "Apply the theme by setting `data-theme=\"light|dark\"` on `<html>` or any container; without an attribute the system preference decides. Do not import @augur/design-system from registry-installed source; this item is self-contained."
+      "docs": "Apply the theme by setting `data-theme=\"light|dark\"` or the `.dark` class on `<html>` or any container; without either the system preference decides. All installed rules sit in `@layer augur`. Do not import @augurproject/design-system from registry-installed source; this item is self-contained."
     },
     {
       "name": "utils",
@@ -267,8 +278,8 @@
       "author": "jubalm",
       "description": "Augur button (registry source distribution; contract docs/registry-contract.md).",
       "registryDependencies": [
-        "jubalm/augur-design-system/augur-theme#v0.1.0",
-        "jubalm/augur-design-system/utils#v0.1.0"
+        "jubalm/augur-design-system/augur-theme#v0.2.0",
+        "jubalm/augur-design-system/utils#v0.2.0"
       ],
       "files": [
         {
@@ -298,8 +309,8 @@
       "author": "jubalm",
       "description": "Augur card (registry source distribution; contract docs/registry-contract.md).",
       "registryDependencies": [
-        "jubalm/augur-design-system/augur-theme#v0.1.0",
-        "jubalm/augur-design-system/utils#v0.1.0"
+        "jubalm/augur-design-system/augur-theme#v0.2.0",
+        "jubalm/augur-design-system/utils#v0.2.0"
       ],
       "files": [
         {
@@ -321,8 +332,8 @@
       "author": "jubalm",
       "description": "Augur input (registry source distribution; contract docs/registry-contract.md).",
       "registryDependencies": [
-        "jubalm/augur-design-system/augur-theme#v0.1.0",
-        "jubalm/augur-design-system/utils#v0.1.0"
+        "jubalm/augur-design-system/augur-theme#v0.2.0",
+        "jubalm/augur-design-system/utils#v0.2.0"
       ],
       "files": [
         {
@@ -344,8 +355,8 @@
       "author": "jubalm",
       "description": "Augur form field (registry source distribution; contract docs/registry-contract.md).",
       "registryDependencies": [
-        "jubalm/augur-design-system/augur-theme#v0.1.0",
-        "jubalm/augur-design-system/utils#v0.1.0"
+        "jubalm/augur-design-system/augur-theme#v0.2.0",
+        "jubalm/augur-design-system/utils#v0.2.0"
       ],
       "files": [
         {
@@ -367,8 +378,8 @@
       "author": "jubalm",
       "description": "Augur dialog (registry source distribution; contract docs/registry-contract.md).",
       "registryDependencies": [
-        "jubalm/augur-design-system/augur-theme#v0.1.0",
-        "jubalm/augur-design-system/utils#v0.1.0"
+        "jubalm/augur-design-system/augur-theme#v0.2.0",
+        "jubalm/augur-design-system/utils#v0.2.0"
       ],
       "files": [
         {
@@ -393,8 +404,8 @@
       "author": "jubalm",
       "description": "Augur page header (registry source distribution; contract docs/registry-contract.md).",
       "registryDependencies": [
-        "jubalm/augur-design-system/augur-theme#v0.1.0",
-        "jubalm/augur-design-system/utils#v0.1.0"
+        "jubalm/augur-design-system/augur-theme#v0.2.0",
+        "jubalm/augur-design-system/utils#v0.2.0"
       ],
       "files": [
         {
@@ -416,10 +427,10 @@
       "author": "jubalm",
       "description": "Augur empty state (registry source distribution; contract docs/registry-contract.md).",
       "registryDependencies": [
-        "jubalm/augur-design-system/augur-theme#v0.1.0",
-        "jubalm/augur-design-system/utils#v0.1.0",
-        "jubalm/augur-design-system/button#v0.1.0",
-        "jubalm/augur-design-system/page-header#v0.1.0"
+        "jubalm/augur-design-system/augur-theme#v0.2.0",
+        "jubalm/augur-design-system/utils#v0.2.0",
+        "jubalm/augur-design-system/button#v0.2.0",
+        "jubalm/augur-design-system/page-header#v0.2.0"
       ],
       "files": [
         {

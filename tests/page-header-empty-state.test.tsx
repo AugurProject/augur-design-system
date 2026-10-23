@@ -15,7 +15,7 @@
  *     whose secondary is a quiet variant (one green signal);
  *   - axe: full compositions are clean in light and dark scopes;
  *   - stylesheet delivery: the pattern classes ship through
- *     `@augur/design-system/styles.css` (the aggregator's relative
+ *     `@augurproject/design-system/styles.css` (the aggregator's relative
  *     imports pull in the pattern sheets, so the injected CSS carries
  *     them; the global var() contract in design-system.test.tsx covers
  *     their custom-property references automatically).
@@ -41,13 +41,13 @@ import {
   PageHeaderContent,
   PageHeaderDescription,
   PageHeaderTitle,
-} from "@augur/design-system";
+} from "@augurproject/design-system";
 import { loadPackageStyles } from "./support/styles";
 
 describe("public entry point", () => {
   test("exports the #14 pattern slice as functions", () => {
     // The named imports above resolve through the documented public entry
-    // ("@augur/design-system"); assert the whole slice is real functions.
+    // ("@augurproject/design-system"); assert the whole slice is real functions.
     const entry: Record<string, unknown> = {
       PageHeader,
       PageHeaderBreadcrumb,

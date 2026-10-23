@@ -1,0 +1,63 @@
+/*
+ * Tailwind v4 bridge for @augurproject/design-system.
+ *
+ * Consumers (Tailwind v4 only), after the theme:
+ *
+ *   @import "tailwindcss";
+ *   @import "@augurproject/design-system/theme.css";
+ *   @import "@augurproject/design-system/tokens.tailwind.css";
+ *
+ * Maps every semantic role to a Tailwind colour utility (`bg-card`,
+ * `border-input-hover`, `ring-ring`), the two voices to `font-sans`
+ * (Schibsted Grotesk, the body voice) and `font-heading` (Sora), and
+ * defines a `dark:` variant that follows the theme's three dark hooks.
+ * Values are references to the theme's custom properties, never raw
+ * values, so the theme stays the single source.
+ *
+ * `@theme` and `@custom-variant` are Tailwind directives and cannot sit in
+ * `@layer augur`; this file emits no CSS rules of its own. The registry
+ * `augur-theme` item derives its `cssVars.theme` from this file.
+ */
+@custom-variant dark {
+  &:where(.dark, .dark *, [data-theme="dark"], [data-theme="dark"] *) {
+    @slot;
+  }
+  @media (prefers-color-scheme: dark) {
+    &:where(:root:not([data-theme="light"]) *):not(:where([data-theme="light"], [data-theme="light"] *)) {
+      @slot;
+    }
+  }
+}
+
+@theme inline {
+  --font-sans: var(--augur-font-secondary);
+  --font-heading: var(--augur-font-primary);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-background: var(--background);
+  --color-border: var(--border);
+  --color-border-quiet: var(--border-quiet);
+  --color-brand-hover-edge: var(--brand-hover-edge);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-destructive-hover: var(--destructive-hover);
+  --color-foreground: var(--foreground);
+  --color-input: var(--input);
+  --color-input-hover: var(--input-hover);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-active: var(--primary-active);
+  --color-primary-active-foreground: var(--primary-active-foreground);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-hover-foreground: var(--primary-hover-foreground);
+  --color-ring: var(--ring);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary-hover: var(--secondary-hover);
+}

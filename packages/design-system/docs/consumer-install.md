@@ -21,7 +21,7 @@ contract §10) — installs every starter registry item and, after `vite build`:
 - fonts are self-hosted (`@font-face` + woff/woff2 assets in `dist`), not
   Google-hosted;
 - installed source is **self-contained**: it never imports
-  `@augur/design-system` or any `@augur/*` specifier (contract §11);
+  `@augurproject/design-system` or any `@augur/*` specifier (contract §11);
 - the consumer has **zero `workspace:*` links** (fully standalone);
 - `bunx shadcn@4.20.1 add --overwrite` re-run refreshes consumer-modified
   installed source (update model, contract §11.4).

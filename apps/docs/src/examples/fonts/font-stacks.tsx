@@ -1,4 +1,4 @@
-import { AUGUR_FONT_FAMILIES } from "@augur/design-system";
+import { AUGUR_FONT_FAMILIES } from "@augurproject/design-system";
 
 /**
  * Apply the package's voice-named font stacks: the stacks are the

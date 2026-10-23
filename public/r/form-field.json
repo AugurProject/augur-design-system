@@ -6,8 +6,8 @@
   "author": "jubalm",
   "description": "Augur form field (registry source distribution; contract docs/registry-contract.md).",
   "registryDependencies": [
-    "jubalm/augur-design-system/augur-theme#v0.1.0",
-    "jubalm/augur-design-system/utils#v0.1.0"
+    "jubalm/augur-design-system/augur-theme#v0.2.0",
+    "jubalm/augur-design-system/utils#v0.2.0"
   ],
   "files": [
     {
@@ -20,7 +20,7 @@
       "path": "packages/design-system/src/components/form-field/form-field.css",
       "type": "registry:file",
       "target": "@ui/form-field.css",
-      "content": "/*\n * FormField styles (issue #12) — layout for the wiring pattern.\n *\n * Color: ONLY semantic role custom properties from ../../styles/theme.css\n * (which references generated tokens). No raw color values, no new\n * custom properties.\n *\n * Geometry: intentional structural constants: spacing-token gaps between\n * the stacked parts, a 4px step between the label and its required marker.\n * The control's own visuals (height, radius, states) come from Input; this\n * sheet only lays the composition out. The component contract for this\n * slice lives in ../../docs/components.md.\n */\n\n.aug-form-field {\n  display: flex;\n  flex-direction: column;\n  align-items: stretch;\n  gap: var(--augur-spacing-sm); /* space.sm */\n  margin: 0;\n  min-width: 0; /* let the full-width control shrink inside grids */\n}\n\n.aug-form-field-description {\n  margin: 0;\n  color: var(--muted-foreground);\n}\n\n/*\n * The error message is text in the theme's danger slot. Where that\n * slot equals the foreground (light), the explicit message text carries\n * the meaning; the aria-invalid border and role=\"alert\" reinforce it.\n * Never color alone.\n */\n.aug-form-field-error {\n  margin: 0;\n  color: var(--destructive);\n}\n\n/* Visible required marker next to the label text; aria-hidden — the\n   native required attribute carries the semantics. */\n.aug-form-field-required {\n  margin-left: var(--augur-spacing-xs); /* space.xs */\n  color: inherit;\n}\n"
+      "content": "/*\n * FormField styles (issue #12) — layout for the wiring pattern.\n *\n * Color: ONLY semantic role custom properties from ../../styles/roles.css\n * (which references generated tokens). No raw color values, no new\n * custom properties.\n *\n * Geometry: intentional structural constants: spacing-token gaps between\n * the stacked parts, a 4px step between the label and its required marker.\n * The control's own visuals (height, radius, states) come from Input; this\n * sheet only lays the composition out. The component contract for this\n * slice lives in ../../docs/components.md.\n *\n * Every rule sits in `@layer augur`; this file depends only on the\n * theme (`theme.css`).\n */\n\n@layer augur {\n\n.aug-form-field {\n  display: flex;\n  flex-direction: column;\n  align-items: stretch;\n  gap: var(--augur-spacing-sm); /* space.sm */\n  margin: 0;\n  min-width: 0; /* let the full-width control shrink inside grids */\n}\n\n.aug-form-field-description {\n  margin: 0;\n  color: var(--muted-foreground);\n}\n\n/*\n * The error message is text in the theme's danger slot. Where that\n * slot equals the foreground (light), the explicit message text carries\n * the meaning; the aria-invalid border and role=\"alert\" reinforce it.\n * Never color alone.\n */\n.aug-form-field-error {\n  margin: 0;\n  color: var(--destructive);\n}\n\n/* Visible required marker next to the label text; aria-hidden — the\n   native required attribute carries the semantics. */\n.aug-form-field-required {\n  margin-left: var(--augur-spacing-xs); /* space.xs */\n  color: inherit;\n}\n\n} /* @layer augur */\n"
     }
   ]
 }
