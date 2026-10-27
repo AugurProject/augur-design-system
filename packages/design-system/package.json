@@ -16,6 +16,12 @@
     "./css/form-field.css": "./src/components/form-field/form-field.css",
     "./css/page-header.css": "./src/patterns/page-header/page-header.css",
     "./css/empty-state.css": "./src/patterns/empty-state/empty-state.css",
+    "./icons/arrow-right.svg": "./src/icons/arrow-right.svg",
+    "./icons/arrow-up-right.svg": "./src/icons/arrow-up-right.svg",
+    "./icons/check.svg": "./src/icons/check.svg",
+    "./icons/chevron-down.svg": "./src/icons/chevron-down.svg",
+    "./icons/plus.svg": "./src/icons/plus.svg",
+    "./icons/x.svg": "./src/icons/x.svg",
     "./package.json": "./package.json"
   },
   "files": [

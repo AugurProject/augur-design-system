@@ -230,3 +230,33 @@ covered by the docs verification fixtures.
    `packages/design-system/src/styles/typography.css` and regenerate the token
    artifacts.
 6. Never add a font from an unverified source or a runtime CDN.
+
+## 7. Signal glyph provenance
+
+The six interface signal glyphs in `packages/design-system/src/icons/` are
+authored interface icons, not Brand Foundation artwork. They are documented on
+the Icons foundation page (`apps/docs/src/content/foundations/icons.mdx`), and
+`tests/signal-glyphs.test.ts` enforces their drawing contract.
+
+- **Author:** melo, under contract with Augur.
+- **Drawn:** 22 October 2026, for the augur.net homepage icon trial.
+- **Origin:** `melodrd/augur-web-lab`, `src/assets/icons/augur/`, added in
+  commit `132cb88` and read at commit `60a994d`. The files are copied
+  byte-for-byte; the hashes below match the lab's own provenance record
+  (`docs/icon-provenance.json`, `authored`).
+- **Terms:** on 27 October 2026 the maintainer confirmed that work by
+  contractors under contract with Augur belongs to Augur, so these glyphs may
+  ship and be redistributed in `@augurproject/design-system`. The lab
+  repository itself carries no licence file.
+
+| Asset | Size | SHA-256 |
+| --- | --- | --- |
+| `icons/arrow-right.svg` | 215 bytes | `c8bdd5c5c16bc47b5b8de2f25241582ed9cd35fa03b83398eef5060241744076` |
+| `icons/arrow-up-right.svg` | 208 bytes | `6533849300f4d84707dc654fec5cc3ea88bedac755418f91293521c58a7e5c6a` |
+| `icons/check.svg` | 207 bytes | `7c37f4abec0ded3bd26d820e020250f12c607bcf190c6f047fae1411e57b42c6` |
+| `icons/chevron-down.svg` | 202 bytes | `6f0fd3ca2fd285377056093cbdca6f070e7ea1c4780affbd2f716c3d5be921c8` |
+| `icons/plus.svg` | 197 bytes | `4e3d8b5c7a601251181e5764cc4999ab797c025a3ec7c0e8a27bc5e569391ad4` |
+| `icons/x.svg` | 207 bytes | `560c611ab8506a2b016a855c2ba797439c63e4fa6a6e9335fe6a713e9fe83566` |
+
+Do not redraw or edit a glyph in place. A changed or added glyph needs
+maintainer approval; record its origin and new hash here when it lands.

@@ -1,0 +1,60 @@
+---
+title: Icons
+description: The Augur signal glyphs — six square-cut interface signals drawn on one grid and one stroke, shipped as plain SVG files.
+order: 6
+---
+import SignalGlyphs from "../../components/SignalGlyphs.astro";
+
+Signal glyphs mark direction, disclosure, dismissal, confirmation, and addition in interface controls. They share Augur's square geometry: square caps, mitred joins, and no curves, so they sit beside square-cornered controls without introducing a second shape language.
+
+The set is deliberately small. It covers interface signals only.
+
+<SignalGlyphs />
+
+## The set
+
+| Glyph | Signal |
+| --- | --- |
+| `arrow-right` | Go forward, continue, or open the next step |
+| `arrow-up-right` | Leave for another page or site |
+| `check` | Confirmed, selected, or complete |
+| `chevron-down` | Disclosure: a menu or panel opens below |
+| `plus` | Add, or expand a collapsed item |
+| `x` | Dismiss or close |
+
+## Using the glyphs
+
+Each glyph is a public package entry, `@augurproject/design-system/icons/<name>.svg`. The files are framework-neutral SVG: inline them at build time so they inherit text colour, with no icon runtime in the browser.
+
+```astro
+---
+import arrowRight from "@augurproject/design-system/icons/arrow-right.svg?raw";
+---
+<span class="icon" aria-hidden="true" set:html={arrowRight} />
+```
+
+- Size the glyph with CSS. It is drawn for 16, 20, and 24px boxes; 20px is the native grid.
+- Colour comes from the parent's semantic foreground role through `currentColor`. Never recolour the file.
+- Glyphs are decorative. Hide them from assistive technology and give the control its own accessible name, as an icon-only control needs one anyway.
+
+## Drawing contract
+
+Every signal glyph follows the same rules, and the repository test suite fails a file that breaks them:
+
+- a 20×20 grid (`viewBox="0 0 20 20"`), drawn inside a 3px inset and centred optically;
+- one stroke weight, `1.75`, in `currentColor`, with `fill="none"`;
+- square caps (`stroke-linecap="square"`) and mitred joins (`stroke-linejoin="miter"`), with no round caps, joins, or arcs;
+- a single path, with no transforms and no embedded title;
+- a matching public `icons/<name>.svg` package entry for every file.
+
+Names describe the shape, not the use: `x`, not `close`. New glyphs need maintainer approval, like any design decision.
+
+## Out of scope
+
+- **Pictograms.** Illustrative icons are not part of the set.
+- **Brand and community logos.** Third-party logos keep their own sources and terms.
+- **Identity artwork.** The logo, glyph, and REP token are fixed artwork, documented on [Identity](/foundations/identity).
+
+## Provenance
+
+The glyphs were drawn for Augur on 22 October 2026. Origin, author, file hashes, and redistribution terms are recorded in [resources/brand/PROVENANCE.md](https://github.com/jubalm/augur-design-system/blob/main/resources/brand/PROVENANCE.md).
