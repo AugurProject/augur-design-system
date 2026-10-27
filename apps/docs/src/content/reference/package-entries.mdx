@@ -16,6 +16,7 @@ The package exposes these public entry points:
 | `@augurproject/design-system/theme.css` | Generated tokens, font-family stacks, typography roles, semantic light/dark roles, and the body, focus and reduced-motion rules. Loads no fonts |
 | `@augurproject/design-system/fonts.css` | Optional font faces: Sora 400/600 and Schibsted Grotesk 400 from the pinned `@fontsource` packages. Bundler only |
 | `@augurproject/design-system/css/<name>.css` | One stylesheet per component or pattern: `button`, `card`, `dialog`, `input`, `form-field`, `page-header`, `empty-state`. Each depends only on `theme.css` |
+| `@augurproject/design-system/icons/<name>.svg` | One SVG file per signal glyph: `arrow-right`, `arrow-up-right`, `check`, `chevron-down`, `plus`, `x`. Stroke in `currentColor`; inline at build time (see [Icons](/foundations/icons)) |
 | `@augurproject/design-system/styles.css` | Everything above: `fonts.css`, `theme.css` and every component stylesheet |
 | `@augurproject/design-system/tokens.tailwind.css` | Tailwind v4 bridge: `@theme inline` colour utilities for every semantic role, `font-sans` and `font-heading`, and a `dark:` variant |
 

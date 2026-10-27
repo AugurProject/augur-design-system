@@ -8,6 +8,7 @@ const PAGES: Array<[string, string, number?]> = [
   ["/", "Augur Design System", 0],
   ["/getting-started", "Getting started"],
   ["/foundations/fonts", "Fonts and typography"],
+  ["/foundations/icons", "Icons"],
   ["/foundations/theming", "Theming"],
   ["/foundations/color", "Color system"],
   ["/foundations/visual-direction", "Visual direction"],
@@ -206,7 +207,7 @@ test.describe("mobile layout (375x812)", () => {
       visibleLinks: [...document.querySelectorAll(".browse-panel nav a")].filter((a) => (a as HTMLElement).offsetParent !== null).length,
     }));
     assertOk("disclosure opens via keyboard", opened.open === true);
-    assertOk("all 23 links visible when open", opened.visibleLinks === 23, String(opened.visibleLinks));
+    assertOk("all 24 links visible when open", opened.visibleLinks === 24, String(opened.visibleLinks));
     await shot(page, "home-mobile-menu-open");
 
     await page.locator(".browse-panel nav").getByRole("link", { name: "Color system" }).click();

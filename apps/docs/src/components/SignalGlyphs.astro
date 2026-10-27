@@ -1,0 +1,124 @@
+---
+// Renders the package's signal glyphs through their public `icons/*.svg`
+// exports, so the page shows the exact files consumers receive. Each panel
+// pins a theme with `data-theme` and colours the glyphs only through the
+// semantic foreground role, demonstrating the `currentColor` contract.
+import arrowRight from "@augurproject/design-system/icons/arrow-right.svg?raw";
+import arrowUpRight from "@augurproject/design-system/icons/arrow-up-right.svg?raw";
+import check from "@augurproject/design-system/icons/check.svg?raw";
+import chevronDown from "@augurproject/design-system/icons/chevron-down.svg?raw";
+import plus from "@augurproject/design-system/icons/plus.svg?raw";
+import x from "@augurproject/design-system/icons/x.svg?raw";
+
+const glyphs = [
+  { name: "arrow-right", svg: arrowRight },
+  { name: "arrow-up-right", svg: arrowUpRight },
+  { name: "check", svg: check },
+  { name: "chevron-down", svg: chevronDown },
+  { name: "plus", svg: plus },
+  { name: "x", svg: x },
+];
+
+const themes = ["light", "dark"] as const;
+const sizes = [16, 20, 24];
+
+// Decorative at the use site: the caption names each glyph.
+const decorative = (svg: string) => svg.replace("<svg ", '<svg aria-hidden="true" focusable="false" ');
+---
+<div class="glyph-demo">
+  {themes.map((theme) => (
+    <section class="glyph-panel" data-theme={theme} aria-label={`Signal glyphs, ${theme} theme`}>
+      <p class="glyph-panel-label augur-type-metadata">{theme === "light" ? "Light" : "Dark"}</p>
+      <ul class="glyph-grid">
+        {glyphs.map((glyph) => (
+          <li class="glyph-cell">
+            <span class="glyph-sizes">
+              {sizes.map((size) => (
+                <span class={`glyph glyph-${size}`} set:html={decorative(glyph.svg)} />
+              ))}
+            </span>
+            <code class="glyph-name">{glyph.name}</code>
+          </li>
+        ))}
+      </ul>
+    </section>
+  ))}
+</div>
+
+<style>
+  .glyph-demo {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+    margin-block: 2rem 2.5rem;
+  }
+
+  .glyph-panel {
+    border: 1px solid var(--border-quiet);
+    background: var(--background);
+    color: var(--foreground);
+    padding: 1rem;
+  }
+
+  .glyph-panel-label {
+    margin: 0 0 0.75rem;
+    color: var(--muted-foreground);
+  }
+
+  .glyph-grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.75rem;
+  }
+
+  .glyph-cell {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .glyph-sizes {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    min-width: 5.5rem;
+  }
+
+  .glyph {
+    display: inline-flex;
+  }
+
+  .glyph :global(svg) {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  .glyph-16 {
+    width: 16px;
+    height: 16px;
+  }
+
+  .glyph-20 {
+    width: 20px;
+    height: 20px;
+  }
+
+  .glyph-24 {
+    width: 24px;
+    height: 24px;
+  }
+
+  .glyph-name {
+    color: var(--muted-foreground);
+  }
+
+  @media (max-width: 640px) {
+    .glyph-demo {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

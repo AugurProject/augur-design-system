@@ -167,7 +167,7 @@ export async function auditPage(
     assertOk(`${url} title`, evidence.title.includes(expectTitleFragment), evidence.title);
   }
   assertOk(`${url} skip link present`, evidence.hasSkipLink);
-  assertOk(`${url} one visible documentation nav with the expected links`, evidence.navLinks.length === (expectNavLinks ?? 23), evidence.navLinks.join(", "));
+  assertOk(`${url} one visible documentation nav with the expected links`, evidence.navLinks.length === (expectNavLinks ?? 24), evidence.navLinks.join(", "));
   assertOk(`${url} fonts registered (>=6 faces)`, evidence.faceCount >= 6, `size ${evidence.faceCount}`);
   assertOk(`${url} fonts.load Sora 400 resolves a face`, loadedFaces.sora400 >= 1, String(loadedFaces.sora400));
   assertOk(`${url} fonts.load Sora 600 resolves a face`, loadedFaces.sora600 >= 1, String(loadedFaces.sora600));

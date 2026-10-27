@@ -105,6 +105,8 @@ function representDocExample(attrs: string, source: string): string[] {
 const LIVE_DEMO_DESCRIPTIONS: Readonly<Record<string, string>> = {
   BrandAssetGallery:
     "*Live on the rendered page: official Augur horizontal Color and Reversed lockups, the standalone glyph, and the REP token shown as recovered from the canonical Brand Foundation PDF.*",
+  SignalGlyphs:
+    "*Live on the rendered page: the six signal glyphs from the package's `icons/*.svg` entries at 16, 20, and 24px, in light and dark panels coloured only by the semantic foreground role.*",
   FontRoles:
     "*Live on the rendered page: the seven package typography role classes applied to real markup — sizes, weights, and families come from the package stylesheet, not this document.*",
   ThemingDemo:

@@ -6,6 +6,10 @@ Releases are immutable Git tags (`vX.Y.Z`) that describe the whole consumer-faci
 
 ## Unreleased
 
+### Added
+
+- **Signal glyphs.** Six square-cut interface icons, `arrow-right`, `arrow-up-right`, `check`, `chevron-down`, `plus` and `x`, as plain SVG files at `@augurproject/design-system/icons/<name>.svg`. They share one drawing contract (20×20 grid, 1.75 stroke in `currentColor`, square caps, mitred joins, one path), which the test suite enforces. The new [Icons](apps/docs/src/content/foundations/icons.mdx) foundation page documents the set and the contract; `resources/brand/PROVENANCE.md` records their origin and terms.
+
 ## [0.2.0] - 2026-10-24
 
 Adopt it by installing the tarball attached to the `v0.2.0` GitHub Release, `https://github.com/jubalm/augur-design-system/releases/download/v0.2.0/augurproject-design-system-0.2.0.tgz`, or the registry items at `#v0.2.0`. Rename `@augur/design-system` imports to `@augurproject/design-system`, and replace imports of the old `fonts.css` (font stacks) with `theme.css`.
