@@ -6,10 +6,10 @@
   "author": "jubalm",
   "description": "Augur empty state (registry source distribution; contract docs/registry-contract.md).",
   "registryDependencies": [
-    "jubalm/augur-design-system/augur-theme#v0.3.0",
-    "jubalm/augur-design-system/utils#v0.3.0",
-    "jubalm/augur-design-system/button#v0.3.0",
-    "jubalm/augur-design-system/page-header#v0.3.0"
+    "AugurProject/augur-design-system/augur-theme",
+    "AugurProject/augur-design-system/utils",
+    "AugurProject/augur-design-system/button",
+    "AugurProject/augur-design-system/page-header"
   ],
   "files": [
     {

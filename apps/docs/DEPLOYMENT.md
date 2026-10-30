@@ -39,7 +39,7 @@ consistency) and uploaded via `actions/upload-pages-artifact`.
 
 | Mode | `base_path` input | Served URLs |
 | --- | --- | --- |
-| GitHub Pages project site (works today, no custom domain) | `/augur-design-system` | `https://jubalm.github.io/augur-design-system/…` |
+| GitHub Pages project site (works today, no custom domain) | `/augur-design-system` | `https://augurproject.github.io/augur-design-system/…` |
 | Custom-domain root (future) | `/` | `https://<docs-domain>/…` |
 
 All internal links and asset references go through the configured base:
@@ -48,7 +48,7 @@ links via the `augur-base-links` mdast plugin in `apps/docs/astro.config.mjs`.
 No source changes are needed to switch modes.
 
 A missing custom domain does **not** block anything: dispatch the workflow
-with `base_path=/augur-design-system` and test the `jubalm.github.io` URL.
+with `base_path=/augur-design-system` and test the `augurproject.github.io` URL.
 
 ## Deploy
 
@@ -79,7 +79,7 @@ exists. Older runs remain inspectable via their uploaded artifacts.
 design (ARCHITECTURE.md, "llms.txt"): LLM consumers resolve them against the
 URL they fetched `llms.txt` from. This makes the file portable across both
 deployment modes with no rebuild — the same bytes work at
-`jubalm.github.io/augur-design-system/llms.txt` and at a custom-domain root.
+`augurproject.github.io/augur-design-system/llms.txt` and at a custom-domain root.
 Once the final origin exists, update any *external* prose/docs that quote
 fully-qualified URLs; the file itself needs no change.
 
@@ -88,10 +88,10 @@ fully-qualified URLs; the file itself needs no change.
 Two consumer channels (packages/design-system/docs/registry-contract.md §14):
 
 - **GitHub source registry** (active today):
-  `bunx shadcn@4.20.1 add "jubalm/augur-design-system/<item>#vX.Y.Z"` (release tags, `RELEASING.md`).
+  `bunx shadcn@4.20.1 add "AugurProject/augur-design-system/<item>#vX.Y.Z"` (release tags, `RELEASING.md`).
   Pinned installs are unaffected by any deployment decision.
 - **Built-JSON channel** (deployed by this workflow): `https://<docs-host>/r/<item>.json`,
-  e.g. `https://jubalm.github.io/augur-design-system/r/button.json`, or
+  e.g. `https://augurproject.github.io/augur-design-system/r/button.json`, or
   `https://<docs-domain>/r/button.json` once a custom domain exists.
 
 The deploy workflow regenerates `public/r/` with
@@ -104,7 +104,7 @@ The deploy workflow regenerates `public/r/` with
 ```
 
 Resolving `<docs-host>` when an origin is chosen: substitute
-`jubalm.github.io/augur-design-system` (current) or the custom domain. Committed
+`augurproject.github.io/augur-design-system` (current) or the custom domain. Committed
 `public/r/` carries either no stamp or the current release tag (`#vX.Y.Z`,
 `RELEASING.md`); the deploy build's SHA stamp is never committed, which is why
 `registry:check` in CI keeps passing.
@@ -113,7 +113,7 @@ Resolving `<docs-host>` when an origin is chosen: substitute
 
 If a custom domain is adopted: add it in Settings → Pages (this creates the
 DNS guidance — actual DNS records are a maintainer action, out of scope here),
-redeploy with `base_path=/`, and update docs quoting the `jubalm.github.io`
+redeploy with `base_path=/`, and update docs quoting the `augurproject.github.io`
 URLs. A `CNAME` file committed to the repo is only needed if Pages is later
 switched away from the Actions source; do not guess one.
 

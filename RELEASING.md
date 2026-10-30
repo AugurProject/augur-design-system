@@ -4,9 +4,9 @@ A design-system release is an immutable Git tag, `vX.Y.Z`, that points to one co
 
 ## Consumer contract
 
-- Package tarball (from `v0.2.0`): `npm install https://github.com/jubalm/augur-design-system/releases/download/vX.Y.Z/augurproject-design-system-X.Y.Z.tgz`. The tarball keeps the final package name, `@augurproject/design-system`, so imports stay the same when the package moves to the npm registry.
-- GitHub source registry: `bunx shadcn@4.20.1 add "jubalm/augur-design-system/<item>#vX.Y.Z"`.
-- Built registry item: `https://raw.githubusercontent.com/jubalm/augur-design-system/vX.Y.Z/public/r/<item>.json`.
+- Package tarball (from `v0.2.0`): `npm install https://github.com/AugurProject/augur-design-system/releases/download/vX.Y.Z/augurproject-design-system-X.Y.Z.tgz`. The tarball keeps the final package name, `@augurproject/design-system`, so imports stay the same when the package moves to the npm registry.
+- GitHub source registry: `bunx shadcn@4.20.1 add "AugurProject/augur-design-system/<item>#vX.Y.Z"`.
+- Built registry item: `https://raw.githubusercontent.com/AugurProject/augur-design-system/vX.Y.Z/public/r/<item>.json`.
 - Every `registryDependencies` address inside a released item is stamped `#vX.Y.Z`, so transitive items resolve to the same release.
 - A consumer may record the commit the tag resolves to for audit and integrity checks. The tag stays the identifier people maintain.
 - `main` is the development channel. Consumers receive changes only when a release is cut and they adopt it.
@@ -32,7 +32,7 @@ Before 1.0:
    - Run `bun run check:release X.Y.Z` locally.
 3. **Verify.** The PR must pass every CI job, including `registry` (artifact drift, shadcn schema validation, and the independent-consumer install smoke). Merge it once green.
 4. **Release.** In GitHub Actions, run the **Release** workflow on `main` with version `X.Y.Z`. It re-runs every CI gate on that commit, runs `check:release`, packs the package with `npm pack` and runs the tarball smoke against it, creates the annotated tag `vX.Y.Z`, and publishes the GitHub Release with the changelog section as its notes and the tarball attached.
-5. **Confirm** that the tag and the Release exist, that the Release has `augurproject-design-system-X.Y.Z.tgz` attached, and that `https://raw.githubusercontent.com/jubalm/augur-design-system/vX.Y.Z/public/r/button.json` resolves with `#vX.Y.Z` dependencies.
+5. **Confirm** that the tag and the Release exist, that the Release has `augurproject-design-system-X.Y.Z.tgz` attached, and that `https://raw.githubusercontent.com/AugurProject/augur-design-system/vX.Y.Z/public/r/button.json` resolves with `#vX.Y.Z` dependencies.
 
 ## Package tarball
 

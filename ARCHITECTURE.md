@@ -81,7 +81,7 @@ This layering is conceptual; it does not require each layer to become an indepen
 
 ## 5. Repository
 
-GitHub repository: `jubalm/augur-design-system`. A future organization transfer is a separate decision; the older `augur-design-system-od` repository is not this implementation's source of truth.
+GitHub repository: `AugurProject/augur-design-system`, transferred from `jubalm/augur-design-system` on 31 October 2026; GitHub redirects the old URLs, including release downloads. The older `augur-design-system-od` repository is not this implementation's source of truth.
 
 Workspace package: `@augurproject/design-system`, under the Augur project's `@augurproject` npm scope (`@augur` on npm belongs to an unrelated company). The name is the code-facing identity used inside the workspace and by consuming Augur applications. The package is not yet published to the npm registry; each GitHub Release attaches an `npm pack` tarball under this name (§16).
 

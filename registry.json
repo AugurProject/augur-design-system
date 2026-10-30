@@ -1,7 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry.json",
   "name": "augur",
-  "homepage": "https://github.com/jubalm/augur-design-system",
+  "homepage": "https://github.com/AugurProject/augur-design-system",
   "items": [
     {
       "name": "augur-theme",
@@ -278,8 +278,8 @@
       "author": "jubalm",
       "description": "Augur button (registry source distribution; contract docs/registry-contract.md).",
       "registryDependencies": [
-        "jubalm/augur-design-system/augur-theme#v0.3.0",
-        "jubalm/augur-design-system/utils#v0.3.0"
+        "AugurProject/augur-design-system/augur-theme",
+        "AugurProject/augur-design-system/utils"
       ],
       "files": [
         {
@@ -309,8 +309,8 @@
       "author": "jubalm",
       "description": "Augur card (registry source distribution; contract docs/registry-contract.md).",
       "registryDependencies": [
-        "jubalm/augur-design-system/augur-theme#v0.3.0",
-        "jubalm/augur-design-system/utils#v0.3.0"
+        "AugurProject/augur-design-system/augur-theme",
+        "AugurProject/augur-design-system/utils"
       ],
       "files": [
         {
@@ -332,8 +332,8 @@
       "author": "jubalm",
       "description": "Augur input (registry source distribution; contract docs/registry-contract.md).",
       "registryDependencies": [
-        "jubalm/augur-design-system/augur-theme#v0.3.0",
-        "jubalm/augur-design-system/utils#v0.3.0"
+        "AugurProject/augur-design-system/augur-theme",
+        "AugurProject/augur-design-system/utils"
       ],
       "files": [
         {
@@ -355,8 +355,8 @@
       "author": "jubalm",
       "description": "Augur form field (registry source distribution; contract docs/registry-contract.md).",
       "registryDependencies": [
-        "jubalm/augur-design-system/augur-theme#v0.3.0",
-        "jubalm/augur-design-system/utils#v0.3.0"
+        "AugurProject/augur-design-system/augur-theme",
+        "AugurProject/augur-design-system/utils"
       ],
       "files": [
         {
@@ -378,8 +378,8 @@
       "author": "jubalm",
       "description": "Augur dialog (registry source distribution; contract docs/registry-contract.md).",
       "registryDependencies": [
-        "jubalm/augur-design-system/augur-theme#v0.3.0",
-        "jubalm/augur-design-system/utils#v0.3.0"
+        "AugurProject/augur-design-system/augur-theme",
+        "AugurProject/augur-design-system/utils"
       ],
       "files": [
         {
@@ -404,8 +404,8 @@
       "author": "jubalm",
       "description": "Augur page header (registry source distribution; contract docs/registry-contract.md).",
       "registryDependencies": [
-        "jubalm/augur-design-system/augur-theme#v0.3.0",
-        "jubalm/augur-design-system/utils#v0.3.0"
+        "AugurProject/augur-design-system/augur-theme",
+        "AugurProject/augur-design-system/utils"
       ],
       "files": [
         {
@@ -427,10 +427,10 @@
       "author": "jubalm",
       "description": "Augur empty state (registry source distribution; contract docs/registry-contract.md).",
       "registryDependencies": [
-        "jubalm/augur-design-system/augur-theme#v0.3.0",
-        "jubalm/augur-design-system/utils#v0.3.0",
-        "jubalm/augur-design-system/button#v0.3.0",
-        "jubalm/augur-design-system/page-header#v0.3.0"
+        "AugurProject/augur-design-system/augur-theme",
+        "AugurProject/augur-design-system/utils",
+        "AugurProject/augur-design-system/button",
+        "AugurProject/augur-design-system/page-header"
       ],
       "files": [
         {

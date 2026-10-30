@@ -96,8 +96,8 @@ The same smoke applies to a public repository (or a consumer with HTTPS/gh
 auth) with release-tag pins:
 
 ```sh
-bunx shadcn@4.20.1 add "jubalm/augur-design-system/augur-theme#v0.1.0"
-bunx shadcn@4.20.1 add "jubalm/augur-design-system/button#v0.1.0"
+bunx shadcn@4.20.1 add "AugurProject/augur-design-system/augur-theme#v0.1.0"
+bunx shadcn@4.20.1 add "AugurProject/augur-design-system/button#v0.1.0"
 # …every item; registryDependencies carry the same #v0.1.0 stamp
 ```
 

@@ -10,7 +10,7 @@
  *   bun run scripts/consumer-smoke.ts --ref <full-40-char-sha>   (exact commit)
  *   bun run scripts/consumer-smoke.ts --keep                      (keep consumer dir)
  *
- * GitHub-native installs (`jubalm/augur-design-system/<item>#<sha>`) are NOT
+ * GitHub-native installs (`AugurProject/augur-design-system/<item>#<sha>`) are NOT
  * exercised here on purpose: this repo is private and this machine's git is
  * SSH-only, so the pinned CLI's HTTPS ref resolution pops an interactive
  * keychain credential prompt (see docs/consumer-install.md §GitHub-native
@@ -155,7 +155,7 @@ const server = http.createServer((req, res) => {
   // Test-harness-only transform; committed artifacts are never modified.
   const json = JSON.parse(body);
   const rewrite = (deps?: string[]) =>
-    deps?.map((d) => d.replace(/^jubalm\/augur-design-system\/([^#]+)(#.*)?$/, `${baseUrl}/r/$1`));
+    deps?.map((d) => d.replace(/^AugurProject\/augur-design-system\/([^#]+)(#.*)?$/, `${baseUrl}/r/$1`));
   json.registryDependencies = rewrite(json.registryDependencies);
   res.writeHead(200, { "content-type": "application/json" }).end(JSON.stringify(json));
 });
