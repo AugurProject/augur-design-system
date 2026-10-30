@@ -166,7 +166,7 @@ if (!(await exists(rDir))) {
 
   // Pin stamp consistency: if any dependency is SHA-pinned, all must be,
   // and with the same SHA (contract §14 policy).
-  const depRe = /jubalm\/augur-design-system\/[\w-]+(#([0-9a-f]{40}))?/;
+  const depRe = /AugurProject\/augur-design-system\/[\w-]+(#([0-9a-f]{40}))?/;
   let pinned = 0;
   let unpinned = 0;
   let shas = new Set();

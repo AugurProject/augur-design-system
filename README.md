@@ -10,14 +10,14 @@ A shared interface language for Augur: maintained design guidance, generated tok
 - [Changelog](CHANGELOG.md): consumer-facing change history.
 - [Docs application](apps/docs/README.md): the documentation site, its fixtures, and its deployment.
 - [GitHub Project](https://github.com/users/jubalm/projects/6): current priority, readiness, and execution status.
-- [Issues](https://github.com/jubalm/augur-design-system/issues): scope, dependencies, decisions, and acceptance evidence.
+- [Issues](https://github.com/AugurProject/augur-design-system/issues): scope, dependencies, decisions, and acceptance evidence.
 - [Brand foundation reference](resources/brand/augur-brand-foundation.pdf): upstream source material, not a runtime implementation.
 
 ## What this repository contains
 
 One lightweight Bun workspace contains `packages/design-system` (`@augurproject/design-system`) and `apps/docs` (plain Astro with React and Markdown/MDX). Components follow shadcn conventions where appropriate. Values representable by the pinned `@google/design.md` schema come from `DESIGN.md`; generated tokens feed a thin semantic light/dark mapping layer.
 
-External distribution has two channels, both published as immutable release tags (`vX.Y.Z`). Projects without React or the shadcn CLI install the `@augurproject/design-system` tarball attached to each GitHub Release and import its CSS (`theme.css`, `css/<component>.css`, `styles.css`); see [Package entries](apps/docs/src/content/reference/package-entries.mdx). shadcn projects install source from the GitHub-hosted registry: `bunx shadcn@4.20.1 add "jubalm/augur-design-system/<item>#vX.Y.Z"`. Changes are recorded in [CHANGELOG.md](CHANGELOG.md), and the release procedure is in [RELEASING.md](RELEASING.md). The docs provide rendered pages, clean Markdown equivalents, and `llms.txt`, deployed as a static site. Architectural detail and decisions live in [ARCHITECTURE.md](ARCHITECTURE.md).
+External distribution has two channels, both published as immutable release tags (`vX.Y.Z`). Projects without React or the shadcn CLI install the `@augurproject/design-system` tarball attached to each GitHub Release and import its CSS (`theme.css`, `css/<component>.css`, `styles.css`); see [Package entries](apps/docs/src/content/reference/package-entries.mdx). shadcn projects install source from the GitHub-hosted registry: `bunx shadcn@4.20.1 add "AugurProject/augur-design-system/<item>#vX.Y.Z"`. Changes are recorded in [CHANGELOG.md](CHANGELOG.md), and the release procedure is in [RELEASING.md](RELEASING.md). The docs provide rendered pages, clean Markdown equivalents, and `llms.txt`, deployed as a static site. Architectural detail and decisions live in [ARCHITECTURE.md](ARCHITECTURE.md).
 
 ## Development
 
@@ -45,4 +45,4 @@ Use an issue branch and a pull request for implementation. Read the issue's prer
 
 ## Status and ownership
 
-The initial repository is [jubalm/augur-design-system](https://github.com/jubalm/augur-design-system), separate from the earlier OpenDesign repository `jubalm/augur-design-system-od`. A future organization transfer is a separate decision. Code licensing, asset redistribution, and the documentation domain are tracked in the Project and issues; no license grant is implied by repository visibility.
+The repository is [AugurProject/augur-design-system](https://github.com/AugurProject/augur-design-system), transferred from `jubalm/augur-design-system` on 31 October 2026, and separate from the earlier OpenDesign repository `jubalm/augur-design-system-od`. Code licensing, asset redistribution, and the documentation domain are tracked in the Project and issues; no license grant is implied by repository visibility.

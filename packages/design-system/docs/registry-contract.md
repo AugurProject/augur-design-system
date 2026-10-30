@@ -53,7 +53,7 @@ Two delivery channels exist; the first is primary:
 1. **GitHub-native registry** (upstream "GitHub Registries"): the CLI reads
    the repository's root `registry.json`, resolves refs, and installs source
    files directly from the repository. Install address shape:
-   `jubalm/augur-design-system/<item>` with an optional `#<ref>`.
+   `AugurProject/augur-design-system/<item>` with an optional `#<ref>`.
 2. **Built static JSON** (upstream "Getting Started", Option A): `shadcn
    build` emits flattened per-item JSON into `public/r/`, served as static
    files — the form the GitHub Pages docs deployment exposes and that
@@ -108,7 +108,7 @@ Rules:
 2. **Component items are unprefixed kebab-case** to match shadcn muscle
    memory and `components.json` migration paths; the `@augur` namespace
    prefix (`@augur/button`) or the GitHub address
-   (`jubalm/augur-design-system/button`) already carries provenance.
+   (`AugurProject/augur-design-system/button`) already carries provenance.
 3. Names are unique across the registry; item names containing `/` are not
    used (they are legal upstream but complicate GitHub addresses, where
    `owner/repo/<name-with-slashes>` is ambiguous).
@@ -171,7 +171,7 @@ Augur contract:
    introduce dependencies outside the consumer framework stack without a
    documented decision.
 2. **`registryDependencies` always use full GitHub item addresses**
-   (`jubalm/augur-design-system/augur-theme`, stamped `#vX.Y.Z` at a
+   (`AugurProject/augur-design-system/augur-theme`, stamped `#vX.Y.Z` at a
    release tag — see §14 and `RELEASING.md`), never
    bare names. Upstream documents that same-repository dependencies in
    GitHub registries use full addresses; a bare name resolves against the
@@ -401,7 +401,7 @@ the nested `@media` fallback, `body`, `:focus-visible`, and reduced-motion
 rules) after hoisting `@import` lines above all rules, and honors the
 `@custom-variant dark` redefinition in the Tailwind build.
 
-For GitHub-native verification (`add jubalm/augur-design-system/<item>#<ref>`),
+For GitHub-native verification (`add AugurProject/augur-design-system/<item>#<ref>`),
 the same steps apply against the committed root `registry.json`; the upstream
 CLI resolves refs via `git ls-remote`.
 
@@ -456,8 +456,8 @@ messages when they are missing.
 
 ## 14. Version-pinned installation URLs
 
-The repository is `jubalm/augur-design-system` (any future transfer is a
-separate decision per `ARCHITECTURE.md`). Upstream GitHub registries accept
+The repository is `AugurProject/augur-design-system` (transferred from
+`jubalm/augur-design-system` on 31 October 2026; see `ARCHITECTURE.md`). Upstream GitHub registries accept
 `owner/repo/item` with `#<branch>`, `#<tag>`, or `#<40-char-sha>`; the CLI
 resolves branch/tag refs to a commit SHA via git, and uses full SHAs
 directly without git.
@@ -467,7 +467,7 @@ Consumer-facing pinning policy (release procedure: [`RELEASING.md`](../../../REL
 1. **Consumers depend on an immutable release tag:**
 
    ```sh
-   bunx shadcn@4.20.1 add "jubalm/augur-design-system/augur-theme#v0.1.0"
+   bunx shadcn@4.20.1 add "AugurProject/augur-design-system/augur-theme#v0.1.0"
    ```
 
    A tag is created only by the release workflow, after the §12 gate
@@ -479,12 +479,12 @@ Consumer-facing pinning policy (release procedure: [`RELEASING.md`](../../../REL
    changes; a full SHA pin (`#<40-char-sha>`) still works but is not the
    documented contract.
 3. **`main` is the development channel.** Unpinned installs
-   (`jubalm/augur-design-system/augur-theme`) resolve to the default branch
+   (`AugurProject/augur-design-system/augur-theme`) resolve to the default branch
    and are never documented as stable.
 4. **Built-JSON channel:** `https://<docs-host>/r/<item>.json` served from
    GitHub Pages, refreshed by the release flow; namespace config in §10.
    Tag-scoped raw URLs
-   (`https://raw.githubusercontent.com/jubalm/augur-design-system/v0.1.0/public/r/<item>.json`)
+   (`https://raw.githubusercontent.com/AugurProject/augur-design-system/v0.1.0/public/r/<item>.json`)
    are the release-addressed built items for tools that want URL-shaped
    access to committed artifacts.
 5. All documented consumer commands pin the CLI (`bunx shadcn@4.20.1`), not

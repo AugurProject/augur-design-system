@@ -323,9 +323,9 @@ console.log("\n== llms.txt ==");
     ok(`llms.txt has section ${heading.slice(3)}`, text.includes(`\n${heading}\n`));
   }
   ok("llms.txt lists the published component pages", text.includes("/components/button.md") && text.includes("/components/card.md"));
-  ok("llms.txt points at DESIGN.md", text.includes("https://github.com/jubalm/augur-design-system/blob/main/DESIGN.md"));
-  ok("llms.txt points at ARCHITECTURE.md", text.includes("https://github.com/jubalm/augur-design-system/blob/main/ARCHITECTURE.md"));
-  ok("llms.txt points at CHANGELOG.md", text.includes("https://github.com/jubalm/augur-design-system/blob/main/CHANGELOG.md"));
+  ok("llms.txt points at DESIGN.md", text.includes("https://github.com/AugurProject/augur-design-system/blob/main/DESIGN.md"));
+  ok("llms.txt points at ARCHITECTURE.md", text.includes("https://github.com/AugurProject/augur-design-system/blob/main/ARCHITECTURE.md"));
+  ok("llms.txt points at CHANGELOG.md", text.includes("https://github.com/AugurProject/augur-design-system/blob/main/CHANGELOG.md"));
 
   const links = mdLinks(text);
   const internal = links.filter((l) => l.startsWith("/"));

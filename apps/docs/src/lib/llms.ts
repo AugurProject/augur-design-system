@@ -25,7 +25,7 @@ import { getSectionOverview } from "./sections";
 import { withBase } from "./base";
 import { mdxPageSource } from "./markdown";
 
-const REPO_URL = "https://github.com/jubalm/augur-design-system";
+const REPO_URL = "https://github.com/AugurProject/augur-design-system";
 
 type DocKind = "foundations" | "components" | "patterns" | "reference";
 

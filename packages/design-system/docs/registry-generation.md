@@ -90,7 +90,7 @@ with the generated item and is not expected to match it.
 | `empty-state` | `registry:block` | `@components/…` | registry-depends on `button`, `page-header` |
 
 Every component/pattern item also depends on `augur-theme` and `utils` via
-full GitHub addresses (`jubalm/augur-design-system/<item>`, contract §6.2).
+full GitHub addresses (`AugurProject/augur-design-system/<item>`, contract §6.2).
 
 ## Pinning and determinism
 
@@ -107,7 +107,7 @@ full GitHub addresses (`jubalm/augur-design-system/<item>`, contract §6.2).
   output is never committed.
 - `public/r/` is the GitHub-Pages-compatible built channel; the root
   `registry.json` is the GitHub source-registry index consumed directly by
-  the CLI for `jubalm/augur-design-system/<item>` installs.
+  the CLI for `AugurProject/augur-design-system/<item>` installs.
 
 ## Theme item and visual parity
 

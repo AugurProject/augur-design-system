@@ -268,7 +268,7 @@ function buildThemeItem(): Record<string, unknown> {
 
 // -------------------------------------------------------- component items
 
-const REPO = "jubalm/augur-design-system";
+const REPO = "AugurProject/augur-design-system";
 
 /** The ref to stamp onto registryDependencies, or "" for the unstamped development channel. */
 function resolveRef(): string {
@@ -473,7 +473,7 @@ function buildRegistry(): Record<string, unknown> {
   return {
     $schema: "https://ui.shadcn.com/schema/registry.json",
     name: "augur",
-    homepage: "https://github.com/jubalm/augur-design-system",
+    homepage: "https://github.com/AugurProject/augur-design-system",
     items: indexItems,
   };
 }
