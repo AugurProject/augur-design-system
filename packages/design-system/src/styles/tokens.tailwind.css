@@ -32,6 +32,7 @@
 @theme inline {
   --font-sans: var(--augur-font-secondary);
   --font-heading: var(--augur-font-primary);
+  --font-mono: var(--augur-font-mono);
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
   --color-background: var(--background);
@@ -46,6 +47,8 @@
   --color-foreground: var(--foreground);
   --color-input: var(--input);
   --color-input-hover: var(--input-hover);
+  --color-outline: var(--outline);
+  --color-danger: var(--danger);
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
   --color-popover: var(--popover);

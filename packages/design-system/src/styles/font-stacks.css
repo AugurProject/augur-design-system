@@ -27,6 +27,11 @@
   --augur-font-secondary:
     "Schibsted Grotesk", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
     "Helvetica Neue", Arial, sans-serif;
+
+  /* Code voice (v0.4.0, adopted from augur.net): the system monospace
+     stack. No font file is delivered for it. */
+  --augur-font-mono:
+    ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 }
 
 } /* @layer augur */

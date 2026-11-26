@@ -86,8 +86,8 @@ test.describe("shared frame alignment (#46)", () => {
     assertOk("frame is 1400px with 64px gutters at 1440", light.frameMax === "1400px" && light.framePad === "64px", `${light.frameMax} / ${light.framePad}`);
     assertOk("centered frame leaves the 20px side margin at 1440", light.mainX === 20, String(light.mainX));
     assertOk("reading measure is exactly 65ch", Math.abs(parseFloat(light.proseMax as string) - parseFloat(light.measure65)) < 0.5, `${light.proseMax} vs ${light.measure65}`);
-    assertOk("page title renders the editorial-title role (Sora 400 40/48)", light.titleFont === "Sora 400 40px/48px -0.4px", light.titleFont);
-    assertOk("section headings render the editorial-section metrics (28/34, regular)", light.h2 === "28px/34px w400", String(light.h2));
+    assertOk("page title renders the editorial-title role (Sora 600 60/66, adopted from augur.net)", light.titleFont === "Sora 600 60px/66px -1.8px", light.titleFont);
+    assertOk("section headings render the editorial-heading-3 metrics (24/32, Sora 600)", light.h2 === "24px/32px w600", String(light.h2));
     assertOk("header lockup holds the 150px horizontal-lockup minimum", light.logoWidth === 150, String(light.logoWidth));
     const cs1a = light.clearspace;
     assertOk(
@@ -116,7 +116,7 @@ test.describe("shared frame alignment (#46)", () => {
         lanes.p.width <= parseFloat(light.measure65) + 0.5,
       JSON.stringify(lanes),
     );
-    assertOk("descriptor is uppercase tracked secondary text (+0.12em)", light.descriptor === "uppercase 1.44px rgb(74, 75, 97)", String(light.descriptor));
+    assertOk("descriptor is the sentence-case editorial label in secondary text (no tracked capitals)", light.descriptor === "none normal rgb(74, 75, 97)", String(light.descriptor));
     assertOk("light header hairline matches the (shared) quiet separator", light.headerBorder === light.controlEdge, `${light.headerBorder} vs ${light.controlEdge}`);
     assertOk("no horizontal overflow at 1440", light.overflowX === false);
     await shot(page, "frame-1440-light", true);
@@ -130,7 +130,7 @@ test.describe("shared frame alignment (#46)", () => {
       dark.headerBorder === "rgb(36, 36, 56)" && dark.headerBorder === dark.controlEdge,
       `${dark.headerBorder} vs sidebar ${dark.controlEdge}`,
     );
-    assertOk("dark descriptor flips to the dark secondary role", dark.descriptor === "uppercase 1.44px rgb(161, 161, 184)", String(dark.descriptor));
+    assertOk("dark descriptor flips to the dark secondary role", dark.descriptor === "none normal rgb(161, 161, 184)", String(dark.descriptor));
     await shot(page, "frame-1440-dark", true);
   });
 
@@ -145,7 +145,7 @@ test.describe("shared frame alignment (#46)", () => {
       assertOk(`frame uses 24px gutters at ${viewport.width}`, narrow.framePad === "24px", String(narrow.framePad));
       assertOk(`no horizontal overflow at ${viewport.width}`, narrow.overflowX === false);
       if (viewport.width === 390) {
-        assertOk("page title steps down to the adopted 32/40 mobile size", narrow.titleFont === "Sora 400 32px/40px -0.32px", narrow.titleFont);
+        assertOk("page title follows the fluid editorial-title step at 390px", narrow.titleFont === "Sora 600 35.7px/39.27px -1.071px", narrow.titleFont);
         assertOk("compact masthead keeps the 150px lockup", narrow.logoWidth === 150, String(narrow.logoWidth));
         const cs1a = narrow.clearspace;
         assertOk(
@@ -221,7 +221,7 @@ test.describe("home page (product first)", () => {
     const light = await readHome(page);
     assertOk(
       "hero title is the locked message in the editorial-title role",
-      light.titleText.trim() === "Make whatmatters clear." && light.titleFont === "400 40px/48px",
+      light.titleText.trim() === "Make whatmatters clear." && light.titleFont === "600 60px/66px",
       `${light.titleFont} "${light.titleText.replace(/\s+/g, " ").trim()}"`,
     );
     assertOk("lede is the locked shared-interface-language copy", light.lede.startsWith("A shared interface language for Augur: foundations, components, and guidance for clear, consistent interfaces."), light.lede.slice(0, 60));
@@ -269,7 +269,7 @@ test.describe("home page (product first)", () => {
     const mobile = await readHome(page);
     assertOk("mobile stacks the hero (message above record)", mobile.heroColumns === 1, String(mobile.heroColumns));
     assertOk("mobile stacks the entry points", mobile.doorColumns === 1, String(mobile.doorColumns));
-    assertOk("mobile title steps to the adopted 32/40", mobile.titleFont === "400 32px/40px", String(mobile.titleFont));
+    assertOk("mobile title follows the fluid editorial-title step", mobile.titleFont === "600 35.7px/39.27px", String(mobile.titleFont));
     assertOk("no horizontal overflow at 390", mobile.overflowX === false);
     await shot(page, "home-light-390", true);
   });
@@ -304,7 +304,7 @@ test.describe("type specimen (#48)", () => {
     await go(page, ORIGIN + site("/foundations/fonts"));
     await page.evaluate(() => document.fonts.ready);
     const light = await read(page);
-    assertOk("specimen shows all ten roles as compact aligned rows", light.rows === 10, String(light.rows));
+    assertOk("specimen shows all eighteen roles as compact aligned rows", light.rows === 18, String(light.rows));
     assertOk("display field is the inverse tonal field (light: Navy field, Paper text)", light.fieldBg === "rgb(14, 14, 33)" && light.fieldFg === "rgb(245, 245, 248)", `${light.fieldBg} / ${light.fieldFg}`);
     assertOk("display sample renders Sora 600 at the display role", light.sampleWeight === "600" && light.sampleSize === "40px", `${light.sampleWeight} ${light.sampleSize}`);
     assertOk("three rule-led support notes", light.notes === 3, String(light.notes));

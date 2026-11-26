@@ -125,6 +125,19 @@
   --input: var(--augur-color-surface-dark-mist);
   --input-hover: var(--augur-color-secondary);
 
+  /* Outline edge (adopted from augur.net, v0.4.0): the quiet edge of
+     labelled outline controls and interactive panels (outline buttons,
+     link and pager cards, disclosure toggles). The label or content
+     identifies the component, so this edge is decorative and does not
+     carry the 3:1 control-edge minimum; fields keep --input. Light
+     value is provisional: augur.net is dark-only. */
+  --outline: var(--augur-color-border-light);
+
+  /* Danger (adopted from augur.net, v0.4.0): marks an invalid field or
+     a failed state. A mark only, never readable copy; the message text
+     carries the meaning. >= 3:1 on Paper, White, and Muted. */
+  --danger: var(--augur-color-danger);
+
   /* Quiet editorial separators: grouping hairlines for shell
      chrome, rules, and tables. It currently resolves to the same step
      as --border in both themes; it stays a separate role so editorial
@@ -206,6 +219,19 @@
   --input: var(--augur-color-surface-dark-mist);
   --input-hover: var(--augur-color-secondary);
 
+  /* Outline edge (adopted from augur.net, v0.4.0): the quiet edge of
+     labelled outline controls and interactive panels (outline buttons,
+     link and pager cards, disclosure toggles). The label or content
+     identifies the component, so this edge is decorative and does not
+     carry the 3:1 control-edge minimum; fields keep --input. Light
+     value is provisional: augur.net is dark-only. */
+  --outline: var(--augur-color-border-light);
+
+  /* Danger (adopted from augur.net, v0.4.0): marks an invalid field or
+     a failed state. A mark only, never readable copy; the message text
+     carries the meaning. >= 3:1 on Paper, White, and Muted. */
+  --danger: var(--augur-color-danger);
+
   /* Quiet editorial separators: grouping hairlines for shell
      chrome, rules, and tables. It currently resolves to the same step
      as --border in both themes; it stays a separate role so editorial
@@ -285,6 +311,13 @@
   --input: var(--augur-color-surface-dark-mist);
   --input-hover: var(--augur-color-secondary-dark);
 
+  /* Outline edge: augur.net's quiet edge for labelled outline controls
+     and interactive panels. Decorative; fields keep Mist (--input). */
+  --outline: var(--augur-color-surface-dark-outline);
+
+  /* Danger mark: >= 3:1 on Navy, Surface 1, and Surface 2. */
+  --danger: var(--augur-color-danger);
+
   /* Quiet editorial separators in dark: a Surface 3 step, not Mist —
      grouping hairlines must not glow like control edges. */
   --border-quiet: var(--augur-color-surface-dark-3);
@@ -335,6 +368,8 @@
     --border: var(--augur-color-surface-dark-mist);
     --input: var(--augur-color-surface-dark-mist);
     --input-hover: var(--augur-color-secondary-dark);
+    --outline: var(--augur-color-surface-dark-outline);
+    --danger: var(--augur-color-danger);
     --border-quiet: var(--augur-color-surface-dark-3);
 
     --brand-hover-edge: color-mix(in srgb, var(--augur-color-accent) 50%, transparent);

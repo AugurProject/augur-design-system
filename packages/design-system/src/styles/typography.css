@@ -85,50 +85,126 @@ body {
   line-height: 16px;
 }
 
-/* DESIGN.md `typography.editorial-title` — Sora 400, 40/48, -0.01em.
-   The editorial voice: long-form titles set regular so size
-   alone creates order. The 32/40 step below 600px is part of the
-   adopted role, per the visual direction contract. */
+/*
+ * Editorial roles (v0.4.0): augur.net's public-page scale, adopted
+ * as-is. Every heading is Sora 600; supporting copy is Schibsted
+ * Grotesk 400. DESIGN.md records each role's largest step; the fluid
+ * steps below are the runtime layer (the same clamp() values the site
+ * uses), so the role resolves to its DESIGN.md value on wide screens.
+ */
+
+/* DESIGN.md `typography.editorial-display` — Sora 600, 72/78 (fluid from 40). */
+.augur-type-editorial-display {
+  font-family: var(--augur-font-primary);
+  font-weight: 600;
+  font-size: clamp(40px, 5vw, 72px);
+  line-height: 1.083333;
+}
+
+/* DESIGN.md `typography.editorial-title` — Sora 600, 60/66, -0.03em
+   (fluid from 32). The landing-page title. */
 .augur-type-editorial-title {
   font-family: var(--augur-font-primary);
-  font-weight: 400;
-  font-size: 40px;
-  line-height: 48px;
-  letter-spacing: -0.01em;
+  font-weight: 600;
+  font-size: clamp(2rem, 1.5rem + 3vw, 3.75rem);
+  line-height: 1.1;
+  letter-spacing: -0.03em;
 }
 
-/* DESIGN.md `typography.editorial-section` — Sora 400, 28/34, -0.005em. */
-.augur-type-editorial-section {
+/* DESIGN.md `typography.editorial-heading-1` — Sora 600, 48/56 (fluid from 36). */
+.augur-type-editorial-heading-1 {
   font-family: var(--augur-font-primary);
-  font-weight: 400;
-  font-size: 28px;
-  line-height: 34px;
-  letter-spacing: -0.005em;
+  font-weight: 600;
+  font-size: clamp(36px, 3.5vw, 48px);
+  line-height: 1.166667;
 }
 
-/* DESIGN.md `typography.editorial-label` — Schibsted Grotesk 400,
-   12/16, +0.12em: short tracked uppercase labels. Wrapping is allowed;
-   the tracking is never reduced to fit. */
-.augur-type-editorial-label {
+/* DESIGN.md `typography.editorial-heading-2` — Sora 600, 40/48 (fluid from 30). */
+.augur-type-editorial-heading-2 {
+  font-family: var(--augur-font-primary);
+  font-weight: 600;
+  font-size: clamp(30px, 2.78vw, 40px);
+  line-height: 1.2;
+}
+
+/* DESIGN.md `typography.editorial-heading-3` — Sora 600, 24/32. */
+.augur-type-editorial-heading-3 {
+  font-family: var(--augur-font-primary);
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 32px;
+}
+
+/* DESIGN.md `typography.editorial-heading-4` — Sora 600, 20/26. */
+.augur-type-editorial-heading-4 {
+  font-family: var(--augur-font-primary);
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 26px;
+}
+
+/* DESIGN.md `typography.editorial-lead` — Schibsted Grotesk 400, 22/33
+   (20/30 below 768px). */
+.augur-type-editorial-lead {
   font-family: var(--augur-font-secondary);
   font-weight: 400;
-  font-size: 12px;
-  line-height: 16px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  font-size: 22px;
+  line-height: 33px;
+  text-wrap: balance;
 }
 
-/* Adopted mobile steps for the editorial roles (visual direction
-   contract). The seven inherited roles have no mobile steps. */
-@media (max-width: 599px) {
-  .augur-type-editorial-title {
-    font-size: 32px;
-    line-height: 40px;
-  }
+/* DESIGN.md `typography.editorial-reading` — Schibsted Grotesk 400,
+   18/30: long-form article body. */
+.augur-type-editorial-reading {
+  font-family: var(--augur-font-secondary);
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 30px;
+}
 
-  .augur-type-editorial-section {
-    font-size: 24px;
-    line-height: 32px;
+/* DESIGN.md `typography.editorial-meta` — Schibsted Grotesk 400, 14/20. */
+.augur-type-editorial-meta {
+  font-family: var(--augur-font-secondary);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+/* DESIGN.md `typography.editorial-caption` — Schibsted Grotesk 400, 13/18. */
+.augur-type-editorial-caption {
+  font-family: var(--augur-font-secondary);
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 18px;
+}
+
+/* DESIGN.md `typography.editorial-label` — Sora 600, 14/20. Labels are
+   sentence case, set in Green or Pewter by context; no tracked capitals. */
+.augur-type-editorial-label {
+  font-family: var(--augur-font-primary);
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+/* Values: tabular figures in the primary voice, as augur.net sets
+   amounts, counts, and token addresses. */
+.augur-type-figure {
+  font-family: var(--augur-font-primary);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Code and raw technical strings: the system monospace stack. */
+.augur-type-code {
+  font-family: var(--augur-font-mono);
+  font-size: 0.85em;
+}
+
+@media (max-width: 767px) {
+  .augur-type-editorial-lead {
+    font-size: 20px;
+    line-height: 30px;
   }
 }
 

@@ -23,9 +23,17 @@ const ROLES: readonly { className: string; label: string; sample: string; spec: 
   { className: "augur-type-control", label: "control", sample: "Record your response", spec: "Sora 600 · 14/20" },
   { className: "augur-type-ui", label: "ui", sample: "Filter: open queries", spec: "Sora 400 · 14/20" },
   { className: "augur-type-metadata", label: "metadata", sample: "Final · 14 responses · updated 2h ago", spec: "Schibsted Grotesk 400 · 12/16" },
-  { className: "augur-type-editorial-title", label: "editorial-title", sample: "Make what matters clear.", spec: "Sora 400 · 40/48 · −0.01em · 32/40 below 600px" },
-  { className: "augur-type-editorial-section", label: "editorial-section", sample: "A quieter title", spec: "Sora 400 · 28/34 · −0.005em · 24/32 below 600px" },
-  { className: "augur-type-editorial-label", label: "editorial-label", sample: "Open query", spec: "Schibsted Grotesk 400 · 12/16 · +0.12em, uppercase" },
+  { className: "augur-type-editorial-display", label: "editorial-display", sample: "Make what matters clear.", spec: "Sora 600 · 72/78 · fluid from 40" },
+  { className: "augur-type-editorial-title", label: "editorial-title", sample: "Frequently asked questions", spec: "Sora 600 · 60/66 · −0.03em · fluid from 32" },
+  { className: "augur-type-editorial-heading-1", label: "editorial-heading-1", sample: "How Augur answers a question", spec: "Sora 600 · 48/56 · fluid from 36" },
+  { className: "augur-type-editorial-heading-2", label: "editorial-heading-2", sample: "Built for applications", spec: "Sora 600 · 40/48 · fluid from 30" },
+  { className: "augur-type-editorial-heading-3", label: "editorial-heading-3", sample: "Report the outcome", spec: "Sora 600 · 24/32" },
+  { className: "augur-type-editorial-heading-4", label: "editorial-heading-4", sample: "Challenge a report", spec: "Sora 600 · 20/26" },
+  { className: "augur-type-editorial-lead", label: "editorial-lead", sample: "A neutral way to settle what happened.", spec: "Schibsted Grotesk 400 · 22/33 · 20/30 below 768px" },
+  { className: "augur-type-editorial-reading", label: "editorial-reading", sample: "Long-form article body for posts and guides.", spec: "Schibsted Grotesk 400 · 18/30" },
+  { className: "augur-type-editorial-meta", label: "editorial-meta", sample: "Protocol · 12 Nov 2026 · 6 min read", spec: "Schibsted Grotesk 400 · 14/20" },
+  { className: "augur-type-editorial-caption", label: "editorial-caption", sample: "Figure 1: the reporting flow", spec: "Schibsted Grotesk 400 · 13/18" },
+  { className: "augur-type-editorial-label", label: "editorial-label", sample: "Open query", spec: "Sora 600 · 14/20 · sentence case" },
 ] as const;
 
 export function FontRoles() {
@@ -66,19 +74,19 @@ export function FontRoles() {
 
         <aside className="type-specimen-notes" aria-label="Typeface roles">
           <div>
-            <h3 className="augur-type-editorial-section">The primary voice</h3>
+            <h3 className="augur-type-editorial-heading-3">The primary voice</h3>
             <p className="augur-type-body">
               Sora gives identity, headings, navigation, and actions a precise voice.
             </p>
           </div>
           <div>
-            <h3 className="augur-type-editorial-section">The supporting voice</h3>
+            <h3 className="augur-type-editorial-heading-3">The supporting voice</h3>
             <p className="augur-type-body">
               Schibsted Grotesk carries paragraphs, helper text, metadata, and dense records.
             </p>
           </div>
           <div>
-            <h3 className="augur-type-editorial-section">One clear priority</h3>
+            <h3 className="augur-type-editorial-heading-3">One clear priority</h3>
             <p className="augur-type-body">
               Alignment, space, and quiet rules reveal the reading order.
             </p>

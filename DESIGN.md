@@ -20,6 +20,8 @@ colors:
   surface-dark-2: "#1D1D30"
   surface-dark-3: "#242438"
   surface-dark-mist: "#71728A"
+  surface-dark-outline: "#383848"
+  danger: "#CF294E"
 typography:
   display:
     fontFamily: Sora
@@ -58,31 +60,77 @@ typography:
     fontSize: 12px
     fontWeight: 400
     lineHeight: 16px
+  editorial-display:
+    fontFamily: Sora
+    fontSize: 72px
+    fontWeight: 600
+    lineHeight: 78px
   editorial-title:
     fontFamily: Sora
-    fontSize: 40px
-    fontWeight: 400
-    lineHeight: 48px
-    letterSpacing: -0.01em
-  editorial-section:
+    fontSize: 60px
+    fontWeight: 600
+    lineHeight: 66px
+    letterSpacing: -0.03em
+  editorial-heading-1:
     fontFamily: Sora
-    fontSize: 28px
-    fontWeight: 400
-    lineHeight: 34px
-    letterSpacing: -0.005em
-  editorial-label:
+    fontSize: 48px
+    fontWeight: 600
+    lineHeight: 56px
+  editorial-heading-2:
+    fontFamily: Sora
+    fontSize: 40px
+    fontWeight: 600
+    lineHeight: 48px
+  editorial-heading-3:
+    fontFamily: Sora
+    fontSize: 24px
+    fontWeight: 600
+    lineHeight: 32px
+  editorial-heading-4:
+    fontFamily: Sora
+    fontSize: 20px
+    fontWeight: 600
+    lineHeight: 26px
+  editorial-lead:
     fontFamily: Schibsted Grotesk
-    fontSize: 12px
+    fontSize: 22px
     fontWeight: 400
-    lineHeight: 16px
-    letterSpacing: 0.12em
+    lineHeight: 33px
+  editorial-reading:
+    fontFamily: Schibsted Grotesk
+    fontSize: 18px
+    fontWeight: 400
+    lineHeight: 30px
+  editorial-meta:
+    fontFamily: Schibsted Grotesk
+    fontSize: 14px
+    fontWeight: 400
+    lineHeight: 20px
+  editorial-caption:
+    fontFamily: Schibsted Grotesk
+    fontSize: 13px
+    fontWeight: 400
+    lineHeight: 18px
+  editorial-label:
+    fontFamily: Sora
+    fontSize: 14px
+    fontWeight: 600
+    lineHeight: 20px
 spacing:
   xs: 4px
   sm: 8px
   md: 12px
   lg: 16px
+  lg-plus: 20px
   xl: 24px
+  xl-plus: 28px
   2xl: 32px
+  3xl: 40px
+  4xl: 48px
+  5xl: 56px
+  6xl: 64px
+  7xl: 72px
+  8xl: 96px
 rounded:
   control: 0px
   surface: 0px
@@ -120,6 +168,10 @@ components:
     backgroundColor: "{colors.border-light}"
   divider-dark:
     backgroundColor: "{colors.surface-dark-mist}"
+  outline-edge-dark:
+    backgroundColor: "{colors.surface-dark-outline}"
+  danger-rule:
+    backgroundColor: "{colors.danger}"
   secondary-text-light:
     backgroundColor: "{colors.surface-light}"
     textColor: "{colors.secondary}"
@@ -169,6 +221,9 @@ The palette is built around Augur Navy, Augur Green, and a restrained set of pap
 - **Green hover (#27D19B) and Green pressed (#24BC8D):** Interaction steps of Augur Green for the dark primary action, adopted from augur.net. They are state fills only, always under a Navy label, never resting colors.
 - **Mist (#71728A):** Companion for edges, rules, and quiet marks only, never for readable copy. It marks dark-theme rules and the edges of controls such as inputs and outline buttons in both themes, where it holds at least 3:1 against Paper, White, and Navy. It is not the light quiet-region color, which is Muted.
 
+- **Outline (#383848):** The quiet dark edge of labelled outline controls and interactive panels: outline buttons, link and pager cards, disclosure toggles. Adopted from augur.net in v0.4.0. The label or content identifies these components, so the edge is decorative and sits below the 3:1 control-edge minimum (1.66:1 on Navy); never use it as the only edge of a field or an unlabelled control. Its light counterpart is Border, provisionally, because augur.net is dark only.
+- **Danger (#CF294E):** Marks an invalid field or a failed state, adopted from augur.net in v0.4.0. It is a mark, never readable copy: the message text names the problem. It holds 3:1 on Paper (4.73), White (5.15), Muted (4.37), Navy (3.70), Surface 1 (3.46), and Surface 2 (3.21).
+
 Light surfaces use Paper as the canvas, White for raised panels, Muted (#ECECF2) for quiet regions, and Border (#E0E0E7) for hairlines. Dark surfaces use Navy as the canvas, then Surface 1 (#161629), Surface 2 (#1D1D30), and Surface 3 / Raised (#242438) as stepped layers. Dark cards sit on Surface 2 and are bounded by Mist, the same edge as controls, as adopted from augur.net; Surface 3 draws the quieter dark editorial rules. In light, panel hairlines (Border) and control edges (Mist) stay distinct. Graphite and Pewter support the system; they do not replace primary copy.
 
 The light and dark themes are equal everyday expressions of one system. Keep content, order, spacing, alignment, and geometry the same in both themes. Use the words open, closed, pending, and final to name state; color only reinforces those words.
@@ -181,7 +236,9 @@ Augur uses two contemporary sans-serif families with distinct roles. **Sora** is
 
 Use the restrained scale in the front matter. Size creates order and weight confirms it. Use sentence case for headings, controls, and labels. Reserve capitals for short metadata and standard abbreviations. Do not stack size, weight, color, and capitals to manufacture hierarchy; one strong distinction and one secondary distinction are enough.
 
-The three editorial roles (`editorial-title`, `editorial-section`, `editorial-label`) set the long-form editorial voice: Sora 400 titles and sections where size alone creates order, and tracked Schibsted Grotesk short labels. The seven interface roles keep their adopted 600-weight hierarchy. Mobile steps for the editorial roles (32/40 and 24/32 below 600px) are part of the adopted roles and live in the runtime typography layer; the visual direction guide records the full role definitions.
+The eleven editorial roles are augur.net's public-page scale, adopted as-is in v0.4.0: `editorial-display` (72/78), `editorial-title` (the landing-page title, 60/66, −0.03em), `editorial-heading-1` to `-4` (48/56, 40/48, 24/32, 20/26), `editorial-lead` (22/33), `editorial-reading` (18/30 article body), `editorial-meta` (14/20), `editorial-caption` (13/18), and `editorial-label` (Sora 600, 14/20). Every heading is Sora 600; supporting copy is Schibsted Grotesk 400. Labels are sentence case in Green or Pewter, never tracked capitals. The front matter records each role's largest step; display, title, and the first two headings are fluid from 40, 32, 36, and 30px, and the lead steps to 20/30 below 768px, in the runtime typography layer. The seven interface roles stay for dense product UI.
+
+Values such as amounts, counts, and token addresses use Sora 600 with tabular figures (`augur-type-figure`). Code and raw technical strings use the system monospace stack (`--augur-font-mono`, `augur-type-code`).
 
 Align numeric columns right, use one precision per view, and put units in a header or beside the value. For long technical strings such as addresses, truncate in the middle while preserving a recognizable prefix and suffix.
 
@@ -189,7 +246,7 @@ Align numeric columns right, use one precision per view, and put units in a head
 
 The layout rule is information order: page purpose or task first, then status, choices, and the primary action. Give each section one visible priority. Use scale and space to separate primary content from supporting detail, and move optional detail out of the main path.
 
-Light and dark layouts should have the same content order, alignment, and geometry. Surfaces organize content, but they do not imply product priority; lifting a panel is not a claim that it matters more. The adopted component spacing scale is the front-matter `spacing` steps (4, 8, 12, 16, 24, 32px); the larger 48/64/80px values, the 1200px frame, outer gutters, section gaps, and the 65ch reading measure are composition roles recorded in the visual direction guide, not component tokens. Use the spacing steps for component rhythm; never treat a product's local spacing as design-system authority.
+Light and dark layouts should have the same content order, alignment, and geometry. Surfaces organize content, but they do not imply product priority; lifting a panel is not a claim that it matters more. The spacing scale is the front-matter `spacing` steps: 4, 8, 12, 16, 20, 24, 28, 32, and 40px for component rhythm, and 48, 56, 64, 72, and 96px for page regions. The page frame is 1248px, inset by a gutter that grows from 48 to 96px between 1024 and 1440px and steps to 32px and 24px on smaller screens. Sections are 96, 72, or 64px apart by breakpoint, with 48 or 32px under a section heading and 64 or 48px between blocks. A page lead holds 58ch and an answer column 720px; long prose stays near 65ch. These composition roles ship as `--augur-layout-*` and `--augur-measure-*` properties (v0.4.0, adopted from augur.net).
 
 For identity assets, use the horizontal lockup by default. Use the vertical lockup only when the width is genuinely constrained, and use the glyph alone only when the surrounding context already names Augur.
 
@@ -197,7 +254,7 @@ For identity assets, use the horizontal lockup by default. Use the vertical lock
 
 Depth is tonal rather than ornamental. Use stepped surfaces, quiet fields, and hairline rules to group and separate content. In light mode, Paper is the canvas and White creates elevation. In dark mode, Navy is the canvas and the three lifted surfaces create hierarchy for panels, controls, and selected regions.
 
-Do not use decorative shadows, glows, bevels, gradients, textures, or a parallel charcoal palette. Border is a rule color, never a text color or a replacement for a surface. Keep the same elevation logic in both themes.
+Do not use decorative shadows, glows, bevels, gradients, textures, or a parallel charcoal palette. The one exception is a gradient mask that fades artwork or video into the canvas; it never colors UI. Border is a rule color, never a text color or a replacement for a surface. Keep the same elevation logic in both themes.
 
 ## Shapes
 
@@ -207,6 +264,8 @@ Use the lowercase **a** in the production wordmark as the clearspace unit, writt
 
 The glyph minimum is 50px high on screen, measured from arrow tip to pyramid base; its controlling pyramid must remain at least 24px. The production horizontal lockup minimum is 150 x 50px, and the vertical lockup minimum is 94 x 93px. Below those thresholds, give the mark more room or use the glyph only where context already identifies Augur. There is no approved redraw or small-size simplification.
 
+One exception is recorded: the augur.net site header sets the horizontal lockup at 128 × 43px, about 15% under its minimum (owner decision, 22 October 2026); the artwork itself is untouched, and the footer keeps 150px.
+
 The horizontal lockup is preferred wherever width allows. The vertical lockup is a fallback for narrow columns, square placements, badges, avatars, centered layouts, event backdrops, and slide covers. Two-tint Color is the default on light surfaces; two-tint Reversed is the default on dark surfaces. Single-tint Augur Navy or White is reserved for low-contrast or production-constrained cases and supporting placements.
 
 Corners are square: the adopted `rounded` values are 0px for both controls and surfaces, so panels, cards, dialogs, and controls have no radius. Only a circle intrinsic to a control, such as a radio, and the production identity artwork keep their required geometry; nothing else rounds. Do not introduce shape language that competes with the fixed identity geometry.
@@ -214,6 +273,10 @@ Corners are square: the adopted `rounded` values are 0px for both controls and s
 ## Components
 
 Components should make the next action obvious and keep the record easy to scan. Use direct verbs and specific labels. A control should communicate what will happen before it is used. Give every choice the same structure and emphasis; neutrality is a design constraint, not a default.
+
+Fields are filled, adopted from augur.net: a quiet fill with a Mist rule along the bottom edge only, a one-step lift on hover, the primary signal on the rule while focused, and a 2px Danger rule when invalid. Outline buttons rest on the quiet Outline edge and, on hover, lift one surface step and take the green brand hover edge. A text action is the label alone; on hover a 2px line draws in beneath it.
+
+Motion is functional feedback with a small vocabulary: four easings (reveal, hero, draw, crossfade), three durations (180, 240, 320ms), a line drawing under a text action, an arrow nudging 3px, and a disclosure edge drawing down. Everything collapses under reduced motion, and no information waits on an animation.
 
 Primary actions use Deep on light surfaces and Green on dark surfaces, with a readable contrasting label. On hover, a filled action steps to a neighboring palette color in its own family (Deep to Green, Green to Wash) rather than to a neutral surface, so an engaged action never reads as disabled. A view should usually have one green signal. On light backgrounds, do not use raw Augur Green for readable text or marks when it fails contrast; use Deep instead. On dark backgrounds, Green may carry the signal because it holds contrast against Navy.
 
@@ -234,6 +297,6 @@ For a logo on a controlled brand surface, use Color on Paper or White and Revers
 - Don't crowd the 1a clearspace or place identity artwork on a busy field.
 - Don't use pure black in place of Augur Navy.
 - Don't use Augur Green as decoration or as readable light-surface text when Deep is required for contrast.
-- Don't use shadows, glows, bevels, gradients, or texture to create hierarchy.
+- Don't use shadows, glows, bevels, gradients, or texture to create hierarchy; a mask that fades artwork into the canvas is the one gradient allowed.
 - Don't add taglines to the mark or combine it with partner marks inside its clearspace.
 - Don't invent a parallel type scale, spacing scale, corner-radius scale, or one-off treatment where product tokens or supplied artwork already govern.

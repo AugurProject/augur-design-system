@@ -113,8 +113,8 @@ test.describe("review type + record cross-check (#52)", () => {
         });
         assertOk(`review type samples retain readable width ${theme}/${viewport.width}`, type.widths.every((w) => w > (viewport.width < 600 ? 0.95 : 0.45)), JSON.stringify(type.widths));
         assertOk(
-          `review support voice is regular ${theme}/${viewport.width}`,
-          type.weights.every((w) => w === "400") && type.bodyLines.every((l) => l === "24px"),
+          `review support headings are Sora 600 over a regular body ${theme}/${viewport.width}`,
+          type.weights.every((w) => w === "600") && type.bodyLines.every((l) => l === "24px"),
           JSON.stringify(type),
         );
         assertOk(`review tablet support grid ${theme}/${viewport.width}`, type.noteColumns === (viewport.width >= 600 && viewport.width < 960 ? 3 : 1));
