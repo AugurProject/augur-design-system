@@ -40,12 +40,12 @@ On coarse pointers, the actionable target expands to at least 44px high and wide
 
 ## States
 
-- **Default:** transparent field with a 1px semantic input edge (`--input`, Mist in both themes).
-- **Hover:** the edge strengthens to `--input-hover` (Graphite in light, Pewter in dark). Hover does not apply to disabled, read-only, or invalid fields.
-- **Focus:** shared 2px `:focus-visible` ring with a 2px offset from `--ring`.
+- **Default:** the filled field adopted from augur.net: a `--muted` fill with a 1px `--input` rule (Mist) along the bottom edge only.
+- **Hover:** the fill lifts one step (`--secondary-hover`). Hover does not apply to disabled, read-only, or invalid fields.
+- **Focus:** the bottom rule turns to `--primary` (Green in dark, Deep in light), and the shared 2px `:focus-visible` ring paints with a 2px offset from `--ring`.
 - **Disabled:** native `disabled`, non-interactive, reduced opacity, `cursor: not-allowed`.
-- **Invalid:** `aria-invalid="true"` plus the semantic destructive edge; visible error copy carries the meaning.
-- **Read-only:** native `readOnly`; value remains focusable, selectable, and copyable on the quiet `--muted` surface.
+- **Invalid:** `aria-invalid="true"` plus a 2px `--danger` bottom rule; visible error copy carries the meaning.
+- **Read-only:** native `readOnly`; value remains focusable, selectable, and copyable; the fill drops away and the bottom rule stays.
 
 ## Accessibility
 

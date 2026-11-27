@@ -721,18 +721,18 @@ body {
   margin-top: 0.5em;
 }
 
-/* h2 mirrors DESIGN.md typography.editorial-section and h3 mirrors
-   typography.heading-2: the markdown renderer cannot attach role
+/* h2 mirrors DESIGN.md typography.editorial-heading-3 and h3 mirrors
+   typography.heading-2 (v0.4.0: editorial headings are Sora 600): the markdown renderer cannot attach role
    classes, so the chrome restates adopted role metrics and must stay
    synced with the fonts fixture when DESIGN.md changes. */
 /* Section rhythm uses the layout steps: 48px before a major section,
    32px before a subsection, and the 12px/8px component steps between a
    heading and its content. */
 .prose h2:not(.doc-example-preview h2) {
-  font-size: 28px;
-  font-weight: 400;
-  line-height: 34px;
-  letter-spacing: -0.005em;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 32px;
+  letter-spacing: normal;
   margin: 3rem 0 0.75rem;
 }
 

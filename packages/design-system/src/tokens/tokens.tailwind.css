@@ -1,7 +1,7 @@
 /**
  * GENERATED FILE — do not edit. Regenerate: `bun run tokens:generate` in packages/design-system. Verify: `bun run tokens:check`. Policy and schema boundaries: packages/design-system/docs/token-generation.md.
  *
- * Source:  DESIGN.md (repository root), sha256 10b28e341e67e3d41f9e319f4d601a7c20e1aecc68255355bfb5aaf868cfb471
+ * Source:  DESIGN.md (repository root), sha256 83d07935b04fe87ccaa133d41d17dbde0209456710fb4b19c3ad48c09f20ea32
  * Tool:    @google/design.md@0.4.0 (exact pin in packages/design-system/package.json (0.4.0))
  * Command: design.md export DESIGN.md --format css-tailwind
  * Lint:    0 errors / 0 warnings / 1 infos at generation time
@@ -27,6 +27,8 @@
   --color-surface-dark-2: #1d1d30;
   --color-surface-dark-3: #242438;
   --color-surface-dark-mist: #71728a;
+  --color-surface-dark-outline: #383848;
+  --color-danger: #cf294e;
   --font-display: "Sora";
   --font-heading-1: "Sora";
   --font-heading-2: "Sora";
@@ -34,9 +36,17 @@
   --font-control: "Sora";
   --font-ui: "Sora";
   --font-metadata: "Schibsted Grotesk";
+  --font-editorial-display: "Sora";
   --font-editorial-title: "Sora";
-  --font-editorial-section: "Sora";
-  --font-editorial-label: "Schibsted Grotesk";
+  --font-editorial-heading-1: "Sora";
+  --font-editorial-heading-2: "Sora";
+  --font-editorial-heading-3: "Sora";
+  --font-editorial-heading-4: "Sora";
+  --font-editorial-lead: "Schibsted Grotesk";
+  --font-editorial-reading: "Schibsted Grotesk";
+  --font-editorial-meta: "Schibsted Grotesk";
+  --font-editorial-caption: "Schibsted Grotesk";
+  --font-editorial-label: "Sora";
   --text-display: 40px;
   --text-heading-1: 28px;
   --text-heading-2: 20px;
@@ -44,9 +54,17 @@
   --text-control: 14px;
   --text-ui: 14px;
   --text-metadata: 12px;
-  --text-editorial-title: 40px;
-  --text-editorial-section: 28px;
-  --text-editorial-label: 12px;
+  --text-editorial-display: 72px;
+  --text-editorial-title: 60px;
+  --text-editorial-heading-1: 48px;
+  --text-editorial-heading-2: 40px;
+  --text-editorial-heading-3: 24px;
+  --text-editorial-heading-4: 20px;
+  --text-editorial-lead: 22px;
+  --text-editorial-reading: 18px;
+  --text-editorial-meta: 14px;
+  --text-editorial-caption: 13px;
+  --text-editorial-label: 14px;
   --leading-display: 44px;
   --leading-heading-1: 34px;
   --leading-heading-2: 26px;
@@ -54,14 +72,20 @@
   --leading-control: 20px;
   --leading-ui: 20px;
   --leading-metadata: 16px;
-  --leading-editorial-title: 48px;
-  --leading-editorial-section: 34px;
-  --leading-editorial-label: 16px;
+  --leading-editorial-display: 78px;
+  --leading-editorial-title: 66px;
+  --leading-editorial-heading-1: 56px;
+  --leading-editorial-heading-2: 48px;
+  --leading-editorial-heading-3: 32px;
+  --leading-editorial-heading-4: 26px;
+  --leading-editorial-lead: 33px;
+  --leading-editorial-reading: 30px;
+  --leading-editorial-meta: 20px;
+  --leading-editorial-caption: 18px;
+  --leading-editorial-label: 20px;
   --tracking-display: -0.01em;
   --tracking-heading-1: -0.005em;
-  --tracking-editorial-title: -0.01em;
-  --tracking-editorial-section: -0.005em;
-  --tracking-editorial-label: 0.12em;
+  --tracking-editorial-title: -0.03em;
   --font-weight-display: 600;
   --font-weight-heading-1: 600;
   --font-weight-heading-2: 600;
@@ -69,15 +93,31 @@
   --font-weight-control: 600;
   --font-weight-ui: 400;
   --font-weight-metadata: 400;
-  --font-weight-editorial-title: 400;
-  --font-weight-editorial-section: 400;
-  --font-weight-editorial-label: 400;
+  --font-weight-editorial-display: 600;
+  --font-weight-editorial-title: 600;
+  --font-weight-editorial-heading-1: 600;
+  --font-weight-editorial-heading-2: 600;
+  --font-weight-editorial-heading-3: 600;
+  --font-weight-editorial-heading-4: 600;
+  --font-weight-editorial-lead: 400;
+  --font-weight-editorial-reading: 400;
+  --font-weight-editorial-meta: 400;
+  --font-weight-editorial-caption: 400;
+  --font-weight-editorial-label: 600;
   --radius-control: 0px;
   --radius-surface: 0px;
   --spacing-xs: 4px;
   --spacing-sm: 8px;
   --spacing-md: 12px;
   --spacing-lg: 16px;
+  --spacing-lg-plus: 20px;
   --spacing-xl: 24px;
+  --spacing-xl-plus: 28px;
   --spacing-2xl: 32px;
+  --spacing-3xl: 40px;
+  --spacing-4xl: 48px;
+  --spacing-5xl: 56px;
+  --spacing-6xl: 64px;
+  --spacing-7xl: 72px;
+  --spacing-8xl: 96px;
 }

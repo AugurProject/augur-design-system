@@ -6,6 +6,25 @@ Releases are immutable Git tags (`vX.Y.Z`) that describe the whole consumer-faci
 
 ## Unreleased
 
+The design system adopts augur.net's choices wherever the two disagreed (Jubal, 25 November 2026). For the website the values are unchanged; it can delete its local copies and read them from the package.
+
+### Added
+
+- **`--outline` role.** The quiet edge of labelled outline controls and interactive panels: `#383848` in dark (new `surface-dark-outline` colour), Border in light (provisional; augur.net is dark only). Tailwind: `border-outline`.
+- **`--danger` role.** `#CF294E` (new `danger` colour) in both themes, a mark for invalid fields and failed states. Tailwind: `border-danger`.
+- **Editorial type scale.** Eleven roles from augur.net, all headings Sora 600: `editorial-display` (fluid 40→72), `editorial-title` (fluid 32→60, −0.03em), `editorial-heading-1` to `-4` (fluid 36→48, fluid 30→40, 24/32, 20/26), `editorial-lead` (22/33, 20/30 on phones), `editorial-reading` (18/30), `editorial-meta` (14/20), `editorial-caption` (13/18) and `editorial-label` (Sora 600 14/20).
+- **`augur-type-figure` and `augur-type-code`.** Tabular Sora 600 for values; `--augur-font-mono` (system monospace, Tailwind `font-mono`) for code.
+- **Spacing steps.** `lg-plus` 20px, `xl-plus` 28px, `3xl` 40px, and page-region steps `4xl` 48px, `5xl` 56px, `6xl` 64px, `7xl` 72px, `8xl` 96px.
+- **Layout and motion properties** in `theme.css`: `--augur-layout-frame` (1248px), `--augur-layout-gutter`, `--augur-layout-section-space`, `--augur-layout-heading-gap`, `--augur-layout-block-gap` (all responsive), `--augur-measure-lead|answer|prose`, the `augur-frame` class, four `--augur-ease-*` easings, `--augur-duration-fast|base|slow` (180/240/320ms) and `--augur-motion-nudge` (3px).
+
+### Changed
+
+- **Breaking: editorial roles.** `editorial-title` is now Sora 600 60/66 (fluid), `editorial-label` is Sora 600 14/20 with no tracked capitals, and `editorial-section` is removed; use `editorial-heading-2` or `-3`.
+- **Input is filled.** A `--muted` fill with a Mist rule along the bottom only, a one-step lift on hover, a `--primary` rule while focused, a 2px `--danger` rule when invalid, and no fill when read-only.
+- **Outline Button.** Rests on `--outline`; on hover lifts to `--secondary` with the green `--brand-hover-edge`; pressed steps to `--secondary-hover` with `--border`.
+- **Link Button.** No horizontal padding; on hover a 2px line draws in under the label instead of an underline.
+- `DESIGN.md` now allows gradient masks that fade artwork into the canvas, records the 128px header-logo exception, and replaces "no decorative transitions" with the motion vocabulary.
+
 ## [0.3.0] - 2026-10-27
 
 Adopt it by installing the tarball attached to the `v0.3.0` GitHub Release, `https://github.com/jubalm/augur-design-system/releases/download/v0.3.0/augurproject-design-system-0.3.0.tgz`, or the registry items at `#v0.3.0`. Nothing changes for existing imports; reference the icons at `@augurproject/design-system/icons/<name>.svg`.

@@ -129,6 +129,9 @@ therefore recorded here rather than in `DESIGN.md`:
 
 ### D1 — `--destructive` maps to the strongest neutral action pairing
 
+> Amended by D10: the palette now has a danger mark (`--danger`) for
+> invalid fields. `--destructive` buttons keep the neutral pairing below.
+
 The brand palette defines **no danger hue**. Inventing one would import an
 off-brand color; using Green would invert its meaning (green = intent/go);
 using Deep would mint a second green signal. Because the inherited state
@@ -261,6 +264,32 @@ are declared once:
 - **`--font-sans`** in the Tailwind bridge is Schibsted Grotesk, the body
   voice; `--font-heading` is Sora.
 
+### D10 — The design system adopts augur.net (v0.4.0)
+
+Where the design system and augur.net disagreed, the site's choice was
+adopted (Jubal, 25 November 2026):
+
+- **`--outline`:** a quiet edge for labelled outline controls and
+  interactive panels. Dark: Outline `#383848` (1.66:1 on Navy). Light:
+  Border, provisional, because augur.net is dark only. The label
+  identifies the control, so the edge carries no 3:1 claim; fields keep
+  `--input` (D5, D7). The outline Button rests on it.
+- **`--danger`:** `#CF294E` in both themes, a mark for invalid fields and
+  failed states, never copy. At least 3:1 on Paper, White, Muted, Navy,
+  Surface 1, and Surface 2 (tested). It is 2.95:1 on Surface 3, so an
+  invalid Input does not take the hover fill.
+- **Outline button hover:** one surface step (`--secondary`) plus the
+  green `--brand-hover-edge`; pressed steps to `--secondary-hover` with
+  the plain `--border`. This supersedes "controls keep the neutral
+  `--input-hover`" (D9) for the outline Button. Input no longer uses
+  `--input-hover`; the role stays for consumers.
+- **Filled Input:** `--muted` fill, a `--input` bottom rule only, a
+  `--secondary-hover` fill on hover, a `--primary` rule while focused,
+  and a 2px `--danger` rule when invalid.
+- **Motion and layout properties** (`layout.css`): four easings, three
+  durations, the 3px nudge, the 1248px frame, gutter, section rhythm, and
+  reading measures. These are composition properties, not color roles.
+
 ## Focus and reduced motion (required behavior, structural form)
 
 - **Focus:** one shared rule in `base.css` paints a 2px ring with a 2px
@@ -271,8 +300,8 @@ are declared once:
 - **Reduced motion:** one shared `@media (prefers-reduced-motion: reduce)`
   gate collapses transition/animation durations to the canonical 0.01ms,
   stops looping animations, and disables smooth scrolling — in both themes,
-  including for consumer-authored motion. No duration tokens are emitted;
-  the treatment is structural.
+  including for consumer-authored motion. The motion properties added in
+  v0.4.0 (D10) collapse with everything else.
 
 ## Verification
 

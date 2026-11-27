@@ -17,10 +17,10 @@ Do not add component-local focus colors or duplicate focus CSS unless the compon
 State feedback is immediate and quiet.
 
 - filled Button variants (`default`, `secondary`, `destructive`) step to a neighboring palette color in their own family, so an engaged action never reads as disabled;
-- surface Button variants (`outline`, `ghost`) use the semantic neutral highlight surface;
-- control edges (Input and the `outline` Button) step from `--input` to the stronger `--input-hover` edge; Input hover does not apply to read-only or invalid fields;
+- `ghost` uses the semantic neutral highlight surface; `outline` lifts one surface step and takes the green `--brand-hover-edge` (adopted from augur.net);
+- Input lifts its fill one step on hover; Input hover does not apply to read-only or invalid fields;
 - pressed actions may use a strong neutral inversion when the component contract defines it;
-- text-like actions may use an underline instead of a filled hover surface;
+- text actions draw a 2px line in under the label instead of a filled hover surface;
 - disabled controls do not receive hover or pressed treatment;
 - green remains reserved for primary intent, focus, active state where appropriate, or short orientation signals rather than generic hover decoration. The primary action's own hover stays in its green family, which keeps one green signal rather than adding a second.
 
@@ -40,13 +40,24 @@ Avoid layout shifts caused by replacing a label with a spinner. A static pending
 
 Invalid state must be named by text, semantics, or both; border color alone is insufficient. Use native or ARIA invalid semantics as appropriate and connect error copy to the affected control.
 
-Augur defines no decorative danger palette that substitutes for clear language. Consequence and correction should be explicit in copy.
+The `--danger` role marks an invalid field with a 2px rule; it never substitutes for clear language. Consequence and correction should be explicit in copy.
 
 ## Motion
 
-Immediate state feedback is the default. New controls do not add decorative transitions merely to make an interface feel polished.
+Motion is functional feedback with a small vocabulary, adopted from augur.net in v0.4.0. Use only these, from `theme.css`:
 
-If a future interaction requires functional motion, document the reason and preserve reduced-motion behavior. Existing legacy motion should collapse under reduced-motion preferences.
+| Property | Value | Use |
+| --- | --- | --- |
+| `--augur-ease-reveal` | `cubic-bezier(.22,.61,.36,1)` | Lines drawing in, disclosures, reveals |
+| `--augur-ease-hero` | `cubic-bezier(.22,.7,.22,1)` | Page-opening arrivals |
+| `--augur-ease-draw` | `cubic-bezier(.45,0,.2,1)` | Strokes and diagrams drawing |
+| `--augur-ease-crossfade` | `cubic-bezier(.45,0,.55,1)` | Crossfades between states |
+| `--augur-duration-fast` | 180ms | Surface and color changes, page crossfades |
+| `--augur-duration-base` | 240ms | The text-action line, small reveals |
+| `--augur-duration-slow` | 320ms | Disclosures opening and closing |
+| `--augur-motion-nudge` | 3px | An arrow nudging toward its destination |
+
+The signature movements are a 2px line drawing under a text action, an arrow nudging 3px, and a disclosure's edge drawing down as it opens. No information waits on an animation, and everything collapses under reduced-motion preferences.
 
 ## Keyboard behavior
 

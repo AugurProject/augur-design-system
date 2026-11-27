@@ -63,7 +63,8 @@ const base = `http://127.0.0.1:${port}`;
 let { chromium } = await import("playwright");
 
 const browser = await chromium.launch();
-const page = await browser.newPage();
+// 1600px wide: the fluid editorial roles reach their DESIGN.md (largest) step.
+const page = await browser.newPage({ viewport: { width: 1600, height: 900 } });
 // Registered before navigation so font fetches are actually observed.
 const consoleErrors = [];
 page.on("console", (msg) => {
@@ -128,9 +129,17 @@ const expectations = {
   control: { family: PRIMARY, weight: "600", fontSize: "14px", lineHeight: "20px", letterSpacing: "normal" },
   ui: { family: PRIMARY, weight: "400", fontSize: "14px", lineHeight: "20px", letterSpacing: "normal" },
   metadata: { family: SECONDARY, weight: "400", fontSize: "12px", lineHeight: "16px", letterSpacing: "normal" },
-  "editorial-title": { family: PRIMARY, weight: "400", fontSize: "40px", lineHeight: "48px", letterSpacing: "-0.4px" },
-  "editorial-section": { family: PRIMARY, weight: "400", fontSize: "28px", lineHeight: "34px", letterSpacing: "-0.14px" },
-  "editorial-label": { family: SECONDARY, weight: "400", fontSize: "12px", lineHeight: "16px", letterSpacing: "1.44px" },
+  "editorial-display": { family: PRIMARY, weight: "600", fontSize: "72px", lineHeight: "78px", letterSpacing: "normal" },
+  "editorial-title": { family: PRIMARY, weight: "600", fontSize: "60px", lineHeight: "66px", letterSpacing: "-1.8px" },
+  "editorial-heading-1": { family: PRIMARY, weight: "600", fontSize: "48px", lineHeight: "56px", letterSpacing: "normal" },
+  "editorial-heading-2": { family: PRIMARY, weight: "600", fontSize: "40px", lineHeight: "48px", letterSpacing: "normal" },
+  "editorial-heading-3": { family: PRIMARY, weight: "600", fontSize: "24px", lineHeight: "32px", letterSpacing: "normal" },
+  "editorial-heading-4": { family: PRIMARY, weight: "600", fontSize: "20px", lineHeight: "26px", letterSpacing: "normal" },
+  "editorial-lead": { family: SECONDARY, weight: "400", fontSize: "22px", lineHeight: "33px", letterSpacing: "normal" },
+  "editorial-reading": { family: SECONDARY, weight: "400", fontSize: "18px", lineHeight: "30px", letterSpacing: "normal" },
+  "editorial-meta": { family: SECONDARY, weight: "400", fontSize: "14px", lineHeight: "20px", letterSpacing: "normal" },
+  "editorial-caption": { family: SECONDARY, weight: "400", fontSize: "13px", lineHeight: "18px", letterSpacing: "normal" },
+  "editorial-label": { family: PRIMARY, weight: "600", fontSize: "14px", lineHeight: "20px", letterSpacing: "normal" },
 };
 
 const failures = [];

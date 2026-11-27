@@ -30,7 +30,7 @@ FormField expresses its result accessibly.
 | Label → control | The label renders as a `<label>` whose `htmlFor` targets the control's generated `id` — a real label association, not `aria-label` |
 | Helper text → control | The description id is referenced in the control's `aria-describedby` whenever a description exists |
 | Error → control | While an `error` is present, the error id joins `aria-describedby` and the control gets `aria-invalid="true"`; no error means no reference, so no dangling idrefs (they fail axe) |
-| Error announcement | The message renders with `role="alert"`, so its appearance is announced; the text — not color alone — names the problem (the brand defines no danger hue) |
+| Error announcement | The message renders with `role="alert"`, so its appearance is announced; the text — not color alone — names the problem; the `--danger` rule only marks the field |
 | Required | The native `required` attribute reaches the control (announced, browser-enforced); the label's visible marker is `aria-hidden` so it is not read as "star" |
 
 ## Composition

@@ -82,9 +82,11 @@
 
 /* Surface variants: quiet by default; the theme's neutral
    hover/highlight surface (accent) on hover. */
+/* Outline (adopted from augur.net, v0.4.0): the quiet outline edge at
+   rest; the label identifies the control. */
 .aug-button--outline {
   background-color: transparent;
-  border-color: var(--input);
+  border-color: var(--outline);
   color: var(--foreground);
 }
 
@@ -93,24 +95,33 @@
   color: var(--foreground);
 }
 
-/* Link: quiet text action. Deliberately NOT action-colored — a view
-   has one green signal (primary action, focus), and text links are not
-   it (the surface-step mapping in docs/components.md). */
+/* Link: the text action (adopted from augur.net, v0.4.0). Deliberately
+   NOT action-colored — a view has one green signal (primary action,
+   focus), and text links are not it. On hover a 2px line draws in under
+   the label from the left; reduced motion makes it a cut. No horizontal
+   padding, so the label aligns with surrounding text. */
 .aug-button--link {
+  padding-inline: 0;
   background-color: transparent;
+  background-image: linear-gradient(currentColor, currentColor);
+  background-position: 0 calc(100% - 6px);
+  background-repeat: no-repeat;
+  background-size: 0 2px;
   color: var(--foreground);
+  transition: background-size var(--augur-duration-base) var(--augur-ease-reveal);
 }
 
-/* Surface variants hover onto the neutral highlight surface; the
-   outline's edge also steps up to the control hover edge. */
-.aug-button--outline:hover:not(:disabled),
+/* Ghost hovers onto the neutral highlight surface. Outline (augur.net)
+   lifts one surface step and takes the green brand hover edge. */
 .aug-button--ghost:hover:not(:disabled) {
   background-color: var(--accent);
   color: var(--accent-foreground);
 }
 
 .aug-button--outline:hover:not(:disabled) {
-  border-color: var(--input-hover);
+  background-color: var(--secondary);
+  border-color: var(--brand-hover-edge);
+  color: var(--foreground);
 }
 
 /* Filled variants step to a neighbouring palette color and keep their
@@ -141,16 +152,20 @@
 
 .aug-button--destructive:active:not(:disabled),
 .aug-button--secondary:active:not(:disabled),
-.aug-button--outline:active:not(:disabled),
 .aug-button--ghost:active:not(:disabled) {
   background-color: var(--foreground);
   color: var(--background);
 }
 
-.aug-button--link:hover:not(:disabled) {
-  text-decoration: underline;
-  text-underline-offset: 0.2em;
-  text-decoration-thickness: 2px;
+/* Outline pressed: one more surface step, with the plain border. */
+.aug-button--outline:active:not(:disabled) {
+  background-color: var(--secondary-hover);
+  border-color: var(--border);
+  color: var(--foreground);
+}
+
+.aug-button--link:is(:hover, :active):not(:disabled) {
+  background-size: 100% 2px;
 }
 
 /*

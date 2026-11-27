@@ -14,19 +14,20 @@
       "path": "packages/design-system/src/styles/typography.css",
       "type": "registry:style",
       "target": "src/styles/augur-typography.css",
-      "content": "/*\n * Typography role classes for @augurproject/design-system.\n *\n * Each class mirrors one `DESIGN.md` front-matter `typography` role,\n * keyed by the role name. Values are hand-authored to match `DESIGN.md`\n * exactly and verified against it by the fonts fixture driver\n * (`fixtures/verify-fonts.mjs`); the token pipeline (issue #3) generates\n * the primitive tokens, while role classes stay the maintained runtime\n * mapping. Do not add roles or values that are not in `DESIGN.md`.\n *\n * Families come from the `--augur-font-primary` and\n * `--augur-font-secondary` custom properties (`font-stacks.css` in the\n * package; the registry theme item declares them on `:root`). Font files\n * are delivered separately, by the package's optional `fonts.css` export\n * or by the consumer. Weights rely on Sora 400/600 and Schibsted\n * Grotesk 400 faces; the editorial roles (issue 45) deliberately reuse\n * the 400 faces, and no Sora Light dependency exists.\n *\n * Every rule sits in `@layer augur`.\n */\n\n@layer augur {\n\n/* Base: body copy uses the secondary voice unless a role overrides it. */\nbody {\n  font-family: var(--augur-font-secondary);\n  font-weight: 400;\n}\n\n/* DESIGN.md `typography.display` — Sora 600, 40/44, -0.01em. */\n.augur-type-display {\n  font-family: var(--augur-font-primary);\n  font-weight: 600;\n  font-size: 40px;\n  line-height: 44px;\n  letter-spacing: -0.01em;\n}\n\n/* DESIGN.md `typography.heading-1` — Sora 600, 28/34, -0.005em. */\n.augur-type-heading-1 {\n  font-family: var(--augur-font-primary);\n  font-weight: 600;\n  font-size: 28px;\n  line-height: 34px;\n  letter-spacing: -0.005em;\n}\n\n/* DESIGN.md `typography.heading-2` — Sora 600, 20/26. */\n.augur-type-heading-2 {\n  font-family: var(--augur-font-primary);\n  font-weight: 600;\n  font-size: 20px;\n  line-height: 26px;\n}\n\n/* DESIGN.md `typography.body` — Schibsted Grotesk 400, 16/24. */\n.augur-type-body {\n  font-family: var(--augur-font-secondary);\n  font-weight: 400;\n  font-size: 16px;\n  line-height: 24px;\n}\n\n/* DESIGN.md `typography.control` — Sora 600, 14/20. */\n.augur-type-control {\n  font-family: var(--augur-font-primary);\n  font-weight: 600;\n  font-size: 14px;\n  line-height: 20px;\n}\n\n/* DESIGN.md `typography.ui` — Sora 400, 14/20. */\n.augur-type-ui {\n  font-family: var(--augur-font-primary);\n  font-weight: 400;\n  font-size: 14px;\n  line-height: 20px;\n}\n\n/* DESIGN.md `typography.metadata` — Schibsted Grotesk 400, 12/16. */\n.augur-type-metadata {\n  font-family: var(--augur-font-secondary);\n  font-weight: 400;\n  font-size: 12px;\n  line-height: 16px;\n}\n\n/* DESIGN.md `typography.editorial-title` — Sora 400, 40/48, -0.01em.\n   The editorial voice: long-form titles set regular so size\n   alone creates order. The 32/40 step below 600px is part of the\n   adopted role, per the visual direction contract. */\n.augur-type-editorial-title {\n  font-family: var(--augur-font-primary);\n  font-weight: 400;\n  font-size: 40px;\n  line-height: 48px;\n  letter-spacing: -0.01em;\n}\n\n/* DESIGN.md `typography.editorial-section` — Sora 400, 28/34, -0.005em. */\n.augur-type-editorial-section {\n  font-family: var(--augur-font-primary);\n  font-weight: 400;\n  font-size: 28px;\n  line-height: 34px;\n  letter-spacing: -0.005em;\n}\n\n/* DESIGN.md `typography.editorial-label` — Schibsted Grotesk 400,\n   12/16, +0.12em: short tracked uppercase labels. Wrapping is allowed;\n   the tracking is never reduced to fit. */\n.augur-type-editorial-label {\n  font-family: var(--augur-font-secondary);\n  font-weight: 400;\n  font-size: 12px;\n  line-height: 16px;\n  letter-spacing: 0.12em;\n  text-transform: uppercase;\n}\n\n/* Adopted mobile steps for the editorial roles (visual direction\n   contract). The seven inherited roles have no mobile steps. */\n@media (max-width: 599px) {\n  .augur-type-editorial-title {\n    font-size: 32px;\n    line-height: 40px;\n  }\n\n  .augur-type-editorial-section {\n    font-size: 24px;\n    line-height: 32px;\n  }\n}\n\n} /* @layer augur */\n"
+      "content": "/*\n * Typography role classes for @augurproject/design-system.\n *\n * Each class mirrors one `DESIGN.md` front-matter `typography` role,\n * keyed by the role name. Values are hand-authored to match `DESIGN.md`\n * exactly and verified against it by the fonts fixture driver\n * (`fixtures/verify-fonts.mjs`); the token pipeline (issue #3) generates\n * the primitive tokens, while role classes stay the maintained runtime\n * mapping. Do not add roles or values that are not in `DESIGN.md`.\n *\n * Families come from the `--augur-font-primary` and\n * `--augur-font-secondary` custom properties (`font-stacks.css` in the\n * package; the registry theme item declares them on `:root`). Font files\n * are delivered separately, by the package's optional `fonts.css` export\n * or by the consumer. Weights rely on Sora 400/600 and Schibsted\n * Grotesk 400 faces; the editorial roles (issue 45) deliberately reuse\n * the 400 faces, and no Sora Light dependency exists.\n *\n * Every rule sits in `@layer augur`.\n */\n\n@layer augur {\n\n/* Base: body copy uses the secondary voice unless a role overrides it. */\nbody {\n  font-family: var(--augur-font-secondary);\n  font-weight: 400;\n}\n\n/* DESIGN.md `typography.display` — Sora 600, 40/44, -0.01em. */\n.augur-type-display {\n  font-family: var(--augur-font-primary);\n  font-weight: 600;\n  font-size: 40px;\n  line-height: 44px;\n  letter-spacing: -0.01em;\n}\n\n/* DESIGN.md `typography.heading-1` — Sora 600, 28/34, -0.005em. */\n.augur-type-heading-1 {\n  font-family: var(--augur-font-primary);\n  font-weight: 600;\n  font-size: 28px;\n  line-height: 34px;\n  letter-spacing: -0.005em;\n}\n\n/* DESIGN.md `typography.heading-2` — Sora 600, 20/26. */\n.augur-type-heading-2 {\n  font-family: var(--augur-font-primary);\n  font-weight: 600;\n  font-size: 20px;\n  line-height: 26px;\n}\n\n/* DESIGN.md `typography.body` — Schibsted Grotesk 400, 16/24. */\n.augur-type-body {\n  font-family: var(--augur-font-secondary);\n  font-weight: 400;\n  font-size: 16px;\n  line-height: 24px;\n}\n\n/* DESIGN.md `typography.control` — Sora 600, 14/20. */\n.augur-type-control {\n  font-family: var(--augur-font-primary);\n  font-weight: 600;\n  font-size: 14px;\n  line-height: 20px;\n}\n\n/* DESIGN.md `typography.ui` — Sora 400, 14/20. */\n.augur-type-ui {\n  font-family: var(--augur-font-primary);\n  font-weight: 400;\n  font-size: 14px;\n  line-height: 20px;\n}\n\n/* DESIGN.md `typography.metadata` — Schibsted Grotesk 400, 12/16. */\n.augur-type-metadata {\n  font-family: var(--augur-font-secondary);\n  font-weight: 400;\n  font-size: 12px;\n  line-height: 16px;\n}\n\n/*\n * Editorial roles (v0.4.0): augur.net's public-page scale, adopted\n * as-is. Every heading is Sora 600; supporting copy is Schibsted\n * Grotesk 400. DESIGN.md records each role's largest step; the fluid\n * steps below are the runtime layer (the same clamp() values the site\n * uses), so the role resolves to its DESIGN.md value on wide screens.\n */\n\n/* DESIGN.md `typography.editorial-display` — Sora 600, 72/78 (fluid from 40). */\n.augur-type-editorial-display {\n  font-family: var(--augur-font-primary);\n  font-weight: 600;\n  font-size: clamp(40px, 5vw, 72px);\n  line-height: 1.083333;\n}\n\n/* DESIGN.md `typography.editorial-title` — Sora 600, 60/66, -0.03em\n   (fluid from 32). The landing-page title. */\n.augur-type-editorial-title {\n  font-family: var(--augur-font-primary);\n  font-weight: 600;\n  font-size: clamp(2rem, 1.5rem + 3vw, 3.75rem);\n  line-height: 1.1;\n  letter-spacing: -0.03em;\n}\n\n/* DESIGN.md `typography.editorial-heading-1` — Sora 600, 48/56 (fluid from 36). */\n.augur-type-editorial-heading-1 {\n  font-family: var(--augur-font-primary);\n  font-weight: 600;\n  font-size: clamp(36px, 3.5vw, 48px);\n  line-height: 1.166667;\n}\n\n/* DESIGN.md `typography.editorial-heading-2` — Sora 600, 40/48 (fluid from 30). */\n.augur-type-editorial-heading-2 {\n  font-family: var(--augur-font-primary);\n  font-weight: 600;\n  font-size: clamp(30px, 2.78vw, 40px);\n  line-height: 1.2;\n}\n\n/* DESIGN.md `typography.editorial-heading-3` — Sora 600, 24/32. */\n.augur-type-editorial-heading-3 {\n  font-family: var(--augur-font-primary);\n  font-weight: 600;\n  font-size: 24px;\n  line-height: 32px;\n}\n\n/* DESIGN.md `typography.editorial-heading-4` — Sora 600, 20/26. */\n.augur-type-editorial-heading-4 {\n  font-family: var(--augur-font-primary);\n  font-weight: 600;\n  font-size: 20px;\n  line-height: 26px;\n}\n\n/* DESIGN.md `typography.editorial-lead` — Schibsted Grotesk 400, 22/33\n   (20/30 below 768px). */\n.augur-type-editorial-lead {\n  font-family: var(--augur-font-secondary);\n  font-weight: 400;\n  font-size: 22px;\n  line-height: 33px;\n  text-wrap: balance;\n}\n\n/* DESIGN.md `typography.editorial-reading` — Schibsted Grotesk 400,\n   18/30: long-form article body. */\n.augur-type-editorial-reading {\n  font-family: var(--augur-font-secondary);\n  font-weight: 400;\n  font-size: 18px;\n  line-height: 30px;\n}\n\n/* DESIGN.md `typography.editorial-meta` — Schibsted Grotesk 400, 14/20. */\n.augur-type-editorial-meta {\n  font-family: var(--augur-font-secondary);\n  font-weight: 400;\n  font-size: 14px;\n  line-height: 20px;\n}\n\n/* DESIGN.md `typography.editorial-caption` — Schibsted Grotesk 400, 13/18. */\n.augur-type-editorial-caption {\n  font-family: var(--augur-font-secondary);\n  font-weight: 400;\n  font-size: 13px;\n  line-height: 18px;\n}\n\n/* DESIGN.md `typography.editorial-label` — Sora 600, 14/20. Labels are\n   sentence case, set in Green or Pewter by context; no tracked capitals. */\n.augur-type-editorial-label {\n  font-family: var(--augur-font-primary);\n  font-weight: 600;\n  font-size: 14px;\n  line-height: 20px;\n}\n\n/* Values: tabular figures in the primary voice, as augur.net sets\n   amounts, counts, and token addresses. */\n.augur-type-figure {\n  font-family: var(--augur-font-primary);\n  font-weight: 600;\n  font-variant-numeric: tabular-nums;\n}\n\n/* Code and raw technical strings: the system monospace stack. */\n.augur-type-code {\n  font-family: var(--augur-font-mono);\n  font-size: 0.85em;\n}\n\n@media (max-width: 767px) {\n  .augur-type-editorial-lead {\n    font-size: 20px;\n    line-height: 30px;\n  }\n}\n\n} /* @layer augur */\n"
     },
     {
       "path": "packages/design-system/src/styles/base.css",
       "type": "registry:style",
       "target": "src/styles/augur-base.css",
-      "content": "/*\n * Structural base rules for @augurproject/design-system: the canvas\n * pairing on body, the keyboard focus ring, and the reduced-motion gate.\n *\n * Internal part of the public `theme.css` entry. The rules reference\n * semantic roles only (`./roles.css`), so they are identical in both\n * themes; the registry `augur-theme` item ships this file unchanged.\n * Every rule sits in `@layer augur`.\n */\n\n@layer augur {\n\n/* ------------------------------------------------------------------ */\n/* Shared structural behavior — identical in both themes.              */\n/* ------------------------------------------------------------------ */\n\n/* Apply the canvas pairing so the default and selected themes render\n   without consumer boilerplate (page-canvas-light / page-canvas-dark). */\nbody {\n  background-color: var(--background);\n  color: var(--foreground);\n}\n\n/* Focus: painted for keyboard focus only (focus-visible), as a 2px ring\n   with a 2px offset in the theme's ring color. Structural rule shared by\n   both themes; the color changes with the theme, nothing else does. The\n   2px/2px geometry is structural and intentionally not emitted as a\n   token. */\n:focus-visible {\n  outline: 2px solid var(--ring);\n  outline-offset: 2px;\n}\n\n/* Links take a 6px offset so the ring clears text and its underline\n   (adopted from augur.net, issue #8). Same ring, larger offset. */\na:focus-visible {\n  outline-offset: 6px;\n}\n\n/* Reduced motion: structural media-query gate over transition and\n   animation properties (the reduced-motion collapse required by the\n   theme contract). No duration tokens are adopted or emitted;\n   the canonical collapse constant is inlined here and applies equally\n   in both themes, including to consumer-authored motion. */\n@media (prefers-reduced-motion: reduce) {\n  *,\n  *::before,\n  *::after {\n    animation-duration: 0.01ms !important;\n    animation-iteration-count: 1 !important;\n    transition-duration: 0.01ms !important;\n    scroll-behavior: auto !important;\n  }\n}\n\n} /* @layer augur */\n"
+      "content": "/*\n * Structural base rules for @augurproject/design-system: the canvas\n * pairing on body, the keyboard focus ring, and the reduced-motion gate.\n *\n * Internal part of the public `theme.css` entry. The rules reference\n * semantic roles only (`./roles.css`), so they are identical in both\n * themes; the registry `augur-theme` item ships this file unchanged.\n * Every rule sits in `@layer augur`.\n */\n\n@layer augur {\n\n/* ------------------------------------------------------------------ */\n/* Shared structural behavior — identical in both themes.              */\n/* ------------------------------------------------------------------ */\n\n/* Apply the canvas pairing so the default and selected themes render\n   without consumer boilerplate (page-canvas-light / page-canvas-dark). */\nbody {\n  background-color: var(--background);\n  color: var(--foreground);\n}\n\n/* Focus: painted for keyboard focus only (focus-visible), as a 2px ring\n   with a 2px offset in the theme's ring color. Structural rule shared by\n   both themes; the color changes with the theme, nothing else does. The\n   2px/2px geometry is structural and intentionally not emitted as a\n   token. */\n:focus-visible {\n  outline: 2px solid var(--ring);\n  outline-offset: 2px;\n}\n\n/* Links take a 6px offset so the ring clears text and its underline\n   (adopted from augur.net, issue #8). Same ring, larger offset. */\na:focus-visible {\n  outline-offset: 6px;\n}\n\n/* Reduced motion: structural media-query gate over transition and\n   animation properties (the reduced-motion collapse required by the\n   theme contract). The v0.4.0 motion properties (layout.css) collapse\n   too; the canonical collapse constant is inlined here and applies equally\n   in both themes, including to consumer-authored motion. */\n@media (prefers-reduced-motion: reduce) {\n  *,\n  *::before,\n  *::after {\n    animation-duration: 0.01ms !important;\n    animation-iteration-count: 1 !important;\n    transition-duration: 0.01ms !important;\n    scroll-behavior: auto !important;\n  }\n}\n\n} /* @layer augur */\n"
     }
   ],
   "cssVars": {
     "theme": {
       "--font-sans": "var(--augur-font-secondary)",
       "--font-heading": "var(--augur-font-primary)",
+      "--font-mono": "var(--augur-font-mono)",
       "--color-accent": "var(--accent)",
       "--color-accent-foreground": "var(--accent-foreground)",
       "--color-background": "var(--background)",
@@ -41,6 +42,8 @@
       "--color-foreground": "var(--foreground)",
       "--color-input": "var(--input)",
       "--color-input-hover": "var(--input-hover)",
+      "--color-outline": "var(--outline)",
+      "--color-danger": "var(--danger)",
       "--color-muted": "var(--muted)",
       "--color-muted-foreground": "var(--muted-foreground)",
       "--color-popover": "var(--popover)",
@@ -82,12 +85,22 @@
       "--augur-color-surface-dark-2": "#1d1d30",
       "--augur-color-surface-dark-3": "#242438",
       "--augur-color-surface-dark-mist": "#71728a",
+      "--augur-color-surface-dark-outline": "#383848",
+      "--augur-color-danger": "#cf294e",
       "--augur-spacing-xs": "4px",
       "--augur-spacing-sm": "8px",
       "--augur-spacing-md": "12px",
       "--augur-spacing-lg": "16px",
+      "--augur-spacing-lg-plus": "20px",
       "--augur-spacing-xl": "24px",
+      "--augur-spacing-xl-plus": "28px",
       "--augur-spacing-2xl": "32px",
+      "--augur-spacing-3xl": "40px",
+      "--augur-spacing-4xl": "48px",
+      "--augur-spacing-5xl": "56px",
+      "--augur-spacing-6xl": "64px",
+      "--augur-spacing-7xl": "72px",
+      "--augur-spacing-8xl": "96px",
       "--augur-rounded-control": "0px",
       "--augur-rounded-surface": "0px",
       "--augur-font-primary": "\"Sora\", ui-sans-serif, system-ui, sans-serif",
@@ -117,6 +130,8 @@
       "--border": "var(--augur-color-border-light)",
       "--input": "var(--augur-color-surface-dark-mist)",
       "--input-hover": "var(--augur-color-secondary)",
+      "--outline": "var(--augur-color-border-light)",
+      "--danger": "var(--augur-color-danger)",
       "--border-quiet": "var(--augur-color-border-light)",
       "--brand-hover-edge": "color-mix(in srgb, var(--augur-color-accent-deep) 50%, transparent)",
       "--ring": "var(--augur-color-accent-deep)"
@@ -148,6 +163,8 @@
       "--border": "var(--augur-color-border-light)",
       "--input": "var(--augur-color-surface-dark-mist)",
       "--input-hover": "var(--augur-color-secondary)",
+      "--outline": "var(--augur-color-border-light)",
+      "--danger": "var(--augur-color-danger)",
       "--border-quiet": "var(--augur-color-border-light)",
       "--brand-hover-edge": "color-mix(in srgb, var(--augur-color-accent-deep) 50%, transparent)",
       "--ring": "var(--augur-color-accent-deep)"
@@ -179,6 +196,8 @@
       "--border": "var(--augur-color-surface-dark-mist)",
       "--input": "var(--augur-color-surface-dark-mist)",
       "--input-hover": "var(--augur-color-secondary-dark)",
+      "--outline": "var(--augur-color-surface-dark-outline)",
+      "--danger": "var(--augur-color-danger)",
       "--border-quiet": "var(--augur-color-surface-dark-3)",
       "--brand-hover-edge": "color-mix(in srgb, var(--augur-color-accent) 50%, transparent)",
       "--ring": "var(--augur-color-accent)"
@@ -210,6 +229,8 @@
       "--border": "var(--augur-color-surface-dark-mist)",
       "--input": "var(--augur-color-surface-dark-mist)",
       "--input-hover": "var(--augur-color-secondary-dark)",
+      "--outline": "var(--augur-color-surface-dark-outline)",
+      "--danger": "var(--augur-color-danger)",
       "--border-quiet": "var(--augur-color-surface-dark-3)",
       "--brand-hover-edge": "color-mix(in srgb, var(--augur-color-accent) 50%, transparent)",
       "--ring": "var(--augur-color-accent)"
@@ -242,6 +263,8 @@
         "--border": "var(--augur-color-surface-dark-mist)",
         "--input": "var(--augur-color-surface-dark-mist)",
         "--input-hover": "var(--augur-color-secondary-dark)",
+        "--outline": "var(--augur-color-surface-dark-outline)",
+        "--danger": "var(--augur-color-danger)",
         "--border-quiet": "var(--augur-color-surface-dark-3)",
         "--brand-hover-edge": "color-mix(in srgb, var(--augur-color-accent) 50%, transparent)",
         "--ring": "var(--augur-color-accent)"

@@ -1,7 +1,7 @@
 /**
  * GENERATED FILE — do not edit. Regenerate: `bun run tokens:generate` in packages/design-system. Verify: `bun run tokens:check`. Policy and schema boundaries: packages/design-system/docs/token-generation.md.
  *
- * Source:  DESIGN.md (repository root), sha256 10b28e341e67e3d41f9e319f4d601a7c20e1aecc68255355bfb5aaf868cfb471
+ * Source:  DESIGN.md (repository root), sha256 83d07935b04fe87ccaa133d41d17dbde0209456710fb4b19c3ad48c09f20ea32
  * Tool:    @google/design.md@0.4.0 (exact pin in packages/design-system/package.json (0.4.0))
  * Command: design.md export DESIGN.md --format css-vars --prefix augur
  * Lint:    0 errors / 0 warnings / 1 infos at generation time
@@ -27,12 +27,22 @@
   --augur-color-surface-dark-2: #1d1d30;
   --augur-color-surface-dark-3: #242438;
   --augur-color-surface-dark-mist: #71728a;
+  --augur-color-surface-dark-outline: #383848;
+  --augur-color-danger: #cf294e;
   --augur-spacing-xs: 4px;
   --augur-spacing-sm: 8px;
   --augur-spacing-md: 12px;
   --augur-spacing-lg: 16px;
+  --augur-spacing-lg-plus: 20px;
   --augur-spacing-xl: 24px;
+  --augur-spacing-xl-plus: 28px;
   --augur-spacing-2xl: 32px;
+  --augur-spacing-3xl: 40px;
+  --augur-spacing-4xl: 48px;
+  --augur-spacing-5xl: 56px;
+  --augur-spacing-6xl: 64px;
+  --augur-spacing-7xl: 72px;
+  --augur-spacing-8xl: 96px;
   --augur-rounded-control: 0px;
   --augur-rounded-surface: 0px;
 }

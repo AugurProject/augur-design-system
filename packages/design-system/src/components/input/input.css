@@ -18,6 +18,9 @@
 
 @layer augur {
 
+/* The filled field (adopted from augur.net, v0.4.0): a quiet fill with
+   a Mist rule along the bottom edge only. The rule carries the 3:1
+   control-edge minimum; the fill groups the field with its label. */
 .aug-input {
   box-sizing: border-box;
   display: block;
@@ -26,10 +29,12 @@
   padding: 0 var(--augur-spacing-md); /* control padding; text fields read
                      better a step tighter than the md button's 16px */
   margin: 0;
-  border: 1px solid var(--input);
+  border: 0;
+  border-bottom: 1px solid var(--input);
   border-radius: var(--augur-rounded-control); /* radius.control: 0px */
-  background-color: transparent; /* sits on any surface: canvas or card */
+  background-color: var(--muted);
   color: var(--foreground);
+  caret-color: var(--primary);
   vertical-align: middle;
 }
 
@@ -42,11 +47,17 @@
   line-height: 24px;
 }
 
-/* Hover: the edge steps from Mist to the stronger control hover edge.
-   Not for disabled or read-only fields, and never over the invalid
-   edge. */
+/* Hover: the fill lifts one surface step. Not for disabled or
+   read-only fields, and never under the invalid rule (the danger mark
+   keeps its contrast on the resting fill). */
 .aug-input:hover:not(:disabled):not([readonly]):not([aria-invalid="true"]) {
-  border-color: var(--input-hover);
+  background-color: var(--secondary-hover);
+}
+
+/* Focus: the bottom rule turns to the primary signal (Green in dark,
+   Deep in light); the shared keyboard ring still paints. */
+.aug-input:focus:not([aria-invalid="true"]) {
+  border-bottom-color: var(--primary);
 }
 
 .aug-input::placeholder {
@@ -56,23 +67,22 @@
 }
 
 /*
- * Invalid: the danger-role border (aria-invalid is set by the
- * component's `invalid` prop). The theme defines no danger hue
- * — the visible error message text carries the
- * meaning; the border is reinforcement, never the sole signal.
+ * Invalid: a 2px danger rule (aria-invalid is set by the component's
+ * `invalid` prop). The visible error message text carries the meaning;
+ * the rule is reinforcement, never the sole signal.
  */
 .aug-input[aria-invalid="true"] {
-  border-color: var(--destructive);
+  border-bottom: 2px solid var(--danger);
 }
 
 /*
  * Read-only: still focusable, value selectable and copyable —
- * deliberately NOT the disabled treatment. The quiet surface signals
- * "displayed, not edited" while the text stays in the secondary-text
- * contrast pairing.
+ * deliberately NOT the disabled treatment. With the filled field as
+ * the editable default, read-only drops the fill and keeps the bottom
+ * rule: "displayed, not edited".
  */
 .aug-input[readonly] {
-  background-color: var(--muted);
+  background-color: transparent;
   cursor: default;
 }
 

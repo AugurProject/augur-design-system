@@ -203,6 +203,8 @@ const SEMANTIC_ROLES = [
   "--border-quiet",
   "--input",
   "--input-hover",
+  "--outline",
+  "--danger",
   "--brand-hover-edge",
   "--ring",
 ] as const;
@@ -324,9 +326,9 @@ describe("generated token integrity (issue #3 output)", () => {
     }
   });
 
-  test("the generator emits the 17 color primitives the theme maps from", () => {
+  test("the generator emits the 19 color primitives the theme maps from", () => {
     const names = Object.keys(generatedColors);
-    expect(names.length).toBe(17);
+    expect(names.length).toBe(19);
     for (const name of names) {
       expect(name.startsWith("--augur-color-")).toBe(true);
       expect(generatedColors[name]).toMatch(/^#[0-9a-f]{6}$/);
@@ -502,6 +504,21 @@ describe("control edges (WCAG 1.4.11 non-text contrast)", () => {
       expect(contrast(resolveRole(scope, "--input-hover"), bg)).toBeGreaterThan(
         contrast(resolveRole(scope, "--input"), bg),
       );
+    }
+  });
+
+  test("the danger mark holds at least 3:1 on every resting field surface", () => {
+    for (const scope of themes) {
+      for (const surface of CONTROL_SURFACES) {
+        const ratio = contrast(resolveRole(scope, "--danger"), resolveRole(scope, surface));
+        expect(ratio).toBeGreaterThanOrEqual(3);
+      }
+    }
+  });
+
+  test("the outline edge stays distinct from the field edge (it is decorative, not a control edge)", () => {
+    for (const scope of themes) {
+      expect(resolveRole(scope, "--outline")).not.toBe(resolveRole(scope, "--input"));
     }
   });
 

@@ -1,0 +1,67 @@
+/*
+ * Layout and motion roles for @augurproject/design-system (v0.4.0).
+ *
+ * Internal part of the public `theme.css` entry. Adopted as-is from
+ * augur.net (augur-website `src/styles/global.css`): the page frame,
+ * gutters, section rhythm, reading measures, and the motion vocabulary.
+ * These are composition roles, not component spacing; components keep
+ * the generated `--augur-spacing-*` steps. Identical in both themes.
+ * Every rule sits in `@layer augur`.
+ */
+
+@layer augur {
+
+:root {
+  /* Page frame and gutters. The gutter grows with the viewport between
+     1024px and 1440px, then steps to 32px and 24px on smaller screens. */
+  --augur-layout-frame: 1248px;
+  --augur-layout-gutter: clamp(48px, calc(100vw / 3 - 384px), 96px);
+
+  /* Vertical rhythm: space around a page section, under a section
+     heading, and between blocks inside a section. */
+  --augur-layout-section-space: 96px;
+  --augur-layout-heading-gap: 48px;
+  --augur-layout-block-gap: 64px;
+
+  /* Reading measures: a page lead, and an answer or article column. */
+  --augur-measure-lead: 58ch;
+  --augur-measure-answer: 720px;
+  --augur-measure-prose: 65ch;
+
+  /* Motion vocabulary. Four easings and three durations; motion is
+     functional feedback (a line drawing under a text action, an arrow
+     nudging 3px, a disclosure edge drawing down), never decoration.
+     The reduced-motion gate in base.css collapses all of it. */
+  --augur-ease-reveal: cubic-bezier(.22, .61, .36, 1);
+  --augur-ease-hero: cubic-bezier(.22, .7, .22, 1);
+  --augur-ease-draw: cubic-bezier(.45, 0, .2, 1);
+  --augur-ease-crossfade: cubic-bezier(.45, 0, .55, 1);
+  --augur-duration-fast: 180ms;
+  --augur-duration-base: 240ms;
+  --augur-duration-slow: 320ms;
+  --augur-motion-nudge: 3px;
+}
+
+@media (max-width: 1023px) {
+  :root {
+    --augur-layout-gutter: 32px;
+    --augur-layout-section-space: 72px;
+  }
+}
+
+@media (max-width: 767px) {
+  :root {
+    --augur-layout-gutter: 24px;
+    --augur-layout-section-space: 64px;
+    --augur-layout-heading-gap: 32px;
+    --augur-layout-block-gap: 48px;
+  }
+}
+
+/* The page frame as a class: centered, inset by the gutter. */
+.augur-frame {
+  width: min(var(--augur-layout-frame), calc(100% - 2 * var(--augur-layout-gutter)));
+  margin-inline: auto;
+}
+
+} /* @layer augur */

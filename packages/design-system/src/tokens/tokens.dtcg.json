@@ -5,7 +5,7 @@
     "source": {
       "file": "DESIGN.md",
       "location": "repository root",
-      "sha256": "10b28e341e67e3d41f9e319f4d601a7c20e1aecc68255355bfb5aaf868cfb471"
+      "sha256": "83d07935b04fe87ccaa133d41d17dbde0209456710fb4b19c3ad48c09f20ea32"
     },
     "tool": {
       "name": "@google/design.md",
@@ -212,6 +212,28 @@
           ],
           "hex": "#71728a"
         }
+      },
+      "surface-dark-outline": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.22,
+            0.22,
+            0.282
+          ],
+          "hex": "#383848"
+        }
+      },
+      "danger": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.812,
+            0.161,
+            0.306
+          ],
+          "hex": "#cf294e"
+        }
       }
     },
     "spacing": {
@@ -240,15 +262,63 @@
           "unit": "px"
         }
       },
+      "lg-plus": {
+        "$value": {
+          "value": 20,
+          "unit": "px"
+        }
+      },
       "xl": {
         "$value": {
           "value": 24,
           "unit": "px"
         }
       },
+      "xl-plus": {
+        "$value": {
+          "value": 28,
+          "unit": "px"
+        }
+      },
       "2xl": {
         "$value": {
           "value": 32,
+          "unit": "px"
+        }
+      },
+      "3xl": {
+        "$value": {
+          "value": 40,
+          "unit": "px"
+        }
+      },
+      "4xl": {
+        "$value": {
+          "value": 48,
+          "unit": "px"
+        }
+      },
+      "5xl": {
+        "$value": {
+          "value": 56,
+          "unit": "px"
+        }
+      },
+      "6xl": {
+        "$value": {
+          "value": 64,
+          "unit": "px"
+        }
+      },
+      "7xl": {
+        "$value": {
+          "value": 72,
+          "unit": "px"
+        }
+      },
+      "8xl": {
+        "$value": {
+          "value": 96,
           "unit": "px"
         }
       }
@@ -361,7 +431,47 @@
           "lineHeight": 16
         }
       },
+      "editorial-display": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "Sora",
+          "fontSize": {
+            "value": 72,
+            "unit": "px"
+          },
+          "fontWeight": 600,
+          "lineHeight": 78
+        }
+      },
       "editorial-title": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "Sora",
+          "fontSize": {
+            "value": 60,
+            "unit": "px"
+          },
+          "fontWeight": 600,
+          "letterSpacing": {
+            "value": -0.03,
+            "unit": "em"
+          },
+          "lineHeight": 66
+        }
+      },
+      "editorial-heading-1": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "Sora",
+          "fontSize": {
+            "value": 48,
+            "unit": "px"
+          },
+          "fontWeight": 600,
+          "lineHeight": 56
+        }
+      },
+      "editorial-heading-2": {
         "$type": "typography",
         "$value": {
           "fontFamily": "Sora",
@@ -369,44 +479,92 @@
             "value": 40,
             "unit": "px"
           },
-          "fontWeight": 400,
-          "letterSpacing": {
-            "value": -0.01,
-            "unit": "em"
-          },
+          "fontWeight": 600,
           "lineHeight": 48
         }
       },
-      "editorial-section": {
+      "editorial-heading-3": {
         "$type": "typography",
         "$value": {
           "fontFamily": "Sora",
           "fontSize": {
-            "value": 28,
+            "value": 24,
+            "unit": "px"
+          },
+          "fontWeight": 600,
+          "lineHeight": 32
+        }
+      },
+      "editorial-heading-4": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "Sora",
+          "fontSize": {
+            "value": 20,
+            "unit": "px"
+          },
+          "fontWeight": 600,
+          "lineHeight": 26
+        }
+      },
+      "editorial-lead": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "Schibsted Grotesk",
+          "fontSize": {
+            "value": 22,
             "unit": "px"
           },
           "fontWeight": 400,
-          "letterSpacing": {
-            "value": -0.005,
-            "unit": "em"
+          "lineHeight": 33
+        }
+      },
+      "editorial-reading": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "Schibsted Grotesk",
+          "fontSize": {
+            "value": 18,
+            "unit": "px"
           },
-          "lineHeight": 34
+          "fontWeight": 400,
+          "lineHeight": 30
+        }
+      },
+      "editorial-meta": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "Schibsted Grotesk",
+          "fontSize": {
+            "value": 14,
+            "unit": "px"
+          },
+          "fontWeight": 400,
+          "lineHeight": 20
+        }
+      },
+      "editorial-caption": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "Schibsted Grotesk",
+          "fontSize": {
+            "value": 13,
+            "unit": "px"
+          },
+          "fontWeight": 400,
+          "lineHeight": 18
         }
       },
       "editorial-label": {
         "$type": "typography",
         "$value": {
-          "fontFamily": "Schibsted Grotesk",
+          "fontFamily": "Sora",
           "fontSize": {
-            "value": 12,
+            "value": 14,
             "unit": "px"
           },
-          "fontWeight": 400,
-          "letterSpacing": {
-            "value": 0.12,
-            "unit": "em"
-          },
-          "lineHeight": 16
+          "fontWeight": 600,
+          "lineHeight": 20
         }
       }
     }

@@ -21,14 +21,14 @@ The specimens below use the package's real typography role classes, so the rende
 
 ## Editorial and interface hierarchy
 
-Augur uses regular-weight editorial roles alongside stronger interface roles:
+The editorial roles are augur.net's public-page scale, adopted as-is in v0.4.0. The interface roles stay for dense product UI:
 
-- `editorial-title` and `editorial-section` use Sora 400 so scale can establish hierarchy without unnecessary weight;
-- display, heading, and control roles retain their stronger interface hierarchy;
-- `editorial-label` uses tracked Schibsted Grotesk for short metadata-like labels;
-- body, helper, table, and record text stay in the supporting voice.
+- every editorial heading (`editorial-display`, `editorial-title`, `editorial-heading-1` to `-4`) is Sora 600; display, title, and the first two headings are fluid and reach their listed size on wide screens;
+- `editorial-lead`, `editorial-reading`, `editorial-meta`, and `editorial-caption` carry supporting copy in Schibsted Grotesk 400;
+- `editorial-label` is Sora 600 14/20 in sentence case, set in Green or Pewter by context; there are no tracked capitals;
+- values use `augur-type-figure` (Sora 600, tabular figures) and code uses `augur-type-code` (the system monospace stack).
 
-Do not globally reduce interface heading weights to imitate editorial pages. Choose the role that matches the content's job.
+Choose the role that matches the content's job.
 
 ## Using the voices in code
 

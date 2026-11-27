@@ -51,9 +51,11 @@ Two relationships are especially important:
 - `--primary` resolves to Deep on light surfaces and Green on dark surfaces so primary intent remains readable in both themes.
 - `--accent` is a neutral hover/highlight surface for outline, ghost, and menu controls, not the brand-green accent color. Generic hover should not multiply green signals. In dark it is Surface 3, one step above the canvas, cards, and popovers, so hover stays visible inside dialogs and menus.
 - Filled buttons hover to a neighboring palette color in their own family through `--primary-hover`, `--secondary-hover`, and `--destructive-hover`, so an engaged primary never reads as disabled.
-- `--input` (control edge) and `--border` (panel bound) are separate jobs: Mist and Border in light, Mist and Surface 3 in dark. Control edges step to `--input-hover` on hover.
+- `--input` (field edge) and `--border` (panel bound) are separate jobs: Mist and Border in light, Mist and Surface 3 in dark. Field edges carry the 3:1 non-text minimum.
+- `--outline` is the quiet edge of labelled outline controls and interactive panels: Outline (#383848) in dark, adopted from augur.net in v0.4.0, and Border in light (provisional; augur.net is dark only). The label identifies the control, so this edge is decorative and never the only edge of a field.
+- `--danger` (#CF294E in both themes, adopted from augur.net in v0.4.0) marks an invalid field or failed state. It is a mark, never readable copy, and holds at least 3:1 on every resting field surface.
 
-The brand palette defines no dedicated danger hue. Destructive meaning must be explicit in the label and surrounding copy; color may reinforce it but cannot carry it alone.
+Destructive meaning must still be explicit in the label and surrounding copy; the danger mark reinforces it but cannot carry it alone.
 
 See [Theming](/foundations/theming) for the full role-selection and scoping model.
 

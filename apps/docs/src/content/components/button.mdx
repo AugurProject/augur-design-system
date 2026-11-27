@@ -29,11 +29,11 @@ import { examples } from "../../examples/registry";
 | `default` | `--primary` / `--primary-foreground` | Primary action and default green-intent carrier |
 | `secondary` | semantic secondary pairing | Supporting action |
 | `destructive` | semantic destructive pairing | High-consequence action; copy names the consequence |
-| `outline` | transparent + `--input` edge | Supporting action on an existing surface |
+| `outline` | transparent + quiet `--outline` edge | Supporting action on an existing surface |
 | `ghost` | transparent | Lowest-emphasis button action |
 | `link` | text only | Inline command-like action |
 
-On hover, filled variants step to a neighboring palette color in their own family: `default` moves from Deep to Green in light and from Green to Wash in dark, both with a Navy label; `secondary` and `destructive` step one tone along their own surface ramp. `outline` and `ghost` step onto the semantic neutral highlight surface, and the `outline` edge strengthens to `--input-hover`. Every non-link variant uses a strong neutral inversion while pressed. The `link` variant gains an underline. Hover does not introduce a second green treatment.
+On hover, filled variants step to a neighboring palette color in their own family: `default` moves from Deep to Green in light and from Green to Wash in dark, both with a Navy label; `secondary` and `destructive` step one tone along their own surface ramp. `ghost` steps onto the semantic neutral highlight surface. `outline` lifts one surface step (`--secondary`) and takes the green `--brand-hover-edge`, as on augur.net; pressed, it steps once more with the plain border. Other non-link variants use a strong neutral inversion while pressed. On the `link` variant a 2px line draws in under the label. Hover does not introduce a second green treatment.
 
 <DocExample example={examples.button.variants} />
 
@@ -49,7 +49,7 @@ These are the maintained structural control sizes. On coarse pointers, the actio
 
 ## States
 
-- **Hover:** a neighboring palette step for filled variants (`--primary-hover`, `--secondary-hover`, `--destructive-hover`); the neutral highlight surface for `outline` and `ghost`, plus the `--input-hover` edge on `outline`; underline for `link`.
+- **Hover:** a neighboring palette step for filled variants (`--primary-hover`, `--secondary-hover`, `--destructive-hover`); the neutral highlight surface for `ghost`; one surface step plus the green `--brand-hover-edge` for `outline`; a drawn 2px line for `link`.
 - **Pressed:** strong neutral inversion for standard variants.
 - **Focus:** shared 2px `:focus-visible` ring with a 2px offset from `--ring`.
 - **Disabled:** native `disabled`, non-interactive, label remains present, `cursor: not-allowed`, reduced opacity.
@@ -106,7 +106,7 @@ import { Button, buttonVariants } from "@augurproject/design-system";
 
 Button keeps command semantics native and the visual API deliberately small. Semantic roles allow the same hierarchy to survive both themes without color props or local token maps.
 
-The default action carries the primary intent signal; supporting variants remain neutral. Destructive meaning is carried by explicit language because the brand palette does not introduce a separate danger hue.
+The default action carries the primary intent signal; supporting variants remain neutral. Destructive meaning is carried by explicit language; the danger color marks invalid fields, not buttons.
 
 ## Related components and patterns
 

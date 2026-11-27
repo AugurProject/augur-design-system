@@ -20,7 +20,9 @@ The 1400px docs-shell maximum is a scoped readability decision. It supersedes th
 
 ## Spacing decisions
 
-The maintained local spacing scale is 4, 8, 12, 16, 24, and 32px. Larger 48, 64, and 80px steps are composition roles for major page regions rather than extra component padding.
+The spacing scale, extended from augur.net in v0.4.0, is 4, 8, 12, 16, 20, 24, 28, 32, and 40px for components, and 48, 56, 64, 72, and 96px for major page regions.
+
+Public pages use augur.net's composition roles from `theme.css`: a 1248px frame (`--augur-layout-frame`, or the `augur-frame` class) inset by `--augur-layout-gutter` (48–96px, then 32px below 1024px and 24px below 768px); `--augur-layout-section-space` 96/72/64px; `--augur-layout-heading-gap` 48/32px; `--augur-layout-block-gap` 64/48px; and the `--augur-measure-lead` (58ch), `--augur-measure-answer` (720px), and `--augur-measure-prose` (65ch) reading measures.
 
 In the documentation shell, a major section opens 48px below the previous content and a subsection 32px below it; headings sit 12px (sections) or 8px (subsections) above their content.
 

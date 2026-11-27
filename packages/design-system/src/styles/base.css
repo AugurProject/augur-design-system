@@ -39,8 +39,8 @@ a:focus-visible {
 
 /* Reduced motion: structural media-query gate over transition and
    animation properties (the reduced-motion collapse required by the
-   theme contract). No duration tokens are adopted or emitted;
-   the canonical collapse constant is inlined here and applies equally
+   theme contract). The v0.4.0 motion properties (layout.css) collapse
+   too; the canonical collapse constant is inlined here and applies equally
    in both themes, including to consumer-authored motion. */
 @media (prefers-reduced-motion: reduce) {
   *,
