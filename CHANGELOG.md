@@ -6,6 +6,10 @@ Releases are immutable Git tags (`vX.Y.Z`) that describe the whole consumer-faci
 
 ## Unreleased
 
+## [0.4.0] - 2026-11-27
+
+Adopt it by installing the tarball attached to the `v0.4.0` GitHub Release, `https://github.com/AugurProject/augur-design-system/releases/download/v0.4.0/augurproject-design-system-0.4.0.tgz`, or the registry items at `#v0.4.0`. Breaking for `editorial-section` users: switch to `editorial-heading-2` or `editorial-heading-3`.
+
 The design system adopts augur.net's choices wherever the two disagreed (Jubal, 25 November 2026). For the website the values are unchanged; it can delete its local copies and read them from the package.
 
 ### Added
