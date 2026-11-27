@@ -6,8 +6,8 @@
   "author": "jubalm",
   "description": "Augur card (registry source distribution; contract docs/registry-contract.md).",
   "registryDependencies": [
-    "AugurProject/augur-design-system/augur-theme",
-    "AugurProject/augur-design-system/utils"
+    "AugurProject/augur-design-system/augur-theme#v0.4.0",
+    "AugurProject/augur-design-system/utils#v0.4.0"
   ],
   "files": [
     {
